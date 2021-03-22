@@ -16,9 +16,9 @@ public class ExamResultFactoryImpl implements ExamResultFactory {
             throw new IllegalArgumentException("Honours may be given only if exam was succeded");
         } else if (cumLaude && result.get() != MAX_RESULT) {
             throw new IllegalArgumentException("Honours may be given only if maximun result is given");
-        } else if (resultType == ExamResultType.SUCCEDED && result.get() < SUFFICIENCY) {
+        } else if (resultType == ExamResultType.SUCCEDED && (result.get() < SUFFICIENCY || result.get() > MAX_RESULT)) {
             throw new IllegalArgumentException("An exam is succeded only if result is sufficient");
-        } else if (resultType == ExamResultType.FAILED && result.get() > SUFFICIENCY) {
+        } else if (resultType == ExamResultType.FAILED && (result.get() < 0 || result.get() >= SUFFICIENCY)) {
             throw new IllegalArgumentException("An exam is failed only if result is below sufficiency");
         }
         return new ExamResult() {

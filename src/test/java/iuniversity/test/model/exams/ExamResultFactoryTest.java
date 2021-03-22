@@ -60,12 +60,18 @@ public class ExamResultFactoryTest {
         assertThrows(IllegalArgumentException.class, () -> {
             resultFactory.succeded(12);
         });
+        assertThrows(IllegalArgumentException.class, () -> {
+            resultFactory.succeded(31);
+        });
     }
 
     @Test
     public void testInvalidFailedExamResult() {
         assertThrows(IllegalArgumentException.class, () -> {
             resultFactory.failed(20);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            resultFactory.failed(-34);
         });
     }
 }
