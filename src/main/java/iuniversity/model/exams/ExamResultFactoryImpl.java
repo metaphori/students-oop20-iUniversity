@@ -1,0 +1,69 @@
+package iuniversity.model.exams;
+
+import java.util.Optional;
+
+public class ExamResultFactoryImpl implements ExamResultFactory {
+
+    private static final int MAX_RESULT = 30;
+    private static final int SUFFICIENCY = 18;
+
+    private ExamResult makeEvaluation(final ExamResultType resultType, final Optional<Integer> result, final boolean cumLaude) {
+        if (result.isEmpty() && resultType != ExamResultType.WITHDRAWN) {
+            throw new IllegalArgumentException("Only withdrawn results may not have a numeric result");
+        } else if (resultType == ExamResultType.WITHDRAWN && result.isPresent()) {
+            throw new IllegalArgumentException("Only withdrawn can't have a numeric result");
+        } else if (cumLaude && resultType != ExamResultType.SUCCEDED) {
+            throw new IllegalArgumentException("Honours may be given only if exam was succeded");
+        } else if (cumLaude && result.get() != MAX_RESULT) {
+            throw new IllegalArgumentException("Honours may be given only if maximun result is given");
+        } else if (resultType == ExamResultType.SUCCEDED && result.get() < SUFFICIENCY) {
+            throw new IllegalArgumentException("An exam is succeded only if result is sufficient");
+        } else if (resultType == ExamResultType.FAILED && result.get() > SUFFICIENCY) {
+            throw new IllegalArgumentException("An exam is failed only if result is below sufficiency");
+        }
+        return new ExamResult() {
+
+            @Override
+            public ExamResultType getResultType() {
+                return resultType;
+            }
+
+            @Override
+            public boolean cumLaude() {
+                return cumLaude;
+            }
+
+            @Override
+            public Optional<Integer> getResult() {
+                return result;
+            }
+
+            @Override
+            public String toString() {
+                return getResultType() 
+                + (getResult().isPresent() ? "(" + getResult().get() + (cumLaude() ? "L" : "") + ")" : "");
+            }
+        };
+    }
+
+    @Override
+    public final ExamResult succeededCumLaude() {
+        return makeEvaluation(ExamResultType.SUCCEDED, Optional.of(MAX_RESULT), true);
+    }
+
+    @Override
+    public final ExamResult succeded(final int result) {
+        return makeEvaluation(ExamResultType.SUCCEDED, Optional.of(result), false);
+    }
+
+    @Override
+    public final ExamResult failed(final int result) {
+        return makeEvaluation(ExamResultType.FAILED, Optional.of(result), false);
+    }
+
+    @Override
+    public final ExamResult withdrawn() {
+        return makeEvaluation(ExamResultType.WITHDRAWN, Optional.empty(), false);
+    }
+
+}
