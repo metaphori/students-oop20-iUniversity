@@ -1,6 +1,8 @@
 package iuniversity.model.user;
 import java.util.*;
 
+import iuniversity.model.didactics.Course;
+
 public class TeacherImpl extends AbstractUser implements Teacher{
 
     private int registrarionNumber;
@@ -8,7 +10,6 @@ public class TeacherImpl extends AbstractUser implements Teacher{
     private Set<Course> courses;
     
     public TeacherImpl(int registrarionNumber, TeacherState academicPosition, Set<Course> courses) {
-        super();
         this.registrarionNumber = registrarionNumber;
         this.academicPosition = academicPosition;
         this.courses = courses;
@@ -25,7 +26,7 @@ public class TeacherImpl extends AbstractUser implements Teacher{
     }
 
     @Override
-    public String getCourses() {
+    public Set<Course> getCourses() {
         return Collections.unmodifiableSet(courses);
     }
 
