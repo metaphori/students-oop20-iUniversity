@@ -2,6 +2,8 @@ package iuniversity.model.exams;
 
 import java.util.Optional;
 
+import iuniversity.model.exams.ExamResult.ExamResultType;
+
 public class ExamResultFactoryImpl implements ExamResultFactory {
 
     private static final int MAX_RESULT = 30;
