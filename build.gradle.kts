@@ -23,4 +23,14 @@ dependencies {
     
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.5.2")
     testRuntime("org.junit.platform:junit-platform-runner:1.5.2")
+    
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+	implementation("commons-io:commons-io:2.8.0")
+	
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation("org.apache.commons:commons-lang3:3.12.0")
+	
+	implementation("com.password4j:password4j:1.5.2")
+	
+    
 }
