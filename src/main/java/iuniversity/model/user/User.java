@@ -1,4 +1,4 @@
-package iuniversity.model;
+package iuniversity.model.user;
 
 public interface User {
 
@@ -8,4 +8,7 @@ public interface User {
     
     String getUsername();
     
+    public enum Gender {
+        MALE, FEMALE, UNSPECIFIED
+    }
 }
