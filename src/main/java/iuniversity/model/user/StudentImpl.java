@@ -1,5 +1,7 @@
 package iuniversity.model.user;
 
+import iuniversity.model.didactics.AcademicYear;
+
 public class StudentImpl extends AbstractUser implements Student {
 
     private int registrationNumber;
