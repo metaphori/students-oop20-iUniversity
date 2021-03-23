@@ -1,4 +1,4 @@
-package iuniversity.model;
+package iuniversity.model.user;
 import java.util.*;
 
 public class TeacherImpl extends AbstractUser implements Teacher{

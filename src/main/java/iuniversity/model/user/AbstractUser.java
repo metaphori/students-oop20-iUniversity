@@ -1,4 +1,4 @@
-package iuniversity.model;
+package iuniversity.model.user;
 
 public abstract class AbstractUser implements User {
 

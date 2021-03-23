@@ -1,4 +1,4 @@
-package iuniversity.model;
+package iuniversity.model.didactics;
 
 import java.time.LocalDate;
 

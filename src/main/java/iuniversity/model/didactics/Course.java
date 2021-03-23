@@ -1,4 +1,4 @@
-package iuniversity.model;
+package iuniversity.model.didactics;
 
 public interface Course {
 
