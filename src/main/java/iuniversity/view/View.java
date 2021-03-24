@@ -11,7 +11,7 @@ public interface View {
     Controller getController();
 
     void setController(Controller controller);
-    
+
     void goToPage(Pages page, Controller controller);
 
 }

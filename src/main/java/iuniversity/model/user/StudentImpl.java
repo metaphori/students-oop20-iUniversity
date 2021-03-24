@@ -11,7 +11,6 @@ public class StudentImpl extends AbstractUser implements Student {
     
     public StudentImpl(int registrationNumber, StudentState state, DegreeProgramme degreeProgramme,
             AcademicYear immatriculationYear) {
-        super();
         this.registrationNumber = registrationNumber;
         this.state = state;
         this.degreeProgramme = degreeProgramme;
