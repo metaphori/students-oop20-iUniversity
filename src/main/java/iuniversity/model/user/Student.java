@@ -1,6 +1,6 @@
-package iuniversity.model;
+package iuniversity.model.user;
 
-import iuniversity.model.Student.StudentState;
+import iuniversity.model.didactics.AcademicYear;
 
 public interface Student {
 

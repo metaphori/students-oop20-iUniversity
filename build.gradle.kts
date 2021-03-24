@@ -13,6 +13,8 @@ javafx {
     modules("javafx.controls", "javafx.fxml")
 }
 
+application.mainClassName = "iuniversity.Launcher"
+
 dependencies {
 	//implementation("com.calendarfx:view:11.8.3")
 	//implementation ("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0")

@@ -1,4 +1,8 @@
-package iuniversity.model;
+package iuniversity.model.user;
+
+import java.util.Set;
+
+import iuniversity.model.didactics.Course;
 
 public interface Teacher {
 
@@ -6,7 +10,7 @@ public interface Teacher {
     
     TeacherState getState();
     
-    String getCourses();
+    Set<Course> getCourses();
     
     public enum TeacherState {
         ASSOCIATE, FULL, RESEARCHER
