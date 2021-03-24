@@ -8,10 +8,11 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.password4j.Password;
+
+import iuniversity.view.login.LoginView;
 
 public class LoginControllerImpl extends AbstractController implements LoginController {
 
@@ -46,9 +47,9 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
     }
 
     private Optional<UserType> getUserTypeFromUsername(final String username) {
-        final String prefix = username.split("\\.")[0]; 
-        return prefix.equals(TEACHER_USERNAME_PREFIX) ? Optional.of(UserType.TEACHER) : 
-            prefix.equals(STUDENT_USERNAME_PREFIX)  ? Optional.of(UserType.STUDENT) : Optional.empty();
+        final String prefix = username.split("\\.")[0];
+        return prefix.equals(TEACHER_USERNAME_PREFIX) ? Optional.of(UserType.TEACHER)
+                : prefix.equals(STUDENT_USERNAME_PREFIX) ? Optional.of(UserType.STUDENT) : Optional.empty();
     }
 
     private boolean checkPassword(final String password, final String hashedPassword) {
@@ -63,15 +64,16 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
              */
         }
         final UserType userType = getUserTypeFromUsername(username);
-        final Optional<Triple<String, String, String>> user = this
-                .readUsersCredentials(userType).stream().map(l -> {
-                    final var tokens = l.split(" +");
-                    return Triple.of(tokens[0], tokens[1], tokens[2]);
-                }).filter(t -> t.getMiddle().equals(username)).findFirst();
+        final Optional<Triple<String, String, String>> user = this.readUsersCredentials(userType).stream().map(l -> {
+            final var tokens = l.split(" +");
+            return Triple.of(tokens[0], tokens[1], tokens[2]);
+        }).filter(t -> t.getMiddle().equals(username)).findFirst();
 
         if (user.isPresent() && checkPassword(password, user.get().getRight())) {
             // setta il current user e vai alla pagina
             return;
+        } else {
+            ((LoginView) this.getView()).incorrectCredentials();
         }
     }
 
