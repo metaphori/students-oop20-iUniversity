@@ -10,9 +10,11 @@ public abstract class AbstractUser implements User {
     private String address;
     private int id;
     
+    public AbstractUser() {
+    }
+    
     public AbstractUser(String name, String lastName, String username, String dateOfBirth, Gender gender,
             String address, int id) {
-        super();
         this.name = name;
         this.lastName = lastName;
         this.username = username;
