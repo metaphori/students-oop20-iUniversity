@@ -11,4 +11,8 @@ public interface User {
     public enum Gender {
         MALE, FEMALE, UNSPECIFIED
     }
+    
+    public enum UserType{
+        STUDENT, TEACHER, ADMIN
+    }
 }
