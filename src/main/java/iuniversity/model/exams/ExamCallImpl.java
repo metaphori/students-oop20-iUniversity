@@ -161,6 +161,56 @@ public final class ExamCallImpl implements ExamCall {
             return new ExamCallImpl(course, start, academicYear, type, maximumStudents);
         }
 
+        @Override
+        public final int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((academicYear == null) ? 0 : academicYear.hashCode());
+            result = prime * result + ((course == null) ? 0 : course.hashCode());
+            result = prime * result + ((start == null) ? 0 : start.hashCode());
+            result = prime * result + ((type == null) ? 0 : type.hashCode());
+            return result;
+        }
+
+        @Override
+        public final boolean equals(final Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final ExamCallBuilderImpl other = (ExamCallBuilderImpl) obj;
+            if (academicYear == null) {
+                if (other.academicYear != null) {
+                    return false;
+                }
+            } else if (!academicYear.equals(other.academicYear)) {
+                return false;
+            }
+            if (course == null) {
+                if (other.course != null) {
+                    return false;
+                }
+            } else if (!course.equals(other.course)) {
+                return false;
+            }
+            if (start == null) {
+                if (other.start != null) {
+                    return false;
+                }
+            } else if (!start.equals(other.start)) {
+                return false;
+            }
+            if (type != other.type) {
+                return false;
+            }
+            return true;
+        }
+
     }
 
 }
