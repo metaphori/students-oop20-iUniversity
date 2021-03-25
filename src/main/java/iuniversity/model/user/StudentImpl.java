@@ -1,4 +1,8 @@
-package iuniversity.model;
+package iuniversity.model.user;
+
+import iuniversity.model.didactics.AcademicYear;
+import iuniversity.model.didactics.DegreeProgramme;
+import iuniversity.model.didactics.DidacticPlan;
 
 public class StudentImpl extends AbstractUser implements Student {
 
@@ -7,6 +11,14 @@ public class StudentImpl extends AbstractUser implements Student {
     private DegreeProgramme degreeProgramme;
     private AcademicYear immatriculationYear;
     
+    public StudentImpl(int registrationNumber, StudentState state, DegreeProgramme degreeProgramme,
+            AcademicYear immatriculationYear) {
+        this.registrationNumber = registrationNumber;
+        this.state = state;
+        this.degreeProgramme = degreeProgramme;
+        this.immatriculationYear = immatriculationYear;
+    }
+
     @Override
     public int getRegistrationNumber() {
         return this.registrationNumber;

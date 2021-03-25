@@ -1,4 +1,4 @@
-package iuniversity.model;
+package iuniversity.model.user;
 
 public interface User {
 
@@ -10,5 +10,9 @@ public interface User {
     
     public enum Gender {
         MALE, FEMALE, UNSPECIFIED
+    }
+    
+    public enum UserType{
+        STUDENT, TEACHER, ADMIN
     }
 }
