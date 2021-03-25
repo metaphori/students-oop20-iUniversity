@@ -85,7 +85,6 @@ public class AdmissionRequestImpl implements AdmissionRequest {
 
     @Override
     public AcademicYear getAcademicYear() {
-        this.immatriculationYear = 
         return this.immatriculationYear;
     }
 
@@ -97,7 +96,10 @@ public class AdmissionRequestImpl implements AdmissionRequest {
     @Override
     public Student accept() {
         this.status = RequestStatus.ACCEPTED;
-        return Student;
+        /*
+         * Qua devi correggere
+         */
+        return null;
     }
 
     @Override
