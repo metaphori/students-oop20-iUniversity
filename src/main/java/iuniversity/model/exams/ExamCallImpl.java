@@ -26,7 +26,7 @@ public final class ExamCallImpl implements ExamCall {
     private final Course course;
     private final boolean published;
 
-    private ExamCallImpl(final Course course, final LocalDateTime callStart, final AcademicYear academicYear,
+    public ExamCallImpl(final Course course, final LocalDateTime callStart, final AcademicYear academicYear,
             final ExamType examType, final Optional<Integer> maxStudents) {
         this.course = course;
         this.setStart(callStart);
