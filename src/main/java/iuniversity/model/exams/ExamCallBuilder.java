@@ -27,7 +27,7 @@ public interface ExamCallBuilder {
      * Sets the Exam call type.
      * 
      * @param examType the exam type of the exam call. See {@link ExamType}
-     * @return istance of builder
+     * @return instance of builder
      */
     ExamCallBuilder examType(ExamType examType);
 
