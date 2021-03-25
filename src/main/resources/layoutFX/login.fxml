@@ -11,9 +11,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import iuniversity.view.login?>
 
-<AnchorPane fx:controller="LoginViewImpl" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="iuniversity.view.login.LoginViewImpl" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane layoutX="47.0" layoutY="51.0" prefHeight="298.0" prefWidth="506.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="51.0">
          <children>
@@ -36,7 +35,7 @@
                   <PasswordField fx:id="passwordTextField" alignment="CENTER" promptText="Inserisci password" />
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="611.0">
                      <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" text="Accedi" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" text="Accedi" />
                      </children>
                   </HBox>
                </children>
