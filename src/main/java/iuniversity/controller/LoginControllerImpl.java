@@ -1,5 +1,6 @@
 package iuniversity.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,6 +13,8 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import com.password4j.Password;
 
+import iuniversity.model.user.User.UserType;
+
 import iuniversity.view.login.LoginView;
 
 public class LoginControllerImpl extends AbstractController implements LoginController {
@@ -21,7 +24,7 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
      * TODO Rettificare in un file di configurazione
      */
     private static final String ADMIN_USERNAME = "admin";
-    private static final String ADMIN_PASSWORD_HASH = "";
+    private static final String ADMIN_PASSWORD_HASH = "$2b$10$FeIspybS9D6rKGy5rAFyweYoVIS7g/sMuPAhQWcs7iUmccgU.Sw36"; //admin
     private static final String TEACHER_USERNAME_PREFIX = "doc";
     private static final String STUDENT_USERNAME_PREFIX = "stu";
 
@@ -39,7 +42,7 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
 
     private List<String> readUsersCredentials(final UserType userType) {
         try {
-            return FileUtils.readLines(passwordFileMap.get(userType), CHARSET);
+            return FileUtils.readLines(new File(this.getFileStoragePath() + passwordFileMap.get(userType)), CHARSET);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,20 +61,27 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
 
     @Override
     public final void login(final String username, final String password) {
+        //System.out.println(Password.hash(password).withBCrypt());
+        final Optional<UserType> userType = getUserTypeFromUsername(username);
         if (username.equals(ADMIN_USERNAME) && checkPassword(password, ADMIN_PASSWORD_HASH)) {
             /*
              * Setta la pagina dell'admin
              */
+            System.out.println("Admin autenticato");
+            return;
+        } else if (userType.isEmpty()) {
+            ((LoginView) this.getView()).incorrectCredentials();
+            return;
         }
-        final UserType userType = getUserTypeFromUsername(username);
-        final Optional<Triple<String, String, String>> user = this.readUsersCredentials(userType).stream().map(l -> {
-            final var tokens = l.split(" +");
-            return Triple.of(tokens[0], tokens[1], tokens[2]);
-        }).filter(t -> t.getMiddle().equals(username)).findFirst();
+        System.out.println(userType);
+        final Optional<Triple<String, String, String>> user = this.readUsersCredentials(userType.get()).stream()
+                .map(l -> {
+                    final var tokens = l.split(" +");
+                    return Triple.of(tokens[0], tokens[1], tokens[2]);
+                }).filter(t -> t.getMiddle().equals(username)).findFirst();
 
         if (user.isPresent() && checkPassword(password, user.get().getRight())) {
-            // setta il current user e vai alla pagina
-            return;
+            System.out.println(userType.get() + " autenticato");
         } else {
             ((LoginView) this.getView()).incorrectCredentials();
         }
