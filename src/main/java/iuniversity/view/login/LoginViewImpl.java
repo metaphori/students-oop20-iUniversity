@@ -26,13 +26,20 @@ public class LoginViewImpl extends AbstractView implements LoginView {
 
     @Override
     public final void login(final String username, final String password) {
-        ((LoginController) this.getController()).login(usernameTextField.getText(), passwordTextField.getText());
+        ((LoginController) this.getController()).login(username, password);
     }
 
     @Override
     public final void incorrectCredentials() {
         this.errorLabel.setText(INCORRECT_CREDENTIALS_MESSAGE);
 
+    }
+
+    @FXML
+    public final void initialize() {
+        loginButton.setOnAction(e -> {
+            this.login(usernameTextField.getText(), passwordTextField.getText());
+        });
     }
 
 }

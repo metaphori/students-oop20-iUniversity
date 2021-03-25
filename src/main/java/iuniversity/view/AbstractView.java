@@ -15,14 +15,14 @@ public class AbstractView implements FXView {
     private Stage stage;
     private Controller controller;
 
-    private final Map<Pages, String> fxmlPages = new EnumMap<>(View.Pages.class) {
+    private final Map<Pages, String> fxmlPages = new EnumMap<>(Pages.class) {
         /**
          * 
          */
         private static final long serialVersionUID = 1L;
 
         {
-            this.put(Pages.LOGIN, "");
+            this.put(Pages.LOGIN, "login");
         }
     };
 
@@ -44,21 +44,5 @@ public class AbstractView implements FXView {
     @Override
     public final void setController(final Controller controller) {
         this.controller = controller;
-    }
-
-    private Parent loadFXML(final String name) {
-        try {
-            return FXMLLoader.load(ClassLoader.getSystemResource("/src/main/resources/layoutFX/" + name));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public final void goToPage(final Pages page, final Controller controller) {
-        this.getStage().setScene(new Scene(loadFXML(fxmlPages.get(page))));
-        this.setController(controller);
     }
 }
