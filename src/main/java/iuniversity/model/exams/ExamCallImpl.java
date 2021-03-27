@@ -111,7 +111,7 @@ public final class ExamCallImpl implements ExamCall {
         this.academicYear = academicYear;
     }
 
-    public static class ExamCallBuilderImpl implements ExamCallBuilder {
+    public static class Builder implements ExamCallBuilder {
 
         private Optional<Integer> maximumStudents;
         private AcademicYear academicYear;
@@ -119,7 +119,7 @@ public final class ExamCallImpl implements ExamCall {
         private ExamType type;
         private Course course;
 
-        public ExamCallBuilderImpl() {
+        public Builder() {
             this.maximumStudents = Optional.empty();
         }
 
@@ -183,7 +183,7 @@ public final class ExamCallImpl implements ExamCall {
             if (getClass() != obj.getClass()) {
                 return false;
             }
-            final ExamCallBuilderImpl other = (ExamCallBuilderImpl) obj;
+            final Builder other = (Builder) obj;
             if (academicYear == null) {
                 if (other.academicYear != null) {
                     return false;

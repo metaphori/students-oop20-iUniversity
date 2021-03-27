@@ -43,7 +43,7 @@ public class LoginViewImpl extends AbstractView implements LoginView {
     }
 
     @Override
-    public void init() {
+    public void start() {
     }
 
 }

@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:controller="iuniversity.view.exams.ExamCreationViewImpl" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuniversity.view.exams.ExamCreationViewImpl">
    <center>
       <AnchorPane prefHeight="407.0" prefWidth="370.0" BorderPane.alignment="CENTER">
          <children>
@@ -40,7 +39,7 @@
                   <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="840.0">
                      <children>
                         <Label text="Data e ora" />
-                        <DatePicker fx:id="callDatePicker"/>
+                        <DatePicker fx:id="callDatePicker" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -64,7 +63,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="562.0" spacing="20.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="378.0" spacing="20.0">
                      <children>
                         <Button fx:id="cancelBtn" mnemonicParsing="false" text="Annulla" />
                         <Button fx:id="publishBtn" mnemonicParsing="false" text="Pubblica" />

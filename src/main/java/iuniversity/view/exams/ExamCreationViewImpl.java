@@ -1,5 +1,7 @@
 package iuniversity.view.exams;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -9,11 +11,15 @@ import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.view.AbstractView;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 
 public final class ExamCreationViewImpl extends AbstractView implements ExamCreationView {
+
+    private static final int CUSTOM_CALL_START_HOUR = 9;
 
     @FXML
     private ChoiceBox<AcademicYear> academicYearChoice;
@@ -30,16 +36,25 @@ public final class ExamCreationViewImpl extends AbstractView implements ExamCrea
     @FXML
     private Spinner<Integer> maxStudentSpin;
 
-    public ExamCreationViewImpl() {
-        System.out.println(this.getController());
-    }
+    @FXML
+    private Button publishBtn;
+
+    @FXML
+    private Button cancelBtn;
 
     @FXML
     public void initialize() {
+        this.maxStudentSpin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
+        this.publishBtn.setOnAction(e -> {
+            ((ExamCreationController) this.getController()).publishExamCall(
+                    LocalDateTime.of(callDatePicker.getValue(), LocalTime.of(CUSTOM_CALL_START_HOUR, 0)),
+                    academicYearChoice.getValue(), courseChoice.getValue(), examTypeChoice.getValue(),
+                    maxStudentSpin.getValue());
+        });
     }
 
     @Override
-    public void init() {
+    public void start() {
         ((ExamCreationController) this.getController()).initializeChoices();
     }
 

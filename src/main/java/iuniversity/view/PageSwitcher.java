@@ -46,8 +46,9 @@ public final class PageSwitcher {
         view.setController(PAGE_CONTROLLERS.get(page));
         PAGE_CONTROLLERS.get(page).setView(view);
         PAGE_CONTROLLERS.get(page).setModel(model);
-        view.init();
+        view.start();
         stage.centerOnScreen();
+        stage.sizeToScene();
         stage.show();
 
     }

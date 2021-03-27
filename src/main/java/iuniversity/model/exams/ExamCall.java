@@ -21,12 +21,12 @@ public interface ExamCall {
         /*
          * Exam call is created but not visible to students.
          */
-        //CREATED,
+        // CREATED,
         /*
          * Exam call is created but and visible to students. Students can't register
          * yet.
          */
-        //PUBLISHED,
+        // PUBLISHED,
         /**
          * Exam call is published and students can register to the call.
          */
@@ -38,7 +38,19 @@ public interface ExamCall {
     }
 
     enum ExamType {
-        ORAL, WRITTEN, PRACTICAL;
+        ORAL("Orale"), WRITTEN("Scritto"), PRACTICAL("Pratico");
+
+        private final String label;
+
+        ExamType(final String label) {
+            this.label = label;
+        }
+
+        @Override
+        public String toString() {
+            return this.label;
+        }
+
     }
 
     /**
