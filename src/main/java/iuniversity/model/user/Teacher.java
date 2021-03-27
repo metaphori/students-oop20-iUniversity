@@ -4,7 +4,7 @@ import java.util.Set;
 
 import iuniversity.model.didactics.Course;
 
-public interface Teacher {
+public interface Teacher extends User {
 
     int getRegistrationNumber();
     
