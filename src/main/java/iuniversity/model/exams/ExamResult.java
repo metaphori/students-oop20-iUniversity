@@ -12,19 +12,30 @@ public interface ExamResult {
         /**
          * The exam is passed.
          */
-        SUCCEDED,
+        SUCCEDED("Superato"),
         /**
          * The student did not complete the exam.
          */
-        WITHDRAWN,
+        WITHDRAWN("Ritirato"),
         /**
          * The student failed in succeeding the exam.
          */
-        FAILED,
+        FAILED("Respinto"),
         /**
          * The student passed the exam but refused the Evaluation given.
          */
-        DECLINED;
+        DECLINED("Rifiutato");
+
+        private final String label;
+
+        ExamResultType(final String label) {
+            this.label = label;
+        }
+
+        @Override
+        public String toString() {
+            return this.label;
+        }
     }
 
     /**
