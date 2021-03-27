@@ -103,38 +103,10 @@ public interface ExamCall {
     Optional<Integer> maxStudents();
 
     /**
-     * Sets the Exam Call start.
-     * 
-     * @param callStart
-     */
-    void setStart(LocalDateTime callStart);
-
-    /**
-     * Sets the the Exam call type. See {@link ExamType}
-     * 
-     * @param examType
-     */
-    void setExamType(ExamType examType);
-
-    /**
      * Add student to the Exam call list.
      * 
      * @param student
      */
     void registerStudent(Student student);
-
-    /**
-     * Sets the maximum number of students that can register to the exam call.
-     * 
-     * @param maxStudents
-     */
-    void setMaximumStudents(int maxStudents);
-
-    /**
-     * Set the academic year of the exam call.
-     * 
-     * @param academicYear
-     */
-    void setAcademicYear(AcademicYear academicYear);
 
 }

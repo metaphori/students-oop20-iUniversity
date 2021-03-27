@@ -16,25 +16,23 @@ public final class ExamCallImpl implements ExamCall {
 
     private static final int DAYS_BEFORE_CALL = 10;
 
-    private Optional<Integer> maxStudents;
-    private AcademicYear academicYear;
+    private final Optional<Integer> maxStudents;
+    private final AcademicYear academicYear;
     private final Set<Student> registeredStudents;
-    private LocalDateTime callStart;
+    private final LocalDateTime callStart;
     private final LocalDateTime registrationStart;
     private final LocalDateTime registrationEnd;
-    private ExamType examType;
+    private final ExamType examType;
     private final Course course;
-    private final boolean published;
 
     public ExamCallImpl(final Course course, final LocalDateTime callStart, final AcademicYear academicYear,
             final ExamType examType, final Optional<Integer> maxStudents) {
         this.course = course;
-        this.setStart(callStart);
+        this.callStart = callStart;
         this.academicYear = academicYear;
         this.examType = examType;
         this.maxStudents = maxStudents;
         this.registeredStudents = new HashSet<>();
-        this.published = true;
         this.registrationStart = LocalDateTime.now();
         this.registrationEnd = callStart.minusDays(1);
     }
@@ -81,34 +79,8 @@ public final class ExamCallImpl implements ExamCall {
     }
 
     @Override
-    public void setStart(final LocalDateTime callStart) {
-        if (LocalDateTime.now().isAfter(callStart.minusDays(DAYS_BEFORE_CALL))) {
-            throw new IllegalStateException("No enough time for student to register");
-        }
-        this.callStart = callStart;
-    }
-
-    @Override
-    public void setExamType(final ExamType examType) {
-        this.examType = examType;
-    }
-
-    @Override
     public void registerStudent(final Student student) {
         this.registeredStudents.add(student);
-    }
-
-    @Override
-    public void setMaximumStudents(final int maxStudents) {
-        if (this.published && maxStudents < this.registeredStudents.size()) {
-            throw new IllegalStateException("The maximum number can't be set lower to currently registered students");
-        }
-        this.maxStudents = Optional.of(maxStudents);
-    }
-
-    @Override
-    public void setAcademicYear(final AcademicYear academicYear) {
-        this.academicYear = academicYear;
     }
 
     public static class Builder implements ExamCallBuilder {
