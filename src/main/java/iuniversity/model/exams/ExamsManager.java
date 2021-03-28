@@ -26,9 +26,10 @@ public interface ExamsManager {
      */
     void addExamCall(LocalDateTime callStart, AcademicYear academicYear, Course course, ExamType examType,
             Integer maximumStudents);
-    
+
     /**
      * Add a student exam report for a particular course.
+     * 
      * @param course
      * @param student
      * @param result
