@@ -1,6 +1,7 @@
 package iuniversity.model.didactics;
 import iuniversity.model.user.Student;
 import iuniversity.model.user.Student.StudentState;
+import iuniversity.model.user.StudentImpl;
 import iuniversity.model.user.User.Gender;
 
 import static iuniversity.model.didactics.AdmissionRequest.RequestStatus;
@@ -96,10 +97,8 @@ public class AdmissionRequestImpl implements AdmissionRequest {
     @Override
     public Student accept() {
         this.status = RequestStatus.ACCEPTED;
-        /*
-         * Qua devi correggere
-         */
-        return null;
+        Student newStudent = new StudentImpl(name, lastName, username, dateOfBirth, gender, address, id, registrationNumber, state, degreeProgramme, immatriculationYear);
+        return newStudent;
     }
 
     @Override
