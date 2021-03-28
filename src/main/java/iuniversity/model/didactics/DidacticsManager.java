@@ -8,8 +8,6 @@ public interface DidacticsManager {
 
     Set<Course> getCourse();
     
-    Set<DidacticPlan> getDidacticPlan();
-    
     AcademicYear currentAcademicYear();
     
     Set<AdmissionRequest> getAdmissionRequests();

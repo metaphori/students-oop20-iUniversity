@@ -14,8 +14,6 @@ public interface Student extends User {
     
     AcademicYear getImmatriculationYear();
     
-    DidacticPlan getDidacticPlan();
-    
     void suspendCareer();
     
     void resumeCareer();
