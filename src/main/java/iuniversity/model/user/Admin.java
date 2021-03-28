@@ -1,5 +1,5 @@
 package iuniversity.model.user;
 
-public interface Admin {
+public interface Admin extends User {
 
 }

@@ -6,8 +6,6 @@ public interface DegreeProgramme {
     
     DegreeType getType();
     
-    DidacticPlan getDidacticPlan();
-    
     public enum DegreeType {
         BACHELOR, MASTER
     }

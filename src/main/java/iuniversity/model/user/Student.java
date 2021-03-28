@@ -4,7 +4,7 @@ import iuniversity.model.didactics.AcademicYear;
 import iuniversity.model.didactics.DegreeProgramme;
 import iuniversity.model.didactics.DidacticPlan;
 
-public interface Student {
+public interface Student extends User {
 
     int getRegistrationNumber();
     
@@ -13,8 +13,6 @@ public interface Student {
     DegreeProgramme getDegreeProgramme();
     
     AcademicYear getImmatriculationYear();
-    
-    DidacticPlan getDidacticPlan();
     
     void suspendCareer();
     

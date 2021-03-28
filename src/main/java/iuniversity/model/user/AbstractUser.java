@@ -1,11 +1,13 @@
 package iuniversity.model.user;
 
+import java.time.LocalDate;
+
 public abstract class AbstractUser implements User {
 
     private String name;
     private String lastName;
     private String username;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private Gender gender;
     private String address;
     private int id;
@@ -13,7 +15,7 @@ public abstract class AbstractUser implements User {
     public AbstractUser() {
     }
     
-    public AbstractUser(String name, String lastName, String username, String dateOfBirth, Gender gender,
+    public AbstractUser(String name, String lastName, String username, LocalDate dateOfBirth, Gender gender,
             String address, int id) {
         this.name = name;
         this.lastName = lastName;
@@ -39,7 +41,7 @@ public abstract class AbstractUser implements User {
         return this.username;
     }
     
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return this.dateOfBirth;
     }
 

@@ -1,16 +1,41 @@
 package iuniversity.model.user;
 
-import iuniversity.model.didactics.AcademicYear;
-import iuniversity.model.didactics.DegreeProgramme;
-import iuniversity.model.didactics.DidacticPlan;
+
+import java.time.LocalDate;
+import iuniversity.model.didactics.*;
+import iuniversity.model.user.User.Gender;
 
 public class StudentImpl extends AbstractUser implements Student {
 
+    private String name;
+    private String lastName;
+    private String username;
+    private LocalDate dateOfBirth;
+    private Gender gender;
+    private String address;
+    private int id;
     private int registrationNumber;
     private StudentState state;
     private DegreeProgramme degreeProgramme;
     private AcademicYear immatriculationYear;
     
+    public StudentImpl(String name, String lastName, String username, LocalDate dateOfBirth, Gender gender,
+            String address, int id, int registrationNumber, StudentState state, DegreeProgramme degreeProgramme,
+            AcademicYear immatriculationYear) {
+        super();
+        this.name = name;
+        this.lastName = lastName;
+        this.username = username;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.address = address;
+        this.id = id;
+        this.registrationNumber = registrationNumber;
+        this.state = state;
+        this.degreeProgramme = degreeProgramme;
+        this.immatriculationYear = immatriculationYear;
+    }
+
     public StudentImpl(int registrationNumber, StudentState state, DegreeProgramme degreeProgramme,
             AcademicYear immatriculationYear) {
         this.registrationNumber = registrationNumber;
@@ -40,21 +65,13 @@ public class StudentImpl extends AbstractUser implements Student {
     }
 
     @Override
-    public DidacticPlan getDidacticPlan() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public void suspendCareer() {
-        // TODO Auto-generated method stub
-        
+        this.state = StudentState.INACTIVE;
     }
 
     @Override
     public void resumeCareer() {
-        // TODO Auto-generated method stub
-        
+       this.state = StudentState.ACTIVE;
     }
 
 }
