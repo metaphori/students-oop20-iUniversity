@@ -1,5 +1,6 @@
 package iuniversity.model.exams;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
@@ -52,8 +53,8 @@ public final class ExamsManagerImpl implements ExamsManager {
     }
 
     @Override
-    public void addExamReport(final Course course, final Student student, final ExamResult result) {
-        this.examReports.add(new ExamReportImpl(course, student, result));
+    public void addExamReport(final Course course, final Student student, final ExamResult result, final LocalDate date) {
+        this.examReports.add(new ExamReportImpl(course, student, result, date));
     }
 
 }

@@ -1,5 +1,6 @@
 package iuniversity.model.exams;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -33,7 +34,8 @@ public interface ExamsManager {
      * @param course
      * @param student
      * @param result
+     * @param date
      */
-    void addExamReport(Course course, Student student, ExamResult result);
+    void addExamReport(Course course, Student student, ExamResult result, LocalDate date);
 
 }

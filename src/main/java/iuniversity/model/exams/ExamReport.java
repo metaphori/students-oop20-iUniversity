@@ -1,5 +1,7 @@
 package iuniversity.model.exams;
 
+import java.time.LocalDate;
+
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Student;
 
@@ -22,5 +24,11 @@ public interface ExamReport {
      * @return the result.
      */
     ExamResult getResult();
+
+    /**
+     * 
+     * @return the date in which the report was made
+     */
+    LocalDate getDate();
 
 }
