@@ -14,7 +14,7 @@ import iuniversity.model.user.Teacher;
 
 public final class ExamCallImpl implements ExamCall {
 
-    private static final int DAYS_BEFORE_CALL = 10;
+    private static final int DAYS_BEFORE_CALL = 2;
 
     private final Optional<Integer> maxStudents;
     private final AcademicYear academicYear;
@@ -129,6 +129,8 @@ public final class ExamCallImpl implements ExamCall {
         public final ExamCall build() {
             if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(academicYear) || Objects.isNull(type)) {
                 throw new IllegalStateException();
+            } else if (start.isBefore(LocalDateTime.now().plusDays(DAYS_BEFORE_CALL))) {
+                throw new IllegalStateException("ExamCall must be at least " + DAYS_BEFORE_CALL + " days after today");
             }
             return new ExamCallImpl(course, start, academicYear, type, maximumStudents);
         }
