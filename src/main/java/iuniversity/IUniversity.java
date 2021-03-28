@@ -1,5 +1,6 @@
 package iuniversity;
 
+import iuniversity.model.ModelImpl;
 import iuniversity.view.PageSwitcher;
 import iuniversity.view.Pages;
 import javafx.application.Application;
@@ -13,6 +14,7 @@ public class IUniversity extends Application {
 
     @Override
     public final void start(final Stage primaryStage) throws Exception {
-        PageSwitcher.goToPage(primaryStage, Pages.LOGIN);
+        //PageSwitcher.goToPage(primaryStage, Pages.LOGIN);
+        PageSwitcher.goToPage(primaryStage, Pages.CREATE_EXAM_CALL, new ModelImpl());
     }
 }

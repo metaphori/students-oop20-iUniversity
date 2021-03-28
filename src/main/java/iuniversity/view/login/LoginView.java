@@ -10,6 +10,9 @@ public interface LoginView {
      */
     void login(String username, String password);
 
+    /**
+     * Manages incorrect credentials.
+     */
     void incorrectCredentials();
 
 }

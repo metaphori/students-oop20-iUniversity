@@ -8,4 +8,6 @@ public interface View {
 
     void setController(Controller controller);
 
+    void start();
+
 }

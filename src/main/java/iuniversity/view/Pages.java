@@ -12,7 +12,11 @@ public enum Pages {
     /**
      * Teacher's home page.
      */
-    TEACHER_HOME("home_teacher");
+    TEACHER_HOME("home_teacher"),
+    /**
+     * Exam call creation page.
+     */
+    CREATE_EXAM_CALL("create_exam_call");
 
     private final String fxmlName;
 
