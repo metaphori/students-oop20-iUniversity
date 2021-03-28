@@ -83,6 +83,88 @@ public final class ExamCallImpl implements ExamCall {
         this.registeredStudents.add(student);
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((academicYear == null) ? 0 : academicYear.hashCode());
+        result = prime * result + ((callStart == null) ? 0 : callStart.hashCode());
+        result = prime * result + ((course == null) ? 0 : course.hashCode());
+        result = prime * result + ((examType == null) ? 0 : examType.hashCode());
+        result = prime * result + ((maxStudents == null) ? 0 : maxStudents.hashCode());
+        result = prime * result + ((registeredStudents == null) ? 0 : registeredStudents.hashCode());
+        result = prime * result + ((registrationEnd == null) ? 0 : registrationEnd.hashCode());
+        result = prime * result + ((registrationStart == null) ? 0 : registrationStart.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ExamCallImpl other = (ExamCallImpl) obj;
+        if (academicYear == null) {
+            if (other.academicYear != null) {
+                return false;
+            }
+        } else if (!academicYear.equals(other.academicYear)) {
+            return false;
+        }
+        if (callStart == null) {
+            if (other.callStart != null) {
+                return false;
+            }
+        } else if (!callStart.equals(other.callStart)) {
+            return false;
+        }
+        if (course == null) {
+            if (other.course != null) {
+                return false;
+            }
+        } else if (!course.equals(other.course)) {
+            return false;
+        }
+        if (examType != other.examType) {
+            return false;
+        }
+        if (maxStudents == null) {
+            if (other.maxStudents != null) {
+                return false;
+            }
+        } else if (!maxStudents.equals(other.maxStudents)) {
+            return false;
+        }
+        if (registeredStudents == null) {
+            if (other.registeredStudents != null) {
+                return false;
+            }
+        } else if (!registeredStudents.equals(other.registeredStudents)) {
+            return false;
+        }
+        if (registrationEnd == null) {
+            if (other.registrationEnd != null) {
+                return false;
+            }
+        } else if (!registrationEnd.equals(other.registrationEnd)) {
+            return false;
+        }
+        if (registrationStart == null) {
+            if (other.registrationStart != null) {
+                return false;
+            }
+        } else if (!registrationStart.equals(other.registrationStart)) {
+            return false;
+        }
+        return true;
+    }
+
     public static class Builder implements ExamCallBuilder {
 
         private Optional<Integer> maximumStudents;
@@ -127,7 +209,8 @@ public final class ExamCallImpl implements ExamCall {
 
         @Override
         public final ExamCall build() {
-            if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(academicYear) || Objects.isNull(type)) {
+            if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(academicYear)
+                    || Objects.isNull(type)) {
                 throw new IllegalStateException();
             } else if (start.isBefore(LocalDateTime.now().plusDays(DAYS_BEFORE_CALL))) {
                 throw new IllegalStateException("ExamCall must be at least " + DAYS_BEFORE_CALL + " days after today");
