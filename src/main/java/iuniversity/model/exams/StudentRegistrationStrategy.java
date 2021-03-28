@@ -4,6 +4,7 @@ import java.util.List;
 
 import iuniversity.model.user.Student;
 
+@FunctionalInterface
 public interface StudentRegistrationStrategy {
 
     /**
