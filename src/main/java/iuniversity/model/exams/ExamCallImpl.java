@@ -165,6 +165,13 @@ public final class ExamCallImpl implements ExamCall {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "ExamCallImpl [maxStudents=" + maxStudents + ", academicYear=" + academicYear + ", registeredStudents="
+                + registeredStudents + ", callStart=" + callStart + ", registrationStart=" + registrationStart
+                + ", registrationEnd=" + registrationEnd + ", examType=" + examType + ", course=" + course + "]";
+    }
+
     public static class Builder implements ExamCallBuilder {
 
         private Optional<Integer> maximumStudents;
