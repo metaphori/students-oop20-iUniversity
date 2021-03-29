@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import iuniversity.model.exams.ExamResult;
 import iuniversity.model.exams.ExamResultFactory;
 import iuniversity.model.exams.ExamResultFactoryImpl;
-import iuniversity.model.exams.ExamResultType;
+import iuniversity.model.exams.ExamResult.ExamResultType;
 
 public class ExamResultFactoryTest {
 
