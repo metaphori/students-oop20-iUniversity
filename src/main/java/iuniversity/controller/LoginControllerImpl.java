@@ -19,10 +19,13 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
 
         switch (userType.get()) {
         case ADMIN:
+            System.out.println("Admin");
             break;
         case TEACHER:
+            System.out.println("Teacher");
             break;
         case STUDENT:
+            System.out.println("Student");
             break;
         default:
             break;
