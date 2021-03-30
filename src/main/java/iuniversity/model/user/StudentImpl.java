@@ -15,12 +15,11 @@ public class StudentImpl extends AbstractUser implements Student {
     private String address;
     private int id;
     private int registrationNumber;
-    private StudentState state;
     private DegreeProgramme degreeProgramme;
     private AcademicYear immatriculationYear;
     
     public StudentImpl(String name, String lastName, String username, LocalDate dateOfBirth, Gender gender,
-            String address, int id, int registrationNumber, StudentState state, DegreeProgramme degreeProgramme,
+            String address, int id, int registrationNumber, DegreeProgramme degreeProgramme,
             AcademicYear immatriculationYear) {
         super();
         this.name = name;
@@ -31,15 +30,13 @@ public class StudentImpl extends AbstractUser implements Student {
         this.address = address;
         this.id = id;
         this.registrationNumber = registrationNumber;
-        this.state = state;
         this.degreeProgramme = degreeProgramme;
         this.immatriculationYear = immatriculationYear;
     }
 
-    public StudentImpl(int registrationNumber, StudentState state, DegreeProgramme degreeProgramme,
+    public StudentImpl(int registrationNumber, DegreeProgramme degreeProgramme,
             AcademicYear immatriculationYear) {
         this.registrationNumber = registrationNumber;
-        this.state = state;
         this.degreeProgramme = degreeProgramme;
         this.immatriculationYear = immatriculationYear;
     }
@@ -47,11 +44,6 @@ public class StudentImpl extends AbstractUser implements Student {
     @Override
     public int getRegistrationNumber() {
         return this.registrationNumber;
-    }
-    
-    @Override
-    public StudentState getState() {
-        return this.state;
     }
 
     @Override
@@ -62,16 +54,6 @@ public class StudentImpl extends AbstractUser implements Student {
     @Override
     public AcademicYear getImmatriculationYear() {
         return this.immatriculationYear;
-    }
-
-    @Override
-    public void suspendCareer() {
-        this.state = StudentState.INACTIVE;
-    }
-
-    @Override
-    public void resumeCareer() {
-       this.state = StudentState.ACTIVE;
     }
 
 }
