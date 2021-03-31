@@ -14,7 +14,9 @@ public class IUniversity extends Application {
 
     @Override
     public final void start(final Stage primaryStage) throws Exception {
-        //PageSwitcher.goToPage(primaryStage, Pages.LOGIN);
-        PageSwitcher.goToPage(primaryStage, Pages.CREATE_EXAM_CALL, new ModelImpl());
+        PageSwitcher.goToPage(primaryStage, Pages.LOGIN, new ModelImpl());
+        //PageSwitcher.goToPage(primaryStage, Pages.LOGIN, new ModelImpl());
+        //PageSwitcher.goToPage(primaryStage, Pages.ADD_STUDENT, new ModelImpl());
+        //PageSwitcher.goToPage(primaryStage, Pages.ADD_DEGREE_PROGRAMME, new ModelImpl());
     }
 }

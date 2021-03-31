@@ -47,4 +47,12 @@ public abstract class AbstractController implements Controller {
     public final void setModel(final Model model) {
         this.model = model;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void logout() {
+        this.getModel().unsetCurrentUser();
+    }
 }
