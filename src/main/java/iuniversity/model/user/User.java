@@ -8,6 +8,8 @@ public interface User {
     
     String getUsername();
     
+    int getId();
+    
     public enum Gender {
         MALE, FEMALE, UNSPECIFIED
     }
