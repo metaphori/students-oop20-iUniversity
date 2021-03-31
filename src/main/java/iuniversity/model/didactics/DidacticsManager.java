@@ -9,5 +9,16 @@ public interface DidacticsManager {
     Set<Course> getCourse();
     
     AcademicYear currentAcademicYear();
+
+    void addCourse(Course course);
     
+    void addDegreeProgramme(DegreeProgramme degreeProgramme);
+    
+    void removeCourse(Course course);
+    
+    void removeDegreeProgramme(DegreeProgramme degreeProgramme);
+    
+    void setCourses(Set<Course> courses);
+    
+    void setDegreeProgrammes(Set<DegreeProgramme> degreeProgramms);
 }
