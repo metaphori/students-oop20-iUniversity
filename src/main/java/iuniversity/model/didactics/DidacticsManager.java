@@ -9,7 +9,7 @@ public interface DidacticsManager {
     Set<Course> getCourse();
     
     AcademicYear currentAcademicYear();
-
+    
     void addCourse(Course course);
     
     void addDegreeProgramme(DegreeProgramme degreeProgramme);
