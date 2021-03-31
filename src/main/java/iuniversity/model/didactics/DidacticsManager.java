@@ -10,5 +10,4 @@ public interface DidacticsManager {
     
     AcademicYear currentAcademicYear();
     
-    Set<AdmissionRequest> getAdmissionRequests();
 }
