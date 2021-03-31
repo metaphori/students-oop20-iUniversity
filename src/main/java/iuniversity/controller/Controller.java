@@ -13,4 +13,6 @@ public interface Controller {
 
     void setModel(Model model);
 
+    void logout();
+
 }

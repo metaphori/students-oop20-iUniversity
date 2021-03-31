@@ -2,7 +2,6 @@ package iuniversity.controller;
 
 import java.util.Optional;
 import iuniversity.model.user.User.UserType;
-
 import iuniversity.view.login.LoginView;
 
 public class LoginControllerImpl extends AbstractController implements LoginController {
@@ -19,13 +18,13 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
 
         switch (userType.get()) {
         case ADMIN:
-            System.out.println("Admin");
+            ((LoginView) this.getView()).goToAdminHomePage();
             break;
         case TEACHER:
-            System.out.println("Teacher");
+            ((LoginView) this.getView()).goToTeacherHomePage();
             break;
         case STUDENT:
-            System.out.println("Student");
+            ((LoginView) this.getView()).goToStudentHomePage();
             break;
         default:
             break;

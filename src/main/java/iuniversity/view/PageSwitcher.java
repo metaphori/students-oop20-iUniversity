@@ -4,9 +4,14 @@ import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
 
+import iuniversity.controller.AdminHomeControllerImpl;
 import iuniversity.controller.Controller;
+import iuniversity.controller.CourseCreationControllerImpl;
+import iuniversity.controller.DegreeProgrammeCreationControllerImpl;
 import iuniversity.controller.ExamCreationControllerImpl;
 import iuniversity.controller.LoginControllerImpl;
+import iuniversity.controller.StudentCreationControllerImpl;
+import iuniversity.controller.TeacherCreationControllerImpl;
 import iuniversity.model.Model;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +31,12 @@ public final class PageSwitcher {
 
         {
             this.put(Pages.LOGIN, new LoginControllerImpl());
+            this.put(Pages.ADD_STUDENT, new StudentCreationControllerImpl());
+            this.put(Pages.ADD_TEACHER, new TeacherCreationControllerImpl());
+            this.put(Pages.ADD_COURSE, new CourseCreationControllerImpl());
+            this.put(Pages.ADD_DEGREE_PROGRAMME, new DegreeProgrammeCreationControllerImpl());
             this.put(Pages.CREATE_EXAM_CALL, new ExamCreationControllerImpl());
+            this.put(Pages.ADMIN_HOME, new AdminHomeControllerImpl());
         }
     };
 

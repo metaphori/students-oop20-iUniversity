@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.password4j.Password;
@@ -33,6 +34,7 @@ public class AccountsManagerImpl implements AccountsManager {
     private static final String ADMIN_PASSWORD_HASH = "$2b$10$FeIspybS9D6rKGy5rAFyweYoVIS7g/sMuPAhQWcs7iUmccgU.Sw36"; // admin
     private static final String TEACHER_USERNAME_PREFIX = "doc";
     private static final String STUDENT_USERNAME_PREFIX = "stu";
+    private static final int PASSWORD_LENGHT = 8;
 
     private final Map<UserType, String> passwordFileMap = new HashMap<>() {
         /**
@@ -58,9 +60,7 @@ public class AccountsManagerImpl implements AccountsManager {
     private void addUserCredentials(final UserType userType, final int registrationNumber, final String username,
             final String password) {
         try {
-            final String userRow = registrationNumber + " "
-                    + (userType == UserType.TEACHER ? TEACHER_USERNAME_PREFIX : STUDENT_USERNAME_PREFIX) + "."
-                    + username + password;
+            final String userRow = registrationNumber + " " + username + " " + this.cryptPassword(password);
             FileUtils.writeLines(new File(STORAGE_PATH + passwordFileMap.get(userType)),
                     Stream.concat(this.readUsersCredentials(userType).stream(), Stream.of(userRow))
                             .collect(Collectors.toList()));
@@ -80,6 +80,10 @@ public class AccountsManagerImpl implements AccountsManager {
         return Password.check(password, hashedPassword).withBCrypt();
     }
 
+    private String cryptPassword(final String password) {
+        return Password.hash(password).withBCrypt().getResult();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -89,38 +93,66 @@ public class AccountsManagerImpl implements AccountsManager {
             return Optional.of(UserType.ADMIN);
         }
         final Optional<UserType> userType = getUserTypeFromUsername(username);
-        final Optional<Triple<String, String, String>> user = this.readUsersCredentials(userType.get()).stream()
-                .map(l -> {
-                    final var tokens = l.split(" +");
-                    return Triple.of(tokens[0], tokens[1], tokens[2]);
-                }).filter(t -> t.getMiddle().equals(username)).findFirst();
+        if (userType.isPresent()) {
+            final Optional<Triple<String, String, String>> user = this.readUsersCredentials(userType.get()).stream()
+                    .map(l -> {
+                        final var tokens = l.split(" +");
+                        return Triple.of(tokens[0], tokens[1], tokens[2]);
+                    }).filter(t -> t.getMiddle().equals(username)).findFirst();
 
-        if (user.isPresent() && checkPassword(password, user.get().getRight())) {
-            return userType;
+            if (user.isPresent() && checkPassword(password, user.get().getRight())) {
+                return userType;
+            }
         }
         return Optional.empty();
     }
 
-    private String makeUsername(final User user) {
-        return user.getLastName().replaceAll(" +", "") + "." + user.getName().replaceAll(" +", "");
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String makeUsername(final UserType userType, final User user, final int occurencies) {
+        return this.makeUsername(userType, user.getName(), user.getLastName(), occurencies);
+    }
+
+    private String getUsernamePrefixByUserType(final UserType userType) {
+        return userType == UserType.TEACHER ? TEACHER_USERNAME_PREFIX : STUDENT_USERNAME_PREFIX;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void registerStudentAccount(final Student student, final String password) {
-        this.addUserCredentials(UserType.STUDENT, student.getRegistrationNumber(), this.makeUsername(student),
-                password);
+    public String makeUsername(final UserType userType, final String firstName, final String lastName,
+            final int occurencies) {
+        return getUsernamePrefixByUserType(userType) + "." + lastName.replaceAll(" +", "") + "."
+                + firstName.replaceAll(" +", "") + (occurencies != 0 ? occurencies + 1 : "");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void registerTeacherAccount(final Teacher teacher, final String password) {
-        this.addUserCredentials(UserType.STUDENT, teacher.getRegistrationNumber(), this.makeUsername(teacher),
-                password);
+    public void registerStudentAccount(final Student student, final String password, final int occurencies) {
+        this.addUserCredentials(UserType.STUDENT, student.getRegistrationNumber(),
+                this.makeUsername(UserType.STUDENT, student, occurencies), password);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void registerTeacherAccount(final Teacher teacher, final String password, final int occurencies) {
+        this.addUserCredentials(UserType.TEACHER, teacher.getRegistrationNumber(),
+                this.makeUsername(UserType.TEACHER, teacher, occurencies), password);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String createPassword() {
+        return RandomStringUtils.random(PASSWORD_LENGHT, true, true);
     }
 
 }
