@@ -10,4 +10,21 @@ public interface Archive {
     
     Admin getAdmin();
     
+    void addStudent(Student student);
+    
+    void addTeacher(Teacher teacher);
+    
+    void setStudents(Set<Student> students);
+    
+    void setTeachers(Set<Teacher> teachers);
+    
+    void removeStudent(Student student);
+    
+    void removeTeacher(Teacher teacher);
+    
+    int getNewStudentRegistrationNumber();
+    
+    int getNewTeacherRegistrationNumber();
+    
+    int getNewUserId();
 }
