@@ -15,4 +15,10 @@ public interface LoginView {
      */
     void incorrectCredentials();
 
+    void goToAdminHomePage();
+
+    void goToStudentHomePage();
+
+    void goToTeacherHomePage();
+
 }
