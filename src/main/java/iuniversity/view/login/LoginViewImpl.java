@@ -2,6 +2,8 @@ package iuniversity.view.login;
 
 import iuniversity.controller.LoginController;
 import iuniversity.view.AbstractView;
+import iuniversity.view.PageSwitcher;
+import iuniversity.view.Pages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,6 +46,28 @@ public class LoginViewImpl extends AbstractView implements LoginView {
 
     @Override
     public void start() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void goToAdminHomePage() {
+        PageSwitcher.goToPage(this.getStage(), Pages.ADMIN_HOME, this.getController().getModel());
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void goToStudentHomePage() {
+        PageSwitcher.goToPage(this.getStage(), Pages.STUDENT_HOME, this.getController().getModel());
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void goToTeacherHomePage() {
+        PageSwitcher.goToPage(this.getStage(), Pages.TEACHER_HOME, this.getController().getModel());
     }
 
 }
