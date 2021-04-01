@@ -13,6 +13,12 @@ public interface Controller {
 
     void setModel(Model model);
 
+    boolean isUserLogged();
+
+    boolean isUserATeacher();
+
+    boolean isUserAStudent();
+
     void logout();
 
 }
