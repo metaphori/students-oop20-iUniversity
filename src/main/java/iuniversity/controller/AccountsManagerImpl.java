@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -127,8 +128,8 @@ public class AccountsManagerImpl implements AccountsManager {
     @Override
     public String makeUsername(final UserType userType, final String firstName, final String lastName,
             final int occurencies) {
-        return getUsernamePrefixByUserType(userType) + "." + lastName.replaceAll(" +", "") + "."
-                + firstName.replaceAll(" +", "") + (occurencies != 0 ? occurencies + 1 : "");
+        return getUsernamePrefixByUserType(userType) + "." + lastName.replaceAll(" +", "").toLowerCase(Locale.ITALY) + "."
+                + firstName.replaceAll(" +", "").toLowerCase(Locale.ITALY) + (occurencies != 0 ? occurencies + 1 : "");
     }
 
     /**
