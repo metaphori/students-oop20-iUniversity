@@ -9,7 +9,6 @@ import java.util.Set;
 
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Student;
-import iuniversity.model.user.Teacher;
 
 public class ExamCallImpl implements ExamCall {
 
@@ -32,14 +31,6 @@ public class ExamCallImpl implements ExamCall {
         this.registeredStudents = new HashSet<>();
         this.registrationStart = LocalDateTime.now();
         this.registrationEnd = callStart.minusDays(1);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Teacher getTeacher() {
-        return null;
     }
 
     /**

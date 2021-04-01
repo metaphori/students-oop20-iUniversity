@@ -54,12 +54,6 @@ public interface ExamCall {
 
     /**
      * 
-     * @return the teacher's who published the call
-     */
-    Teacher getTeacher();
-
-    /**
-     * 
      * @return the ExamCall course
      */
     Course getCourse();
