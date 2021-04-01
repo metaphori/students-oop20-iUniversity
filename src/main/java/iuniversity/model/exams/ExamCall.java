@@ -6,7 +6,6 @@ import java.util.Set;
 
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Student;
-import iuniversity.model.user.Teacher;
 
 public interface ExamCall {
 

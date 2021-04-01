@@ -1,5 +1,6 @@
 package iuniversity.view.home;
 
+import java.util.Objects;
 import java.util.Set;
 
 import iuniversity.controller.TeacherHomeController;
@@ -122,6 +123,7 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
      */
     @Override
     public void setOpenExamCalls(final Set<ExamCall> examCalls) {
+        this.openExamCallList.getItems().clear();
         this.openExamCallList.getItems().addAll(examCalls);
     }
 
@@ -133,6 +135,18 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
         logoutBtn.setOnAction(e -> {
             getController().logout();
             PageSwitcher.goToPage(getStage(), Pages.LOGIN, getController().getModel());
+        });
+
+        newExamCallBtn.setOnAction(e -> {
+            PageSwitcher.goToPage(getStage(), Pages.CREATE_EXAM_CALL, getController().getModel());
+        });
+
+        removeExamCallBtn.setOnAction(e -> {
+            final ExamCall examCall = openExamCallList.getSelectionModel().getSelectedItem();
+            if (!Objects.isNull(examCall)) {
+                ((TeacherHomeController) this.getController()).removeExamCall(examCall);
+                ((TeacherHomeController) this.getController()).displayOpenExamCalls();
+            }
         });
     }
 

@@ -8,6 +8,8 @@ import iuniversity.controller.ExamCreationController;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.view.AbstractView;
+import iuniversity.view.PageSwitcher;
+import iuniversity.view.Pages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -44,7 +46,15 @@ public final class ExamCreationViewImpl extends AbstractView implements ExamCrea
             ((ExamCreationController) this.getController()).publishExamCall(
                     LocalDateTime.of(callDatePicker.getValue(), LocalTime.of(CUSTOM_CALL_START_HOUR, 0)),
                     courseChoice.getValue(), examTypeChoice.getValue(), maxStudentSpin.getValue());
+            this.goToHome();
         });
+        this.cancelBtn.setOnAction(e -> {
+            this.goToHome();
+        });
+    }
+
+    private void goToHome() {
+        PageSwitcher.goToPage(getStage(), Pages.TEACHER_HOME, getController().getModel());
     }
 
     @Override

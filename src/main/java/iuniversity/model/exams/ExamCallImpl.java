@@ -1,6 +1,7 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -175,9 +176,8 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public String toString() {
-        return "ExamCallImpl [maxStudents=" + maxStudents + ", registeredStudents=" + registeredStudents
-                + ", callStart=" + callStart + ", registrationStart=" + registrationStart + ", registrationEnd="
-                + registrationEnd + ", examType=" + examType + ", course=" + course + "]";
+        return callStart.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm")) + " | " + course + ", " + examType
+                + ", aperto fino al " + registrationEnd.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public static class Builder implements ExamCallBuilder {
