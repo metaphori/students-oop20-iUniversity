@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.password4j.Password;
@@ -88,9 +90,9 @@ public class AccountsManagerImpl implements AccountsManager {
      * {@inheritDoc}
      */
     @Override
-    public Optional<UserType> checkCredentials(final String username, final String password) {
+    public Optional<Pair<UserType, Integer>> checkCredentials(final String username, final String password) {
         if (username.equals(ADMIN_USERNAME) && checkPassword(password, ADMIN_PASSWORD_HASH)) {
-            return Optional.of(UserType.ADMIN);
+            return Optional.of(new ImmutablePair<>(User.UserType.ADMIN, 0));
         }
         final Optional<UserType> userType = getUserTypeFromUsername(username);
         if (userType.isPresent()) {
@@ -101,7 +103,7 @@ public class AccountsManagerImpl implements AccountsManager {
                     }).filter(t -> t.getMiddle().equals(username)).findFirst();
 
             if (user.isPresent() && checkPassword(password, user.get().getRight())) {
-                return userType;
+                return Optional.of(new ImmutablePair<>(userType.get(), Integer.valueOf(user.get().getLeft())));
             }
         }
         return Optional.empty();
