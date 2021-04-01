@@ -37,5 +37,7 @@ public interface ExamsManager {
      * @param date
      */
     void addExamReport(Course course, Student student, ExamResult result, LocalDate date);
+    
+    void removeExamCall(ExamCall examCall);
 
 }
