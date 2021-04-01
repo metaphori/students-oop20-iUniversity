@@ -10,7 +10,7 @@ public interface TeacherHomeView {
 
     void setLastName(String lastName);
 
-    void setRegistrationNumber(int registraionNumeber);
+    void setRegistrationNumber(int registrationNumber);
 
     void setPromotedStudents(int promotedStudents);
 

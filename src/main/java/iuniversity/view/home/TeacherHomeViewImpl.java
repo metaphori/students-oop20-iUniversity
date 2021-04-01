@@ -2,8 +2,11 @@ package iuniversity.view.home;
 
 import java.util.Set;
 
+import iuniversity.controller.TeacherHomeController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.view.AbstractView;
+import iuniversity.view.PageSwitcher;
+import iuniversity.view.Pages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,7 +21,7 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
     private Label lastNameLbl;
 
     @FXML
-    private Label registrationNameLbl;
+    private Label registrationNumberLbl;
 
     @FXML
     private Label promotedStudentsLbl;
@@ -70,8 +73,8 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
      * {@inheritDoc}
      */
     @Override
-    public void setRegistrationNumber(final int registraionNumeber) {
-        registrationNameLbl.setText(String.valueOf(registraionNumeber));
+    public void setRegistrationNumber(final int registrationNumber) {
+        registrationNumberLbl.setText(String.valueOf(registrationNumber));
     }
 
     /**
@@ -122,8 +125,25 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
         this.openExamCallList.getItems().addAll(examCalls);
     }
 
+    /**
+     * 
+     */
+    @FXML
+    public void initialize() {
+        logoutBtn.setOnAction(e -> {
+            getController().logout();
+            PageSwitcher.goToPage(getStage(), Pages.LOGIN, getController().getModel());
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start() {
+        ((TeacherHomeController) this.getController()).displayTeacherInfo();
+        ((TeacherHomeController) this.getController()).displayTeacherStatistics();
+        ((TeacherHomeController) this.getController()).displayOpenExamCalls();
     }
 
 }

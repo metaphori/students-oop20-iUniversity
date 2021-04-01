@@ -36,7 +36,7 @@ public class TeacherHomeControllerImpl extends AbstractController implements Tea
         final Teacher teacher = getLoggedTeacher();
         final TeacherHomeView view = (TeacherHomeView) this.getView();
         view.setFirstName(teacher.getName());
-        view.setFirstName(teacher.getLastName());
+        view.setLastName(teacher.getLastName());
         view.setRegistrationNumber(teacher.getRegistrationNumber());
     }
 

@@ -30,16 +30,16 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
             final Optional<Teacher> teacher = this.getModel().getArchive()
                     .getTeacherByRegistrationNumber(userType.get().getRight());
             if (teacher.isPresent()) {
-                ((LoginView) this.getView()).goToTeacherHomePage();
                 this.getModel().setCurrentUser(teacher.get());
+                ((LoginView) this.getView()).goToTeacherHomePage();
             }
             break;
         case STUDENT:
             final Optional<Student> student = this.getModel().getArchive()
                     .getStudentByRegistrationNumber(userType.get().getRight());
             if (student.isPresent()) {
-                ((LoginView) this.getView()).goToStudentHomePage();
                 this.getModel().setCurrentUser(student.get());
+                ((LoginView) this.getView()).goToStudentHomePage();
             }
             break;
         default:
