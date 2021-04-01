@@ -2,6 +2,7 @@ package iuniversity.model.user;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class ArchiveImpl implements Archive {
@@ -90,5 +91,21 @@ public class ArchiveImpl implements Archive {
             }
         }
         return ++id;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<Teacher> getTeacherByRegistrationNumber(final int registrationNumber) {
+        return teachers.stream().filter(t -> t.getRegistrationNumber() == registrationNumber).findFirst();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<Student> getStudentByRegistrationNumber(final int registrationNumber) {
+        return students.stream().filter(s -> s.getRegistrationNumber() == registrationNumber).findFirst();
     }
 }
