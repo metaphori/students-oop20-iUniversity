@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import iuniversity.model.didactics.AcademicYear;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.model.user.Student;
@@ -41,9 +40,9 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
-    public void addExamCall(final LocalDateTime callStart, final AcademicYear academicYear, final Course course,
+    public void addExamCall(final LocalDateTime callStart, final Course course,
             final ExamType examType, final Integer maximumStudents) {
-        this.examCalls.add(new ExamCallImpl.Builder().callStart(callStart).academicYear(academicYear).course(course)
+        this.examCalls.add(new ExamCallImpl.Builder().callStart(callStart).course(course)
                 .examType(examType).maximumStudents(maximumStudents).build());
     }
 

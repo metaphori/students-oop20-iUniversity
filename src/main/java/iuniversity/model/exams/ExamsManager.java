@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import iuniversity.model.didactics.AcademicYear;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.model.user.Student;
@@ -19,14 +18,12 @@ public interface ExamsManager {
      * Creates a new Exam call.
      * 
      * @param callStart       start date and time of the exam call
-     * @param academicYear    the academic year to which the exam call refers to
      * @param course          the course of the exam call
      * @param examType        the type of the exam call
      * @param maximumStudents the maximum number of students that can register to
      *                        the exam call
      */
-    void addExamCall(LocalDateTime callStart, AcademicYear academicYear, Course course, ExamType examType,
-            Integer maximumStudents);
+    void addExamCall(LocalDateTime callStart, Course course, ExamType examType, Integer maximumStudents);
 
     /**
      * Add a student exam report for a particular course.
@@ -37,7 +34,7 @@ public interface ExamsManager {
      * @param date
      */
     void addExamReport(Course course, Student student, ExamResult result, LocalDate date);
-    
+
     void removeExamCall(ExamCall examCall);
 
 }

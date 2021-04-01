@@ -7,17 +7,15 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import iuniversity.model.didactics.AcademicYear;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Student;
 import iuniversity.model.user.Teacher;
 
-public final class ExamCallImpl implements ExamCall {
+public class ExamCallImpl implements ExamCall {
 
     private static final int DAYS_BEFORE_CALL = 2;
 
     private final Optional<Integer> maxStudents;
-    private final AcademicYear academicYear;
     private final Set<Student> registeredStudents;
     private final LocalDateTime callStart;
     private final LocalDateTime registrationStart;
@@ -25,11 +23,10 @@ public final class ExamCallImpl implements ExamCall {
     private final ExamType examType;
     private final Course course;
 
-    public ExamCallImpl(final Course course, final LocalDateTime callStart, final AcademicYear academicYear,
-            final ExamType examType, final Optional<Integer> maxStudents) {
+    public ExamCallImpl(final Course course, final LocalDateTime callStart, final ExamType examType,
+            final Optional<Integer> maxStudents) {
         this.course = course;
         this.callStart = callStart;
-        this.academicYear = academicYear;
         this.examType = examType;
         this.maxStudents = maxStudents;
         this.registeredStudents = new HashSet<>();
@@ -37,57 +34,78 @@ public final class ExamCallImpl implements ExamCall {
         this.registrationEnd = callStart.minusDays(1);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Teacher getTeacher() {
         return null;
     }
 
-    @Override
-    public AcademicYear getAcademicYear() {
-        return this.academicYear;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Student> getRegisteredStudents() {
         return Collections.unmodifiableSet(this.registeredStudents);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LocalDateTime getStart() {
         return this.callStart;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ExamType getExamType() {
         return this.examType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CallStatus getStatus() {
         final LocalDateTime now = LocalDateTime.now();
         return now.isAfter(registrationStart) && now.isBefore(registrationEnd) ? CallStatus.OPEN : CallStatus.CLOSED;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Course getCourse() {
         return this.course;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Integer> maxStudents() {
         return this.maxStudents;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void registerStudent(final Student student) {
         this.registeredStudents.add(student);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((academicYear == null) ? 0 : academicYear.hashCode());
         result = prime * result + ((callStart == null) ? 0 : callStart.hashCode());
         result = prime * result + ((course == null) ? 0 : course.hashCode());
         result = prime * result + ((examType == null) ? 0 : examType.hashCode());
@@ -98,6 +116,9 @@ public final class ExamCallImpl implements ExamCall {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -110,13 +131,6 @@ public final class ExamCallImpl implements ExamCall {
             return false;
         }
         final ExamCallImpl other = (ExamCallImpl) obj;
-        if (academicYear == null) {
-            if (other.academicYear != null) {
-                return false;
-            }
-        } else if (!academicYear.equals(other.academicYear)) {
-            return false;
-        }
         if (callStart == null) {
             if (other.callStart != null) {
                 return false;
@@ -165,29 +179,25 @@ public final class ExamCallImpl implements ExamCall {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "ExamCallImpl [maxStudents=" + maxStudents + ", academicYear=" + academicYear + ", registeredStudents="
-                + registeredStudents + ", callStart=" + callStart + ", registrationStart=" + registrationStart
-                + ", registrationEnd=" + registrationEnd + ", examType=" + examType + ", course=" + course + "]";
+        return "ExamCallImpl [maxStudents=" + maxStudents + ", registeredStudents=" + registeredStudents
+                + ", callStart=" + callStart + ", registrationStart=" + registrationStart + ", registrationEnd="
+                + registrationEnd + ", examType=" + examType + ", course=" + course + "]";
     }
 
     public static class Builder implements ExamCallBuilder {
 
         private Optional<Integer> maximumStudents;
-        private AcademicYear academicYear;
         private LocalDateTime start;
         private ExamType type;
         private Course course;
 
         public Builder() {
             this.maximumStudents = Optional.empty();
-        }
-
-        @Override
-        public final ExamCallBuilder academicYear(final AcademicYear academicYear) {
-            this.academicYear = academicYear;
-            return this;
         }
 
         @Override
@@ -216,63 +226,12 @@ public final class ExamCallImpl implements ExamCall {
 
         @Override
         public final ExamCall build() {
-            if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(academicYear)
-                    || Objects.isNull(type)) {
+            if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(type)) {
                 throw new IllegalStateException();
             } else if (start.isBefore(LocalDateTime.now().plusDays(DAYS_BEFORE_CALL))) {
                 throw new IllegalStateException("ExamCall must be at least " + DAYS_BEFORE_CALL + " days after today");
             }
-            return new ExamCallImpl(course, start, academicYear, type, maximumStudents);
-        }
-
-        @Override
-        public final int hashCode() {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + ((academicYear == null) ? 0 : academicYear.hashCode());
-            result = prime * result + ((course == null) ? 0 : course.hashCode());
-            result = prime * result + ((start == null) ? 0 : start.hashCode());
-            result = prime * result + ((type == null) ? 0 : type.hashCode());
-            return result;
-        }
-
-        @Override
-        public final boolean equals(final Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final Builder other = (Builder) obj;
-            if (academicYear == null) {
-                if (other.academicYear != null) {
-                    return false;
-                }
-            } else if (!academicYear.equals(other.academicYear)) {
-                return false;
-            }
-            if (course == null) {
-                if (other.course != null) {
-                    return false;
-                }
-            } else if (!course.equals(other.course)) {
-                return false;
-            }
-            if (start == null) {
-                if (other.start != null) {
-                    return false;
-                }
-            } else if (!start.equals(other.start)) {
-                return false;
-            }
-            if (type != other.type) {
-                return false;
-            }
-            return true;
+            return new ExamCallImpl(course, start, type, maximumStudents);
         }
 
     }

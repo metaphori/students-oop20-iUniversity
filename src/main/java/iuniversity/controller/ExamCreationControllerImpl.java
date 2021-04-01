@@ -1,10 +1,8 @@
 package iuniversity.controller;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.Set;
 
-import iuniversity.model.didactics.AcademicYear;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.view.exams.ExamCreationView;
@@ -13,14 +11,8 @@ public final class ExamCreationControllerImpl extends AbstractController impleme
 
     @Override
     public void initializeChoices() {
-        this.initializeAcademicYearChoices();
         this.initializeExamTypeChoices();
         this.initilizeCourseChoices();
-    }
-
-    @Override
-    public void initializeAcademicYearChoices() {
-        ((ExamCreationView) this.getView()).setAcademicYearChoices(Collections.emptyList());
     }
 
     @Override
@@ -35,8 +27,8 @@ public final class ExamCreationControllerImpl extends AbstractController impleme
     }
 
     @Override
-    public void publishExamCall(final LocalDateTime callStart, final AcademicYear academicYear, final Course course,
-            final ExamType examType, final Integer maximumStudents) {
-        this.getModel().getExamManager().addExamCall(callStart, academicYear, course, examType, maximumStudents);
+    public void publishExamCall(final LocalDateTime callStart, final Course course,
+            final ExamType examType, final int maximumStudents) {
+        this.getModel().getExamManager().addExamCall(callStart, course, examType, maximumStudents);
     }
 }
