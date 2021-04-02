@@ -8,6 +8,7 @@ import iuniversity.controller.AdminHomeControllerImpl;
 import iuniversity.controller.Controller;
 import iuniversity.controller.CourseCreationControllerImpl;
 import iuniversity.controller.DegreeProgrammeCreationControllerImpl;
+import iuniversity.controller.ExamBookingControllerImpl;
 import iuniversity.controller.ExamCreationControllerImpl;
 import iuniversity.controller.LoginControllerImpl;
 import iuniversity.controller.StudentCreationControllerImpl;
@@ -41,6 +42,7 @@ public final class PageSwitcher {
             this.put(Pages.ADMIN_HOME, new AdminHomeControllerImpl());
             this.put(Pages.TEACHER_HOME, new TeacherHomeControllerImpl());
             this.put(Pages.STUDENT_HOME, new StudentHomeControllerImpl());
+            this.put(Pages.BOOK_EXAM_CALL, new ExamBookingControllerImpl());
         }
     };
 
