@@ -29,7 +29,9 @@ public class ExamBookingControllerImpl extends AbstractController implements Exa
         checkUser();
         ((ExamBookingView) this.getView()).setAvailableExamCalls(this.getModel().getExamManager().getExamCalls()
                 .stream().filter(e -> !e.getRegisteredStudents().contains(getLoggedStudent()))
-                .filter(e -> e.getStatus() == CallStatus.OPEN).collect(Collectors.toSet()));
+                .filter(e -> e.getStatus() == CallStatus.OPEN)
+                .filter(e -> getLoggedStudent().getDegreeProgramme().getCourses().contains(e.getCourse()))
+                .collect(Collectors.toSet()));
     }
 
     /**
