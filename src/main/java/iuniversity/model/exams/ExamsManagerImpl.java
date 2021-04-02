@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import iuniversity.model.didactics.AcademicYear;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.model.user.Student;
@@ -41,20 +40,50 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
-    public void addExamCall(final LocalDateTime callStart, final AcademicYear academicYear, final Course course,
-            final ExamType examType, final Integer maximumStudents) {
-        this.examCalls.add(new ExamCallImpl.Builder()
-                .callStart(callStart)
-                .academicYear(academicYear)
-                .course(course)
-                .examType(examType)
-                .maximumStudents(maximumStudents)
-                .build());
+    public void addExamCall(final LocalDateTime callStart, final Course course, final ExamType examType,
+            final Integer maximumStudents) {
+        this.examCalls.add(new ExamCallImpl.Builder().callStart(callStart).course(course).examType(examType)
+                .maximumStudents(maximumStudents).build());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addExamReport(final Course course, final Student student, final ExamResult result, final LocalDate date) {
+    public void addExamReport(final Course course, final Student student, final ExamResult result,
+            final LocalDate date) {
         this.examReports.add(new ExamReportImpl(course, student, result, date));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeExamCall(final ExamCall examCall) {
+        examCalls.remove(examCall);
+    }
+
+    private void addExamCall(final ExamCall examCall) {
+        examCalls.add(examCall);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void withdrawStudent(final ExamCall examCall, final Student student) {
+        removeExamCall(examCall);
+        examCall.withdrawStudent(student);
+        addExamCall(examCall);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void registerStudent(final ExamCall examCall, final Student student) {
+        removeExamCall(examCall);
+        examCall.registerStudent(student);
+        addExamCall(examCall);
     }
 
 }

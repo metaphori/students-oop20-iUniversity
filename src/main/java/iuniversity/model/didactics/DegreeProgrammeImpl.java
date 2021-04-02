@@ -1,5 +1,6 @@
 package iuniversity.model.didactics;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class DegreeProgrammeImpl implements DegreeProgramme {
@@ -27,6 +28,11 @@ public class DegreeProgrammeImpl implements DegreeProgramme {
     @Override
     public String toString() {
         return name + "[" + type + "]";
+    }
+
+    @Override
+    public Set<Course> getCourses() {
+        return Collections.unmodifiableSet(courses);
     }
     
 }
