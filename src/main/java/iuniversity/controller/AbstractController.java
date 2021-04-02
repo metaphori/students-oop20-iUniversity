@@ -3,6 +3,8 @@ package iuniversity.controller;
 import java.io.File;
 
 import iuniversity.model.Model;
+import iuniversity.model.user.Student;
+import iuniversity.model.user.Teacher;
 import iuniversity.view.View;
 
 public abstract class AbstractController implements Controller {
@@ -54,5 +56,29 @@ public abstract class AbstractController implements Controller {
     @Override
     public void logout() {
         this.getModel().unsetCurrentUser();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isUserLogged() {
+        return this.getModel().getLoggedUser().isPresent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isUserATeacher() {
+        return this.isUserLogged() && this.getModel().getLoggedUser().get() instanceof Teacher;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isUserAStudent() {
+        return this.isUserLogged() && this.getModel().getLoggedUser().get() instanceof Student;
     }
 }

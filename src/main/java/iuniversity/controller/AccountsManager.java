@@ -2,6 +2,8 @@ package iuniversity.controller;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import iuniversity.model.user.Student;
 import iuniversity.model.user.Teacher;
 import iuniversity.model.user.User;
@@ -15,7 +17,7 @@ public interface AccountsManager {
      * @param password
      * @return an optional with the type of user logged
      */
-    Optional<UserType> checkCredentials(String username, String password);
+    Optional<Pair<UserType, Integer>> checkCredentials(String username, String password);
 
     /**
      * Stores the student credentials.

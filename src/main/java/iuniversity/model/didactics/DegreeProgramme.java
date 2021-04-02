@@ -1,5 +1,7 @@
 package iuniversity.model.didactics;
 
+import java.util.Set;
+
 public interface DegreeProgramme {
 
     /**
@@ -13,6 +15,8 @@ public interface DegreeProgramme {
      * @return the degree type 
      */
     DegreeType getType();
+    
+    Set<Course> getCourses();
     
     public enum DegreeType {
         
