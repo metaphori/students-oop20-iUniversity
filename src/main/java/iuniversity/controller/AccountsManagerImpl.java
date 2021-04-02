@@ -155,7 +155,8 @@ public class AccountsManagerImpl implements AccountsManager {
      */
     @Override
     public String createPassword() {
-        return RandomStringUtils.random(PASSWORD_LENGHT, true, true);
+        return "1234";
+        //return RandomStringUtils.random(PASSWORD_LENGHT, true, true);
     }
 
 }
