@@ -2,6 +2,7 @@ package iuniversity.view.home;
 
 import java.util.Set;
 
+import iuniversity.controller.StudentHomeController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.view.AbstractView;
 import javafx.fxml.FXML;
@@ -58,9 +59,14 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start() {
-
+        ((StudentHomeController) this.getController()).displayStudentInfo();
+        ((StudentHomeController) this.getController()).displayStudentStatistics();
+        ((StudentHomeController) this.getController()).displayBookedExamCalls();
     }
 
     /**
