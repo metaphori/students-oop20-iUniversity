@@ -1,6 +1,6 @@
 package iuniversity.controller;
 
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -9,16 +9,14 @@ import iuniversity.model.exams.ExamCall.CallStatus;
 import iuniversity.model.exams.ExamReport;
 import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Teacher;
-import iuniversity.model.user.User;
 import iuniversity.view.home.TeacherHomeView;
 
 public class TeacherHomeControllerImpl extends AbstractController implements TeacherHomeController {
 
     private void checkUser() {
-        final Optional<User> loggedUser = this.getModel().getLoggedUser();
-        if (loggedUser.isEmpty()) {
+        if (!isUserLogged()) {
             throw new IllegalStateException("No user logged");
-        } else if (!(loggedUser.get() instanceof Teacher)) {
+        } else if (!isUserATeacher()) {
             throw new IllegalStateException("User must be a teacher");
         }
     }

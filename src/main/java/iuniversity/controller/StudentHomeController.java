@@ -1,5 +1,6 @@
 package iuniversity.controller;
 
+
 import iuniversity.model.exams.ExamCall;
 
 public interface StudentHomeController {
@@ -9,4 +10,6 @@ public interface StudentHomeController {
     void displayStudentStatistics();
 
     void withdrawStudent(ExamCall examCall);
+
+    void displayBookedExamCalls();
 }
