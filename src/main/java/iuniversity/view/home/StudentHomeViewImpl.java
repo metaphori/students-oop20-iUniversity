@@ -25,7 +25,7 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
     private Label degreeProgrammeLbl;
 
     @FXML
-    private Label acquiredCredidtsLbl;
+    private Label acquiredCreditsLbl;
 
     @FXML
     private Label meanExamResultLbl;
@@ -106,7 +106,7 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
      */
     @Override
     public void setAcquiredCredits(final int acquiredCredits) {
-        acquiredCredidtsLbl.setText(String.valueOf(acquiredCredits));
+        acquiredCreditsLbl.setText(String.valueOf(acquiredCredits));
     }
 
     /**
