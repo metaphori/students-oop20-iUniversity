@@ -95,4 +95,6 @@ public interface ExamCall {
      */
     void registerStudent(Student student);
 
+    void withdrawStudent(Student student);
+
 }

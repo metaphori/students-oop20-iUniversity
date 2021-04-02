@@ -227,4 +227,12 @@ public class ExamCallImpl implements ExamCall {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void withdrawStudent(final Student student) {
+        this.registeredStudents.remove(student);
+    }
+
 }

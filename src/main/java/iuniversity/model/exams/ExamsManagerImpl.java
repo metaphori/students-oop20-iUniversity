@@ -40,10 +40,10 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
-    public void addExamCall(final LocalDateTime callStart, final Course course,
-            final ExamType examType, final Integer maximumStudents) {
-        this.examCalls.add(new ExamCallImpl.Builder().callStart(callStart).course(course)
-                .examType(examType).maximumStudents(maximumStudents).build());
+    public void addExamCall(final LocalDateTime callStart, final Course course, final ExamType examType,
+            final Integer maximumStudents) {
+        this.examCalls.add(new ExamCallImpl.Builder().callStart(callStart).course(course).examType(examType)
+                .maximumStudents(maximumStudents).build());
     }
 
     /**
@@ -61,6 +61,29 @@ public final class ExamsManagerImpl implements ExamsManager {
     @Override
     public void removeExamCall(final ExamCall examCall) {
         examCalls.remove(examCall);
+    }
+
+    private void addExamCall(final ExamCall examCall) {
+        examCalls.add(examCall);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void withdrawStudent(final ExamCall examCall, final Student student) {
+        removeExamCall(examCall);
+        examCall.registerStudent(student);
+        addExamCall(examCall);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void registerStudent(final ExamCall examCall, final Student student) {
+        removeExamCall(examCall);
+        examCall.withdrawStudent(student);
+        addExamCall(examCall);
     }
 
 }
