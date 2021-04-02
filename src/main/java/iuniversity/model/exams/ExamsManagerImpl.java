@@ -73,7 +73,7 @@ public final class ExamsManagerImpl implements ExamsManager {
     @Override
     public void withdrawStudent(final ExamCall examCall, final Student student) {
         removeExamCall(examCall);
-        examCall.registerStudent(student);
+        examCall.withdrawStudent(student);
         addExamCall(examCall);
     }
     /**
@@ -82,7 +82,7 @@ public final class ExamsManagerImpl implements ExamsManager {
     @Override
     public void registerStudent(final ExamCall examCall, final Student student) {
         removeExamCall(examCall);
-        examCall.withdrawStudent(student);
+        examCall.registerStudent(student);
         addExamCall(examCall);
     }
 
