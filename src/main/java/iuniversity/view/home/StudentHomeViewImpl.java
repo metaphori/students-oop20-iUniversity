@@ -6,6 +6,8 @@ import java.util.Set;
 import iuniversity.controller.StudentHomeController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.view.AbstractView;
+import iuniversity.view.PageSwitcher;
+import iuniversity.view.Pages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -69,6 +71,9 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
                 ((StudentHomeController) this.getController()).withdrawStudent(examCall);
                 ((StudentHomeController) this.getController()).displayBookedExamCalls();
             }
+        });
+        bookExamBtn.setOnAction(e -> {
+            PageSwitcher.goToPage(getStage(), Pages.BOOK_EXAM_CALL, getController().getModel());
         });
     }
 
