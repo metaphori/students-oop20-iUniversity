@@ -48,7 +48,6 @@ public class TeacherHomeControllerImpl extends AbstractController implements Tea
     }
 
     private Stream<ExamCall> getTeacherExamCallsStream() {
-        System.out.println(this.getModel().getExamManager().getExamCalls());
         return this.getModel().getExamManager().getExamCalls().stream()
                 .filter(e -> getLoggedTeacher().getCourses().contains(e.getCourse()));
     }
