@@ -64,6 +64,7 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
     public void initialize() {
         logoutBtn.setOnAction(e -> {
             getController().logout();
+            PageSwitcher.goToPage(getStage(), Pages.LOGIN, getController().getModel());
         });
         withdrawBtn.setOnAction(e -> {
             final ExamCall examCall = this.bookedExamCallList.getSelectionModel().getSelectedItem();

@@ -1,7 +1,9 @@
 package iuniversity.view.exams;
 
+import java.util.Objects;
 import java.util.Set;
 
+import iuniversity.controller.ExamBookingController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.view.AbstractView;
 import iuniversity.view.PageSwitcher;
@@ -27,12 +29,25 @@ public class ExamBookingViewImpl extends AbstractView implements ExamBookingView
     @FXML
     public void initialize() {
         cancelBtn.setOnAction(e -> {
-            PageSwitcher.goToPage(getStage(), Pages.STUDENT_HOME, getController().getModel());
+            goToHome();
+        });
+        bookBtn.setOnAction(e -> {
+            final ExamCall examCall = examCallList.getSelectionModel().getSelectedItem();
+            if (!Objects.isNull(examCall)) {
+                ((ExamBookingController) this.getController()).bookExamCall(examCall);
+                goToHome();
+            }
         });
     }
-
+    private void goToHome() {
+        PageSwitcher.goToPage(getStage(), Pages.STUDENT_HOME, getController().getModel());
+    }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start() {
+        ((ExamBookingController) this.getController()).displayAvailableExamCalls();
     }
 
     /**
