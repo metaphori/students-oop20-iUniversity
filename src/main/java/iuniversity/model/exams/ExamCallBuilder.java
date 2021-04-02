@@ -2,19 +2,10 @@ package iuniversity.model.exams;
 
 import java.time.LocalDateTime;
 
-import iuniversity.model.didactics.AcademicYear;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 
 public interface ExamCallBuilder {
-
-    /**
-     * Sets the academic.
-     * 
-     * @param academicYear the academic year of the exam call
-     * @return instance of builder
-     */
-    ExamCallBuilder academicYear(AcademicYear academicYear);
 
     /**
      * 

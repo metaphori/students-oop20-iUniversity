@@ -4,10 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
-import iuniversity.model.didactics.AcademicYear;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Student;
-import iuniversity.model.user.Teacher;
 
 public interface ExamCall {
 
@@ -55,21 +53,9 @@ public interface ExamCall {
 
     /**
      * 
-     * @return the teacher's who published the call
-     */
-    Teacher getTeacher();
-
-    /**
-     * 
      * @return the ExamCall course
      */
     Course getCourse();
-
-    /**
-     * 
-     * @return the Academic year to witch the call is referenced
-     */
-    AcademicYear getAcademicYear();
 
     /**
      * 
@@ -108,5 +94,7 @@ public interface ExamCall {
      * @param student
      */
     void registerStudent(Student student);
+
+    void withdrawStudent(Student student);
 
 }

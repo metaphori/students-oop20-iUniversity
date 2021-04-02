@@ -36,7 +36,12 @@ public enum Pages {
     /**
      * Admin home page.
      */
-    ADMIN_HOME("admin_homepage");
+    ADMIN_HOME("admin_homepage"),
+    /**
+     * Exam call booking page.
+     */
+    BOOK_EXAM_CALL("book_exam_call");
+
     private final String fxmlName;
 
     Pages(final String name) {
