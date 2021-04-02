@@ -1,5 +1,6 @@
 package iuniversity.view.home;
 
+import java.util.Objects;
 import java.util.Set;
 
 import iuniversity.controller.StudentHomeController;
@@ -54,9 +55,21 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
     @FXML
     private ListView<ExamCall> bookedExamCallList;
 
+    /**
+     * {@inheritDoc}
+     */
     @FXML
     public void initialize() {
-
+        logoutBtn.setOnAction(e -> {
+            getController().logout();
+        });
+        withdrawBtn.setOnAction(e -> {
+            final ExamCall examCall = this.bookedExamCallList.getSelectionModel().getSelectedItem();
+            if (!Objects.isNull(examCall)) {
+                ((StudentHomeController) this.getController()).withdrawStudent(examCall);
+                ((StudentHomeController) this.getController()).displayBookedExamCalls();
+            }
+        });
     }
 
     /**
