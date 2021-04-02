@@ -25,6 +25,10 @@ public class AdminHomeViewImpl extends AbstractView {
     @FXML
     private Button logoutBtn;
 
+    
+    /**
+     * Choose whether to add the course, the degree course, the student, the teacher or log out.
+     */
     @Override
     public void start() {
         addCourseBtn.setOnAction(new EventHandler<ActionEvent>() {
