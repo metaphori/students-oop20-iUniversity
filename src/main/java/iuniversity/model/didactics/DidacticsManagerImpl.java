@@ -51,7 +51,7 @@ public class DidacticsManagerImpl implements DidacticsManager {
     }
 
     @Override
-    public void setDegreeProgrammes(Set<DegreeProgramme> degreeProgramms) {
+    public void setDegreeProgrammes(Set<DegreeProgramme> degreeProgrammes) {
         this.degreeProgrammes = new HashSet<>(degreeProgrammes);
     }
 
