@@ -1,5 +1,6 @@
 package iuniversity.model.didactics;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,12 +47,12 @@ public class DidacticsManagerImpl implements DidacticsManager {
     }
 
     @Override
-    public void setCourses(Set<Course> courses) {
+    public void setCourses(Collection<Course> courses) {
         this.courses = new HashSet<>(courses);
     }
 
     @Override
-    public void setDegreeProgrammes(Set<DegreeProgramme> degreeProgrammes) {
+    public void setDegreeProgrammes(Collection<DegreeProgramme> degreeProgrammes) {
         this.degreeProgrammes = new HashSet<>(degreeProgrammes);
     }
 

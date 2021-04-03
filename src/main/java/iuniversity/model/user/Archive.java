@@ -1,5 +1,6 @@
 package iuniversity.model.user;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,14 +43,14 @@ public interface Archive {
      * 
      * @param students   The new set of students  
      */
-    void setStudents(Set<Student> students);
+    void setStudents(Collection<Student> students);
     
     /**
      * The set of teachers becomes the one given in input
      * 
      * @param teachers  The new set of teachers
      */
-    void setTeachers(Set<Teacher> teachers);
+    void setTeachers(Collection<Teacher> teachers);
     
     /**
      * Remove the student
