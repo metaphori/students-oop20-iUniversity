@@ -1,11 +1,16 @@
 package iuniversity.model.user;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
 import iuniversity.model.didactics.Course;
 
-public class TeacherImpl extends AbstractUser implements Teacher{
+public class TeacherImpl extends AbstractUser implements Teacher, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private int registrarionNumber;
     private Set<Course> courses;
     

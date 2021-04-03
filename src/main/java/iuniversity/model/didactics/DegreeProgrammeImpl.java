@@ -1,10 +1,15 @@
 package iuniversity.model.didactics;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 
-public class DegreeProgrammeImpl implements DegreeProgramme {
+public class DegreeProgrammeImpl implements DegreeProgramme, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private String name;
     private DegreeType type;
     private Set<Course> courses;
