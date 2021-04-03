@@ -31,7 +31,8 @@ public class FileDataStoreImpl implements DataStore {
 
     public FileDataStoreImpl() {
         try {
-            FileUtils.forceMkdir(new File(STORE_PATH));
+            final File store = new File(STORE_PATH);
+            FileUtils.forceMkdir(store);
         } catch (IOException e) {
             e.printStackTrace();
         }
