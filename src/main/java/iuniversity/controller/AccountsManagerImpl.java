@@ -3,7 +3,7 @@ package iuniversity.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -39,7 +39,7 @@ public class AccountsManagerImpl implements AccountsManager {
     private static final String STUDENT_USERNAME_PREFIX = "stu";
     private static final int PASSWORD_LENGHT = 8;
 
-    private final Map<UserType, String> passwordFileMap = new HashMap<>() {
+    private final Map<UserType, String> passwordFileMap = new EnumMap<>(UserType.class) {
         /**
         * 
         */
@@ -50,6 +50,22 @@ public class AccountsManagerImpl implements AccountsManager {
             this.put(UserType.STUDENT, "pass_students.txt");
         }
     };
+
+    public AccountsManagerImpl() {
+        for (final UserType userType : UserType.values()) {
+            if (userType != UserType.ADMIN) {
+                final File file = new File(STORAGE_PATH + passwordFileMap.get(userType));
+                if (!file.exists()) {
+                    try {
+                        FileUtils.copyInputStreamToFile(
+                                ClassLoader.getSystemResourceAsStream("data/" + passwordFileMap.get(userType)), file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
 
     private List<String> readUsersCredentials(final UserType userType) {
         try {
@@ -128,8 +144,9 @@ public class AccountsManagerImpl implements AccountsManager {
     @Override
     public String makeUsername(final UserType userType, final String firstName, final String lastName,
             final int occurencies) {
-        return getUsernamePrefixByUserType(userType) + "." + lastName.replaceAll(" +", "").toLowerCase(Locale.ITALY) + "."
-                + firstName.replaceAll(" +", "").toLowerCase(Locale.ITALY) + (occurencies != 0 ? occurencies + 1 : "");
+        return getUsernamePrefixByUserType(userType) + "." + lastName.replaceAll(" +", "").toLowerCase(Locale.ITALY)
+                + "." + firstName.replaceAll(" +", "").toLowerCase(Locale.ITALY)
+                + (occurencies != 0 ? occurencies + 1 : "");
     }
 
     /**
@@ -156,7 +173,7 @@ public class AccountsManagerImpl implements AccountsManager {
     @Override
     public String createPassword() {
         return "1234";
-        //return RandomStringUtils.random(PASSWORD_LENGHT, true, true);
+        // return RandomStringUtils.random(PASSWORD_LENGHT, true, true);
     }
 
 }
