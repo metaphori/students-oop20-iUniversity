@@ -30,5 +30,10 @@ public class TeacherImpl extends AbstractUser implements Teacher, Serializable {
     public Set<Course> getCourses() {
         return Collections.unmodifiableSet(courses);
     }
+    
+    @Override
+    public String toString() {
+        return  "[" + registrarionNumber + "] " + super.toString();
+    }
 
 }

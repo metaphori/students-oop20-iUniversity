@@ -32,4 +32,11 @@ public class StudentImpl extends AbstractUser implements Student, Serializable {
         return this.degreeProgramme;
     }
 
+    @Override
+    public String toString() {
+        return  "[" + registrationNumber + "] " + super.toString();
+    }
+    
+    
+
 }
