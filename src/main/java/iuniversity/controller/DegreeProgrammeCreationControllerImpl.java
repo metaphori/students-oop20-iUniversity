@@ -16,6 +16,7 @@ public class DegreeProgrammeCreationControllerImpl extends AbstractController im
     @Override
     public void createDegreeProgramme(String name, DegreeType type, Set<Course> courses) {
         this.getModel().getDidacticsManager().addDegreeProgramme(new DegreeProgrammeImpl(name, type, courses));
+        this.getStorage().saveDegreeProgrammes(this.getModel().getDidacticsManager().getDegreeProgrammes());
     }
 
     @Override
