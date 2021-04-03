@@ -1,6 +1,7 @@
 package iuniversity.controller;
 
 import iuniversity.model.Model;
+import iuniversity.storage.DataStore;
 import iuniversity.view.View;
 
 public interface Controller {
@@ -20,5 +21,7 @@ public interface Controller {
     boolean isUserAStudent();
 
     void logout();
+
+    DataStore getStorage();
 
 }

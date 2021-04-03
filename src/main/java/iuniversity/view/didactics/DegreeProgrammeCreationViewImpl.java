@@ -55,7 +55,6 @@ public class DegreeProgrammeCreationViewImpl extends AbstractView implements Deg
                 Course course = courseChoice.getValue();
                 selectedCourses.add(course);
                 addedCourseList.getItems().add(course);
-                System.out.println(selectedCourses);
             }
         });
         

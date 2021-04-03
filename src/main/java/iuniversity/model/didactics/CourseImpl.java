@@ -1,7 +1,13 @@
 package iuniversity.model.didactics;
 
-public class CourseImpl implements Course {
+import java.io.Serializable;
 
+public class CourseImpl implements Course, Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private String name;
     private int CFU;
     

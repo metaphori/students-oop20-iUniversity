@@ -1,12 +1,17 @@
 package iuniversity.model.user;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import iuniversity.model.didactics.*;
 import iuniversity.model.user.User.Gender;
 
-public class StudentImpl extends AbstractUser implements Student {
+public class StudentImpl extends AbstractUser implements Student, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private int registrationNumber;
     private DegreeProgramme degreeProgramme;
     
@@ -26,5 +31,12 @@ public class StudentImpl extends AbstractUser implements Student {
     public DegreeProgramme getDegreeProgramme() {
         return this.degreeProgramme;
     }
+
+    @Override
+    public String toString() {
+        return  "[" + registrationNumber + "] " + super.toString();
+    }
+    
+    
 
 }
