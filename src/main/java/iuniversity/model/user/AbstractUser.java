@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 public abstract class AbstractUser implements User {
 
+    /**
+     * Is the abstract user class, it is subsequently extended to student, professor and admin
+     */
     private String name;
     private String lastName;
     private String username;
