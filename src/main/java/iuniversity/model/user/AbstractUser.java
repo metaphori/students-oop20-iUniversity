@@ -54,4 +54,9 @@ public abstract class AbstractUser implements User {
         return this.id;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + lastName;
+    }
+
 }
