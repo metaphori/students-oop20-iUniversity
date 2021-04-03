@@ -1,5 +1,6 @@
 package iuniversity.model.didactics;
 
+import java.util.Collection;
 import java.util.Set;
 
 public interface DidacticsManager {
@@ -55,12 +56,12 @@ public interface DidacticsManager {
      * 
      * @param courses   The new set of courses  
      */
-    void setCourses(Set<Course> courses);
+    void setCourses(Collection<Course> courses);
     
     /**
      * The set of degree programmes becomes the one given in input
      * 
      * @param degreeProgramms   The new set of degree programmes
      */
-    void setDegreeProgrammes(Set<DegreeProgramme> degreeProgrammes);
+    void setDegreeProgrammes(Collection<DegreeProgramme> degreeProgrammes);
 }
