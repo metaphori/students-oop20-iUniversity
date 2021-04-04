@@ -1,6 +1,7 @@
 package iuniversity.model.exams;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -65,9 +66,15 @@ public interface ExamCall {
 
     /**
      * 
+     * @return the list of student based on the registration strategy
+     */
+    List<Student> getRegistrationList();
+
+    /**
+     * 
      * @return the start Date and time of the call
      */
-    LocalDateTime getStart();
+    LocalDate getStart();
 
     /**
      * 

@@ -1,7 +1,5 @@
 package iuniversity.view.exams;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Set;
 
 import iuniversity.controller.ExamCreationController;
@@ -18,8 +16,6 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 
 public final class ExamCreationViewImpl extends AbstractView implements ExamCreationView {
-
-    private static final int CUSTOM_CALL_START_HOUR = 9;
 
     @FXML
     private ChoiceBox<Course> courseChoice;
@@ -43,8 +39,7 @@ public final class ExamCreationViewImpl extends AbstractView implements ExamCrea
     public void initialize() {
         this.maxStudentSpin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
         this.publishBtn.setOnAction(e -> {
-            ((ExamCreationController) this.getController()).publishExamCall(
-                    LocalDateTime.of(callDatePicker.getValue(), LocalTime.of(CUSTOM_CALL_START_HOUR, 0)),
+            ((ExamCreationController) this.getController()).publishExamCall(callDatePicker.getValue(),
                     courseChoice.getValue(), examTypeChoice.getValue(), maxStudentSpin.getValue());
             this.goToHome();
         });

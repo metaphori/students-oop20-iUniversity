@@ -1,9 +1,10 @@
 package iuniversity.model.exams;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -16,22 +17,24 @@ public class ExamCallImpl implements ExamCall {
     private static final int DAYS_BEFORE_CALL = 2;
 
     private final Optional<Integer> maxStudents;
-    private final Set<Student> registeredStudents;
-    private final LocalDateTime callStart;
-    private final LocalDateTime registrationStart;
-    private final LocalDateTime registrationEnd;
+    private final List<Student> registeredStudents;
+    private final LocalDate callStart;
+    private final LocalDate registrationStart;
+    private final LocalDate registrationEnd;
     private final ExamType examType;
     private final Course course;
+    private final StudentRegistrationStrategy registrationStrategy;
 
-    public ExamCallImpl(final Course course, final LocalDateTime callStart, final ExamType examType,
-            final Optional<Integer> maxStudents) {
+    public ExamCallImpl(final Course course, final LocalDate callStart, final ExamType examType,
+            final Optional<Integer> maxStudents, final StudentRegistrationStrategy registrationStrategy) {
         this.course = course;
         this.callStart = callStart;
         this.examType = examType;
         this.maxStudents = maxStudents;
-        this.registeredStudents = new HashSet<>();
-        this.registrationStart = LocalDateTime.now();
+        this.registeredStudents = new ArrayList<>();
+        this.registrationStart = LocalDate.now();
         this.registrationEnd = callStart.minusDays(1);
+        this.registrationStrategy = registrationStrategy;
     }
 
     /**
@@ -39,14 +42,22 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public Set<Student> getRegisteredStudents() {
-        return Collections.unmodifiableSet(this.registeredStudents);
+        return Set.copyOf(this.registeredStudents);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public LocalDateTime getStart() {
+    public List<Student> getRegistrationList() {
+        return Collections.unmodifiableList(this.registeredStudents);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LocalDate getStart() {
         return this.callStart;
     }
 
@@ -63,8 +74,10 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public CallStatus getStatus() {
-        final LocalDateTime now = LocalDateTime.now();
-        return now.isAfter(registrationStart) && now.isBefore(registrationEnd) ? CallStatus.OPEN : CallStatus.CLOSED;
+        final LocalDate now = LocalDate.now();
+        return (now.isAfter(registrationStart) || now.isEqual(registrationStart))
+                && (now.isBefore(registrationEnd) || now.isEqual(registrationEnd)) ? CallStatus.OPEN
+                        : CallStatus.CLOSED;
     }
 
     /**
@@ -83,12 +96,36 @@ public class ExamCallImpl implements ExamCall {
         return this.maxStudents;
     }
 
+    private boolean isFull() {
+        return this.maxStudents.isPresent() && registeredStudents.size() == this.maxStudents.get();
+    }
+
+    private boolean isCallOpen() {
+        return this.getStatus() == CallStatus.OPEN;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void registerStudent(final Student student) {
-        this.registeredStudents.add(student);
+        if (isFull()) {
+            throw new IllegalStateException("Exam call is full");
+        } else if (!isCallOpen()) {
+            throw new IllegalStateException("Exam call is closed");
+        }
+        registrationStrategy.register(this.registeredStudents, student);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void withdrawStudent(final Student student) {
+        if (!isCallOpen()) {
+            throw new IllegalStateException("Can't withdrawn from a closed exam call");
+        }
+        this.registeredStudents.remove(student);
     }
 
     /**
@@ -176,14 +213,14 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public String toString() {
-        return callStart.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm")) + " | " + course + ", " + examType
+        return callStart.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " | " + course + ", " + examType
                 + ", aperto fino al " + registrationEnd.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public static class Builder implements ExamCallBuilder {
 
         private Optional<Integer> maximumStudents;
-        private LocalDateTime start;
+        private LocalDate start;
         private ExamType type;
         private Course course;
 
@@ -192,7 +229,7 @@ public class ExamCallImpl implements ExamCall {
         }
 
         @Override
-        public final ExamCallBuilder callStart(final LocalDateTime callStart) {
+        public final ExamCallBuilder callStart(final LocalDate callStart) {
             this.start = callStart;
             return this;
         }
@@ -219,20 +256,13 @@ public class ExamCallImpl implements ExamCall {
         public final ExamCall build() {
             if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(type)) {
                 throw new IllegalStateException();
-            } else if (start.isBefore(LocalDateTime.now().plusDays(DAYS_BEFORE_CALL))) {
+            } else if (start.isBefore(LocalDate.now().plusDays(DAYS_BEFORE_CALL))) {
                 throw new IllegalStateException("ExamCall must be at least " + DAYS_BEFORE_CALL + " days after today");
             }
-            return new ExamCallImpl(course, start, type, maximumStudents);
+            return new ExamCallImpl(course, start, type, maximumStudents,
+                    new StudentRegistrationStrategyFactoryImpl().atTheEndOfList());
         }
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void withdrawStudent(final Student student) {
-        this.registeredStudents.remove(student);
     }
 
 }
