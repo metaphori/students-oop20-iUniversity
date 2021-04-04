@@ -1,8 +1,10 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import iuniversity.model.didactics.Course;
+import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Student;
 
 public class ExamReportImpl implements ExamReport {
@@ -26,6 +28,7 @@ public class ExamReportImpl implements ExamReport {
     public Course getCourse() {
         return this.course;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -33,6 +36,7 @@ public class ExamReportImpl implements ExamReport {
     public Student getStudent() {
         return this.student;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -40,6 +44,7 @@ public class ExamReportImpl implements ExamReport {
     public ExamResult getResult() {
         return this.result;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -47,6 +52,7 @@ public class ExamReportImpl implements ExamReport {
     public LocalDate getDate() {
         return this.date;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -60,6 +66,7 @@ public class ExamReportImpl implements ExamReport {
         result = prime * result + ((student == null) ? 0 : student.hashCode());
         return result;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -104,6 +111,100 @@ public class ExamReportImpl implements ExamReport {
             return false;
         }
         return true;
+    }
+
+    public static class Builder implements ExamReportBuilder {
+
+        private Optional<Course> course;
+        private Optional<Student> student;
+        private Optional<ExamResultType> resultType;
+        private Optional<Integer> result;
+        private boolean cumLaude;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ExamReportBuilder course(final Course course) {
+            this.course = Optional.of(course);
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ExamReportBuilder student(final Student student) {
+            this.student = Optional.of(student);
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ExamReportBuilder resultType(final ExamResultType resultType) {
+            this.resultType = Optional.of(resultType);
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ExamReportBuilder result(final int result) {
+            this.result = Optional.of(result);
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ExamReportBuilder laude(final boolean laude) {
+            if (laude) {
+                resultType = Optional.empty();
+                result = Optional.empty();
+            }
+            cumLaude = laude;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ExamReport build() {
+            if (this.course.isEmpty() || this.student.isEmpty()) {
+                throw new IllegalStateException("A student and a course must be provided");
+            } else if (this.resultType.isEmpty() && !cumLaude) {
+                throw new IllegalStateException("A result type should be provided");
+            } else if (!cumLaude && this.resultType.get() != ExamResultType.WITHDRAWN && this.result.isEmpty()) {
+                throw new IllegalStateException("A result should be provided");
+            }
+            final ExamResultFactory resultFactory = new ExamResultFactoryImpl();
+            ExamResult examResult = null;
+            if (cumLaude) {
+                examResult = resultFactory.succeededCumLaude();
+            } else {
+                switch (this.resultType.get()) {
+                case WITHDRAWN:
+                    examResult = resultFactory.withdrawn();
+                    break;
+                case SUCCEDED:
+                    examResult = resultFactory.succeded(this.result.get());
+                    break;
+                case FAILED:
+                    examResult = resultFactory.failed(this.result.get());
+                    break;
+                case DECLINED:
+                    examResult = resultFactory.declined(this.result.get());
+                default:
+                    break;
+                }
+            }
+            return new ExamReportImpl(this.course.get(), student.get(), examResult, LocalDate.now());
+        }
     }
 
 }

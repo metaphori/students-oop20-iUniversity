@@ -17,6 +17,10 @@ import iuniversity.model.exams.ExamResult.ExamResultType;
 public class ExamResultFactoryTest {
 
     private static final int MAX_RESULT = 30;
+    private static final int SUFFICIENT_RESULT = 27;
+    private static final int INSUFFICIENT_RESULT = 12;
+    private static final int OVER_RANGE_RESULT = MAX_RESULT + 1;
+
     private final ExamResultFactory resultFactory = new ExamResultFactoryImpl();
 
     @Test
@@ -25,25 +29,22 @@ public class ExamResultFactoryTest {
         assertTrue(examResult.cumLaude());
         assertEquals(Optional.of(MAX_RESULT), examResult.getResult());
         assertEquals(ExamResultType.SUCCEDED, examResult.getResultType());
-        System.out.println(examResult);
     }
 
     @Test
     public void testSuccededExamResult() {
-        final ExamResult examResult = resultFactory.succeded(23);
+        final ExamResult examResult = resultFactory.succeded(SUFFICIENT_RESULT);
         assertFalse(examResult.cumLaude());
-        assertEquals(Optional.of(23), examResult.getResult());
+        assertEquals(Optional.of(SUFFICIENT_RESULT), examResult.getResult());
         assertEquals(ExamResultType.SUCCEDED, examResult.getResultType());
-        System.out.println(examResult);
     }
 
     @Test
     public void testFailedExamResult() {
-        final ExamResult examResult = resultFactory.failed(12);
+        final ExamResult examResult = resultFactory.failed(INSUFFICIENT_RESULT);
         assertFalse(examResult.cumLaude());
-        assertEquals(Optional.of(12), examResult.getResult());
+        assertEquals(Optional.of(INSUFFICIENT_RESULT), examResult.getResult());
         assertEquals(ExamResultType.FAILED, examResult.getResultType());
-        System.out.println(examResult);
     }
 
     @Test
@@ -52,26 +53,44 @@ public class ExamResultFactoryTest {
         assertFalse(examResult.cumLaude());
         assertEquals(Optional.empty(), examResult.getResult());
         assertEquals(ExamResultType.WITHDRAWN, examResult.getResultType());
-        System.out.println(examResult);
+    }
+
+    @Test
+    public void testDeclinedExamResult() {
+        final ExamResult examResult = resultFactory.declined(SUFFICIENT_RESULT);
+        assertFalse(examResult.cumLaude());
+        assertEquals(Optional.of(SUFFICIENT_RESULT), examResult.getResult());
+        assertEquals(ExamResultType.DECLINED, examResult.getResultType());
     }
 
     @Test
     public void testInvalidSuccededExamResult() {
         assertThrows(IllegalArgumentException.class, () -> {
-            resultFactory.succeded(12);
+            resultFactory.succeded(INSUFFICIENT_RESULT);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            resultFactory.succeded(31);
+            resultFactory.succeded(OVER_RANGE_RESULT);
         });
     }
 
     @Test
     public void testInvalidFailedExamResult() {
         assertThrows(IllegalArgumentException.class, () -> {
-            resultFactory.failed(20);
+            resultFactory.failed(SUFFICIENT_RESULT);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            resultFactory.failed(-34);
+            resultFactory.failed(OVER_RANGE_RESULT);
         });
     }
+
+    @Test
+    public void testInvalidDeclinedExamResult() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            resultFactory.declined(INSUFFICIENT_RESULT);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            resultFactory.declined(OVER_RANGE_RESULT);
+        });
+    }
+
 }

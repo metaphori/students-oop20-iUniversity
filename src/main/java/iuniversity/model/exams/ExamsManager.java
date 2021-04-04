@@ -35,6 +35,8 @@ public interface ExamsManager {
      */
     void addExamReport(Course course, Student student, ExamResult result, LocalDate date);
 
+    void addExamReport(ExamReport examReport);
+
     void removeExamCall(ExamCall examCall);
 
     void withdrawStudent(ExamCall examCall, Student student);

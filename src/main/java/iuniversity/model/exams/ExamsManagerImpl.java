@@ -59,6 +59,14 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
+    public void addExamReport(final ExamReport examReport) {
+        this.examReports.add(examReport);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void removeExamCall(final ExamCall examCall) {
         examCalls.remove(examCall);
     }
@@ -76,6 +84,7 @@ public final class ExamsManagerImpl implements ExamsManager {
         examCall.withdrawStudent(student);
         addExamCall(examCall);
     }
+
     /**
      * {@inheritDoc}
      */
