@@ -22,5 +22,11 @@ public interface ExamResultFactory {
      * @return a withdrawn Exam Result 
      */
     ExamResult withdrawn();
+    /**
+     * @param result the result of the exam
+     * @return a declined Exam Result
+     * @throws IllegalArgumentException if result is greater than sufficiency
+     */
+    ExamResult declined(int result);
 
 }

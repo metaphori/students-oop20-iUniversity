@@ -1,6 +1,6 @@
 package iuniversity.controller;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 import iuniversity.model.didactics.Course;
@@ -42,8 +42,9 @@ public class ExamCreationControllerImpl extends AbstractController implements Ex
      * {@inheritDoc}
      */
     @Override
-    public void publishExamCall(final LocalDateTime callStart, final Course course, final ExamType examType,
+    public void publishExamCall(final LocalDate callStart, final Course course, final ExamType examType,
             final int maximumStudents) {
         this.getModel().getExamManager().addExamCall(callStart, course, examType, maximumStudents);
+        this.getModel().getExamManager().getExamCalls().stream().forEach(e -> System.out.println(e.getStatus()));
     }
 }

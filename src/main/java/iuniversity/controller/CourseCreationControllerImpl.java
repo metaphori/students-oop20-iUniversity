@@ -7,6 +7,7 @@ public class CourseCreationControllerImpl extends AbstractController implements 
     @Override
     public void createCourse(String name, int cfu) {
         this.getModel().getDidacticsManager().addCourse(new CourseImpl(name, cfu));
+        this.getStorage().saveCourses(this.getModel().getDidacticsManager().getCourse());
     }
 
 }

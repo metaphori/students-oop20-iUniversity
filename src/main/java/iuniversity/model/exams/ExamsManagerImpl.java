@@ -1,7 +1,6 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +39,7 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
-    public void addExamCall(final LocalDateTime callStart, final Course course, final ExamType examType,
+    public void addExamCall(final LocalDate callStart, final Course course, final ExamType examType,
             final Integer maximumStudents) {
         this.examCalls.add(new ExamCallImpl.Builder().callStart(callStart).course(course).examType(examType)
                 .maximumStudents(maximumStudents).build());
@@ -53,6 +52,14 @@ public final class ExamsManagerImpl implements ExamsManager {
     public void addExamReport(final Course course, final Student student, final ExamResult result,
             final LocalDate date) {
         this.examReports.add(new ExamReportImpl(course, student, result, date));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addExamReport(final ExamReport examReport) {
+        this.examReports.add(examReport);
     }
 
     /**
@@ -76,6 +83,7 @@ public final class ExamsManagerImpl implements ExamsManager {
         examCall.withdrawStudent(student);
         addExamCall(examCall);
     }
+
     /**
      * {@inheritDoc}
      */

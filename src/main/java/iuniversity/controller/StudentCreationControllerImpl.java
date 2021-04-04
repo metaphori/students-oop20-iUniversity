@@ -35,6 +35,7 @@ public class StudentCreationControllerImpl extends AbstractController implements
                 degreeProgramme);
         this.getModel().getArchive().addStudent(student);
         this.accountManager.registerStudentAccount(student, newPassword, occurencies);
+        this.getStorage().saveStudents(this.getModel().getArchive().getStudents());
         ((StudentCreationView) this.getView()).showStudentCredentials(newUsername, newPassword);
     }
 

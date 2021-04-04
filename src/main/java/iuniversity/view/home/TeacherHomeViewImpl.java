@@ -148,6 +148,9 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
                 ((TeacherHomeController) this.getController()).displayOpenExamCalls();
             }
         });
+        addExamResultBtn.setOnAction(e -> {
+            PageSwitcher.goToPage(getStage(), Pages.CREATE_EXAM_REPORT, getController().getModel());
+        });
     }
 
     /**

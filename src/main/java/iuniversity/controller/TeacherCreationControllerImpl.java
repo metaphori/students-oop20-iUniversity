@@ -32,6 +32,7 @@ public class TeacherCreationControllerImpl extends AbstractController implements
                 this.getModel().getArchive().getNewTeacherRegistrationNumber(), courses);
         this.getModel().getArchive().addTeacher(teacher);
         this.accountManager.registerTeacherAccount(teacher, newPassword, occurencies);
+        this.getStorage().saveTeachers(this.getModel().getArchive().getTeachers());
         ((TeacherCreationView) this.getView()).showTeacherCredentials(newUsername, newPassword);
     }
     @Override
