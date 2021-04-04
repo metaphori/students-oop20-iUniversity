@@ -177,9 +177,9 @@ public class ExamReportImpl implements ExamReport {
         public ExamReport build() {
             if (this.course.isEmpty() || this.student.isEmpty()) {
                 throw new IllegalStateException("A student and a course must be provided");
-            } else if (!cumLaude && this.resultType.isEmpty()) {
+            } else if (this.resultType.isEmpty() && !cumLaude) {
                 throw new IllegalStateException("A result type should be provided");
-            } else if (this.resultType.get() != ExamResultType.WITHDRAWN && this.result.isEmpty()) {
+            } else if (!cumLaude && this.resultType.get() != ExamResultType.WITHDRAWN && this.result.isEmpty()) {
                 throw new IllegalStateException("A result should be provided");
             }
             final ExamResultFactory resultFactory = new ExamResultFactoryImpl();
