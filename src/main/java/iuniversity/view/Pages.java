@@ -18,6 +18,10 @@ public enum Pages {
      */
     CREATE_EXAM_CALL("create_exam_call"),
     /**
+     * Exam report creation page.
+     */
+    CREATE_EXAM_REPORT("create_exam_report"),
+    /**
      * Student creation page.
      */
     ADD_STUDENT("add_student"),
