@@ -7,6 +7,7 @@ import java.util.Map;
 import iuniversity.controller.AdminHomeControllerImpl;
 import iuniversity.controller.Controller;
 import iuniversity.controller.CourseCreationControllerImpl;
+import iuniversity.controller.CreateExamReportControllerImpl;
 import iuniversity.controller.DegreeProgrammeCreationControllerImpl;
 import iuniversity.controller.ExamBookingControllerImpl;
 import iuniversity.controller.ExamCreationControllerImpl;
@@ -43,6 +44,7 @@ public final class PageSwitcher {
             this.put(Pages.TEACHER_HOME, new TeacherHomeControllerImpl());
             this.put(Pages.STUDENT_HOME, new StudentHomeControllerImpl());
             this.put(Pages.BOOK_EXAM_CALL, new ExamBookingControllerImpl());
+            this.put(Pages.CREATE_EXAM_REPORT, new CreateExamReportControllerImpl());
         }
     };
 
