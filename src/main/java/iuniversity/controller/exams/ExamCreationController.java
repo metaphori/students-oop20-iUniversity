@@ -1,6 +1,6 @@
-package iuniversity.controller;
+package iuniversity.controller.exams;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
@@ -13,7 +13,7 @@ public interface ExamCreationController {
 
     void initilizeCourseChoices();
 
-    void publishExamCall(LocalDateTime callStart, Course course, ExamType examType,
+    void publishExamCall(LocalDate callStart, Course course, ExamType examType,
             int maximumStudents);
 
 }

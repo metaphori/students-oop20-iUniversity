@@ -1,7 +1,6 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import iuniversity.model.didactics.Course;
@@ -23,7 +22,7 @@ public interface ExamsManager {
      * @param maximumStudents the maximum number of students that can register to
      *                        the exam call
      */
-    void addExamCall(LocalDateTime callStart, Course course, ExamType examType, Integer maximumStudents);
+    void addExamCall(LocalDate callStart, Course course, ExamType examType, Integer maximumStudents);
 
     /**
      * Add a student exam report for a particular course.
@@ -35,10 +34,16 @@ public interface ExamsManager {
      */
     void addExamReport(Course course, Student student, ExamResult result, LocalDate date);
 
+    void addExamReport(ExamReport examReport);
+
     void removeExamCall(ExamCall examCall);
 
-    void withdrawStudent(ExamCall examCall, Student student);
+    boolean withdrawStudent(ExamCall examCall, Student student);
 
-    void registerStudent(ExamCall examCall, Student student);
+    boolean registerStudent(ExamCall examCall, Student student);
+
+    boolean alreadyHeld(ExamCall examCall);
+
+    boolean alreadyReported(ExamReport examReport);
 
 }

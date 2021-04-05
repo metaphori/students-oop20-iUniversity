@@ -1,4 +1,4 @@
-package iuniversity.controller;
+package iuniversity.controller.users;
 
 import java.time.LocalDate;
 import java.util.Set;

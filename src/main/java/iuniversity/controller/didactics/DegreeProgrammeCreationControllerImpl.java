@@ -1,4 +1,4 @@
-package iuniversity.controller;
+package iuniversity.controller.didactics;
 
 import iuniversity.model.didactics.DegreeProgrammeImpl;
 import iuniversity.view.didactics.DegreeProgrammeCreationView;
@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import iuniversity.controller.AbstractController;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.didactics.DegreeProgramme.DegreeType;
 

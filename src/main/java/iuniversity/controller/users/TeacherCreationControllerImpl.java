@@ -1,10 +1,13 @@
-package iuniversity.controller;
+package iuniversity.controller.users;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import iuniversity.controller.AbstractController;
+import iuniversity.controller.AccountsManager;
+import iuniversity.controller.AccountsManagerImpl;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Teacher;
 import iuniversity.model.user.TeacherImpl;

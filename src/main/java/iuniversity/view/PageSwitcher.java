@@ -4,17 +4,18 @@ import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
 
-import iuniversity.controller.AdminHomeControllerImpl;
 import iuniversity.controller.Controller;
-import iuniversity.controller.CourseCreationControllerImpl;
-import iuniversity.controller.DegreeProgrammeCreationControllerImpl;
-import iuniversity.controller.ExamBookingControllerImpl;
-import iuniversity.controller.ExamCreationControllerImpl;
-import iuniversity.controller.LoginControllerImpl;
-import iuniversity.controller.StudentCreationControllerImpl;
-import iuniversity.controller.StudentHomeControllerImpl;
-import iuniversity.controller.TeacherCreationControllerImpl;
-import iuniversity.controller.TeacherHomeControllerImpl;
+import iuniversity.controller.didactics.CourseCreationControllerImpl;
+import iuniversity.controller.didactics.DegreeProgrammeCreationControllerImpl;
+import iuniversity.controller.exams.CreateExamReportControllerImpl;
+import iuniversity.controller.exams.ExamBookingControllerImpl;
+import iuniversity.controller.exams.ExamCreationControllerImpl;
+import iuniversity.controller.home.AdminHomeControllerImpl;
+import iuniversity.controller.home.StudentHomeControllerImpl;
+import iuniversity.controller.home.TeacherHomeControllerImpl;
+import iuniversity.controller.login.LoginControllerImpl;
+import iuniversity.controller.users.StudentCreationControllerImpl;
+import iuniversity.controller.users.TeacherCreationControllerImpl;
 import iuniversity.model.Model;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,6 +44,7 @@ public final class PageSwitcher {
             this.put(Pages.TEACHER_HOME, new TeacherHomeControllerImpl());
             this.put(Pages.STUDENT_HOME, new StudentHomeControllerImpl());
             this.put(Pages.BOOK_EXAM_CALL, new ExamBookingControllerImpl());
+            this.put(Pages.CREATE_EXAM_REPORT, new CreateExamReportControllerImpl());
         }
     };
 
