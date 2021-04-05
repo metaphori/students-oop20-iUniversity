@@ -1,4 +1,4 @@
-package iuniversity.controller;
+package iuniversity.controller.exams;
 
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall;

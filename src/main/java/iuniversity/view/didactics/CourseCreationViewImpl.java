@@ -1,6 +1,6 @@
 package iuniversity.view.didactics;
 
-import iuniversity.controller.CourseCreationController;
+import iuniversity.controller.didactics.CourseCreationController;
 import iuniversity.view.AbstractView;
 import iuniversity.view.PageSwitcher;
 import iuniversity.view.Pages;

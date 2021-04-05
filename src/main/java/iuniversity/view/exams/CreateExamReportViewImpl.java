@@ -3,7 +3,7 @@ package iuniversity.view.exams;
 import java.util.Objects;
 import java.util.Set;
 
-import iuniversity.controller.CreateExamReportController;
+import iuniversity.controller.exams.CreateExamReportController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.model.user.Student;
 import iuniversity.view.AbstractView;

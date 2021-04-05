@@ -1,5 +1,6 @@
-package iuniversity.controller;
+package iuniversity.controller.didactics;
 
+import iuniversity.controller.AbstractController;
 import iuniversity.model.didactics.CourseImpl;
 
 public class CourseCreationControllerImpl extends AbstractController implements CourseCreationController {

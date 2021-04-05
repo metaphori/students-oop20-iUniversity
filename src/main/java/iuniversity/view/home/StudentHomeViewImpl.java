@@ -3,7 +3,7 @@ package iuniversity.view.home;
 import java.util.Objects;
 import java.util.Set;
 
-import iuniversity.controller.StudentHomeController;
+import iuniversity.controller.home.StudentHomeController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.view.AbstractView;
 import iuniversity.view.PageSwitcher;

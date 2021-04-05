@@ -1,7 +1,8 @@
 package iuniversity.view.users;
 
 import java.util.List;
-import iuniversity.controller.StudentCreationController;
+
+import iuniversity.controller.users.StudentCreationController;
 import iuniversity.model.didactics.DegreeProgramme;
 import iuniversity.model.user.User.Gender;
 import iuniversity.view.AbstractView;

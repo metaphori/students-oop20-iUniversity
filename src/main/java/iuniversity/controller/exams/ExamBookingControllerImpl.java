@@ -1,7 +1,8 @@
-package iuniversity.controller;
+package iuniversity.controller.exams;
 
 import java.util.stream.Collectors;
 
+import iuniversity.controller.AbstractController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.model.exams.ExamCall.CallStatus;
 import iuniversity.model.user.Student;
