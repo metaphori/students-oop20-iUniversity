@@ -2,7 +2,7 @@ package iuniversity.view.exams;
 
 import java.util.Set;
 
-import iuniversity.controller.ExamCreationController;
+import iuniversity.controller.exams.ExamCreationController;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.view.AbstractView;

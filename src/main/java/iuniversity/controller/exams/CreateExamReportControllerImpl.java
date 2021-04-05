@@ -1,9 +1,10 @@
-package iuniversity.controller;
+package iuniversity.controller.exams;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+import iuniversity.controller.AbstractController;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.model.exams.ExamReport;

@@ -41,7 +41,7 @@ public final class ExamsManagerImpl implements ExamsManager {
     @Override
     public void addExamCall(final LocalDate callStart, final Course course, final ExamType examType,
             final Integer maximumStudents) {
-        this.examCalls.add(new ExamCallImpl.Builder().callStart(callStart).course(course).examType(examType)
+        addExamCall(new ExamCallImpl.Builder().callStart(callStart).course(course).examType(examType)
                 .maximumStudents(maximumStudents).build());
     }
 
@@ -51,7 +51,16 @@ public final class ExamsManagerImpl implements ExamsManager {
     @Override
     public void addExamReport(final Course course, final Student student, final ExamResult result,
             final LocalDate date) {
-        this.examReports.add(new ExamReportImpl(course, student, result, date));
+        addExamReport(new ExamReportImpl(course, student, result, date));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean alreadyReported(final ExamReport examReport) {
+        return this.getExamReports().stream().filter(e -> e.getStudent().equals(examReport.getStudent()))
+                .anyMatch(e -> e.getCourse().equals(examReport.getCourse()));
     }
 
     /**
@@ -59,6 +68,9 @@ public final class ExamsManagerImpl implements ExamsManager {
      */
     @Override
     public void addExamReport(final ExamReport examReport) {
+        if (alreadyReported(examReport)) {
+            throw new IllegalStateException("Student already have a report");
+        }
         this.examReports.add(examReport);
     }
 
@@ -66,7 +78,18 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
+    public boolean alreadyHeld(final ExamCall examCall) {
+        return LocalDate.now().isAfter(examCall.getStart());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void removeExamCall(final ExamCall examCall) {
+        if (alreadyHeld(examCall)) {
+            throw new IllegalStateException("Can't remove an exam call which has been already held");
+        }
         examCalls.remove(examCall);
     }
 
@@ -78,20 +101,22 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
-    public void withdrawStudent(final ExamCall examCall, final Student student) {
+    public boolean withdrawStudent(final ExamCall examCall, final Student student) {
         removeExamCall(examCall);
-        examCall.withdrawStudent(student);
+        final boolean result = examCall.withdrawStudent(student);
         addExamCall(examCall);
+        return result;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void registerStudent(final ExamCall examCall, final Student student) {
+    public boolean registerStudent(final ExamCall examCall, final Student student) {
         removeExamCall(examCall);
-        examCall.registerStudent(student);
+        final boolean result = examCall.registerStudent(student);
         addExamCall(examCall);
+        return result;
     }
 
 }

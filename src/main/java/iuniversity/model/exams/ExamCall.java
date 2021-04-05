@@ -99,9 +99,10 @@ public interface ExamCall {
      * Add student to the Exam call list.
      * 
      * @param student
+     * @return true if the student was registered
      */
-    void registerStudent(Student student);
+    boolean registerStudent(Student student);
 
-    void withdrawStudent(Student student);
+    boolean withdrawStudent(Student student);
 
 }

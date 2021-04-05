@@ -16,16 +16,25 @@ public class ExamCallImpl implements ExamCall {
 
     private static final int DAYS_BEFORE_CALL = 2;
 
-    private final Optional<Integer> maxStudents;
-    private final List<Student> registeredStudents;
-    private final LocalDate callStart;
-    private final LocalDate registrationStart;
-    private final LocalDate registrationEnd;
-    private final ExamType examType;
-    private final Course course;
-    private final StudentRegistrationStrategy registrationStrategy;
+    private Optional<Integer> maxStudents = Optional.empty();
+    private List<Student> registeredStudents = new ArrayList<>();
+    private LocalDate callStart;
+    private LocalDate registrationStart;
+    private LocalDate registrationEnd;
+    private ExamType examType;
+    private Course course;
+    private StudentRegistrationStrategy registrationStrategy;
 
-    public ExamCallImpl(final Course course, final LocalDate callStart, final ExamType examType,
+    /**
+     * Should not be called.
+     */
+    public ExamCallImpl() {
+        /**
+         * It is functional for serialization.
+         */
+    }
+
+    private ExamCallImpl(final Course course, final LocalDate callStart, final ExamType examType,
             final Optional<Integer> maxStudents, final StudentRegistrationStrategy registrationStrategy) {
         this.course = course;
         this.callStart = callStart;
@@ -108,24 +117,24 @@ public class ExamCallImpl implements ExamCall {
      * {@inheritDoc}
      */
     @Override
-    public void registerStudent(final Student student) {
-        if (isFull()) {
-            throw new IllegalStateException("Exam call is full");
-        } else if (!isCallOpen()) {
-            throw new IllegalStateException("Exam call is closed");
+    public boolean registerStudent(final Student student) {
+        if (isFull() || !isCallOpen()) {
+            return false;
         }
         registrationStrategy.register(this.registeredStudents, student);
+        return true;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void withdrawStudent(final Student student) {
+    public boolean withdrawStudent(final Student student) {
         if (!isCallOpen()) {
-            throw new IllegalStateException("Can't withdrawn from a closed exam call");
+            return false;
         }
         this.registeredStudents.remove(student);
+        return true;
     }
 
     /**

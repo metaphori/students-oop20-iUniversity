@@ -3,7 +3,7 @@ package iuniversity.view.users;
 import java.util.HashSet;
 import java.util.Set;
 
-import iuniversity.controller.TeacherCreationController;
+import iuniversity.controller.users.TeacherCreationController;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.User.Gender;
 import iuniversity.view.AbstractView;

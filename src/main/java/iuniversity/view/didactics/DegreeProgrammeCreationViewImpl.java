@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import iuniversity.controller.DegreeProgrammeCreationController;
+import iuniversity.controller.didactics.DegreeProgrammeCreationController;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.didactics.DegreeProgramme.DegreeType;
 import iuniversity.view.AbstractView;

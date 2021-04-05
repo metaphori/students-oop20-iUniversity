@@ -1,6 +1,6 @@
 package iuniversity.view.login;
 
-import iuniversity.controller.LoginController;
+import iuniversity.controller.login.LoginController;
 import iuniversity.view.AbstractView;
 import iuniversity.view.PageSwitcher;
 import iuniversity.view.Pages;

@@ -1,4 +1,4 @@
-package iuniversity.controller;
+package iuniversity.controller.home;
 
 
 

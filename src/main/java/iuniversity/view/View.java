@@ -10,4 +10,6 @@ public interface View {
 
     void start();
 
+    void showErrorMessage(String message);
+
 }
