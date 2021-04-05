@@ -78,20 +78,22 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
-    public void withdrawStudent(final ExamCall examCall, final Student student) {
+    public boolean withdrawStudent(final ExamCall examCall, final Student student) {
         removeExamCall(examCall);
-        examCall.withdrawStudent(student);
+        final boolean result = examCall.withdrawStudent(student);
         addExamCall(examCall);
+        return result;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void registerStudent(final ExamCall examCall, final Student student) {
+    public boolean registerStudent(final ExamCall examCall, final Student student) {
         removeExamCall(examCall);
-        examCall.registerStudent(student);
+        final boolean result = examCall.registerStudent(student);
         addExamCall(examCall);
+        return result;
     }
 
 }

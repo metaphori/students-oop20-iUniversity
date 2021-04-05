@@ -38,8 +38,8 @@ public interface ExamsManager {
 
     void removeExamCall(ExamCall examCall);
 
-    void withdrawStudent(ExamCall examCall, Student student);
+    boolean withdrawStudent(ExamCall examCall, Student student);
 
-    void registerStudent(ExamCall examCall, Student student);
+    boolean registerStudent(ExamCall examCall, Student student);
 
 }

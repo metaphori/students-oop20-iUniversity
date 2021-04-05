@@ -108,24 +108,24 @@ public class ExamCallImpl implements ExamCall {
      * {@inheritDoc}
      */
     @Override
-    public void registerStudent(final Student student) {
-        if (isFull()) {
-            throw new IllegalStateException("Exam call is full");
-        } else if (!isCallOpen()) {
-            throw new IllegalStateException("Exam call is closed");
-        }
+    public boolean registerStudent(final Student student) {
+        if (isFull() || !isCallOpen()) {
+            return false;
+        } 
         registrationStrategy.register(this.registeredStudents, student);
+        return true;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void withdrawStudent(final Student student) {
+    public boolean withdrawStudent(final Student student) {
         if (!isCallOpen()) {
-            throw new IllegalStateException("Can't withdrawn from a closed exam call");
+            return false;
         }
         this.registeredStudents.remove(student);
+        return true;
     }
 
     /**

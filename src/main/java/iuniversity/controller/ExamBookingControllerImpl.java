@@ -9,6 +9,8 @@ import iuniversity.view.exams.ExamBookingView;
 
 public class ExamBookingControllerImpl extends AbstractController implements ExamBookingController {
 
+    private static final String BOOKING_ERROR_MESSAGE = "Impossibile iscriversi all'appello d'esame";
+
     private void checkUser() {
         if (!isUserLogged()) {
             throw new IllegalStateException("No user logged");
@@ -40,7 +42,9 @@ public class ExamBookingControllerImpl extends AbstractController implements Exa
     @Override
     public void bookExamCall(final ExamCall examCall) {
         checkUser();
-        this.getModel().getExamManager().registerStudent(examCall, getLoggedStudent());
+        if (!this.getModel().getExamManager().registerStudent(examCall, getLoggedStudent())) {
+            this.getView().showErrorMessage(BOOKING_ERROR_MESSAGE);
+        }
     }
 
 }
