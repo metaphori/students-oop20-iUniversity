@@ -40,9 +40,6 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
     private Label lowestResultLbl;
 
     @FXML
-    private Button showDidacticPlanBtn;
-
-    @FXML
     private Button showBookletBtn;
 
     @FXML
