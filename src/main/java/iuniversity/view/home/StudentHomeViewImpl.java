@@ -40,9 +40,6 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
     private Label lowestResultLbl;
 
     @FXML
-    private Button showDidacticPlanBtn;
-
-    @FXML
     private Button showBookletBtn;
 
     @FXML
@@ -75,6 +72,9 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
         });
         bookExamBtn.setOnAction(e -> {
             PageSwitcher.goToPage(getStage(), Pages.BOOK_EXAM_CALL, getController().getModel());
+        });
+        showBookletBtn.setOnAction(e -> {
+            PageSwitcher.openPage(Pages.BOOKLET, getController().getModel());
         });
     }
 
