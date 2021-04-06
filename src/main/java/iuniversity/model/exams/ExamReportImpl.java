@@ -119,7 +119,7 @@ public class ExamReportImpl implements ExamReport {
      */
     @Override
     public String toString() {
-        return course + " " + result + " " + date.format(DateTimeFormatter.ofPattern("dd/mm/yyyy"));
+        return course + " " + result + " " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public static class Builder implements ExamReportBuilder {
