@@ -39,5 +39,4 @@ public class DegreeProgrammeImpl implements DegreeProgramme, Serializable {
     public Set<Course> getCourses() {
         return Collections.unmodifiableSet(courses);
     }
-    
 }

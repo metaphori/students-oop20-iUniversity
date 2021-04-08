@@ -65,5 +65,4 @@ public abstract class AbstractUser implements User, Serializable {
     public String toString() {
         return name + " " + lastName;
     }
-
 }

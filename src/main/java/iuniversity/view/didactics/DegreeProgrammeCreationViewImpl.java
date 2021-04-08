@@ -25,31 +25,31 @@ public class DegreeProgrammeCreationViewImpl extends AbstractView implements Deg
     
     @FXML
     private ChoiceBox<DegreeType> typeChoice;
-    
+
     @FXML
     private ChoiceBox<Course> courseChoice;
-    
+
     @FXML
     private ListView<Course> addedCourseList;
-    
+
     @FXML
     private Button addCourseBtn;
-    
+
     @FXML
     private Button removeCourseBtn;
-    
+
     @FXML
     private Button addBtn;
-    
+
     @FXML
     private Button cancelBtn;
-    
+
     private Set<Course> selectedCourses = new HashSet<>();
-    
+
     @FXML
     public void initialize() {
         addCourseBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 Course course = courseChoice.getValue();
@@ -57,9 +57,9 @@ public class DegreeProgrammeCreationViewImpl extends AbstractView implements Deg
                 addedCourseList.getItems().add(course);
             }
         });
-        
+
         removeCourseBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 Course course = addedCourseList.getSelectionModel().getSelectedItem();
@@ -67,25 +67,25 @@ public class DegreeProgrammeCreationViewImpl extends AbstractView implements Deg
                 addedCourseList.getItems().remove(course);
             }
         });
-        
+
         addBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 createDegreeProgramme();
                 PageSwitcher.goToPage(getStage(), Pages.ADMIN_HOME, getController().getModel());
             }
         });
-        
+
         cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 PageSwitcher.goToPage(getStage(), Pages.ADMIN_HOME, getController().getModel());
             }
         });
     }
-    
+
     @Override
     public void start() {
         ((DegreeProgrammeCreationController) this.getController()).initializeChoices();
