@@ -45,5 +45,4 @@ public class TeacherCreationControllerImpl extends AbstractController implements
         ((TeacherCreationView) this.getView()).setCourseChoices(this.getModel().getDidacticsManager().getCourse());
         ((TeacherCreationView) this.getView()).setGenderChoices(genders);
     }
-    
 }

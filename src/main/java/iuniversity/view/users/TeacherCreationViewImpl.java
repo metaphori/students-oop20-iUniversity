@@ -23,43 +23,43 @@ public class TeacherCreationViewImpl extends AbstractView implements TeacherCrea
 
     @FXML
     private TextField firstNameTF;
-    
+
     @FXML
     private TextField lastNameTF;
-    
+
     @FXML
     private DatePicker dateOfBirthPicker;
-    
+
     @FXML
     private ChoiceBox<Gender> genderChoice;
-    
+
     @FXML
     private TextField addressTF;
     
     @FXML
     private ChoiceBox<Course> courseChoice;
-    
+
     @FXML
     private ListView<Course> addedCourseList;
-    
+
     @FXML
     private Button addCourseBtn;
-    
+
     @FXML
     private Button removeCourseBtn;
-    
+
     @FXML
     private Button addBtn;
-    
+
     @FXML
     private Button cancelBtn;
-    
+
     private Set<Course> addedCourses = new HashSet<>();
-    
+
     @FXML
     public void initialize() {
         addCourseBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 Course course = courseChoice.getValue();
@@ -67,9 +67,9 @@ public class TeacherCreationViewImpl extends AbstractView implements TeacherCrea
                 addedCourses.add(course);
             }
         });
-        
+
         removeCourseBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 Course course = addedCourseList.getSelectionModel().getSelectedItem();
@@ -77,24 +77,24 @@ public class TeacherCreationViewImpl extends AbstractView implements TeacherCrea
                 addedCourses.remove(course);
             }
         });
-        
+
         addBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 createTeacher();
             }
         });
-        
+
         cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 PageSwitcher.goToPage(getStage(), Pages.ADMIN_HOME, getController().getModel());
             }
         });
     }
-    
+
     @Override
     public void start() {
         ((TeacherCreationController) this.getController()).initializeChoices();

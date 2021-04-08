@@ -21,28 +21,28 @@ public class StudentCreationViewImpl extends AbstractView implements StudentCrea
 
     @FXML
     private TextField firstNameTF;
-    
+
     @FXML
     private TextField lastNameTF;
-    
+
     @FXML
     private TextField addressTF;
-    
+
     @FXML
     private DatePicker dateOfBirthPicker;
-    
+
     @FXML
     private ChoiceBox<Gender> genderChoice;
-    
+
     @FXML
     private ChoiceBox<DegreeProgramme> degreeChoice;
-    
+
     @FXML
     private Button addBtn;
-    
+
     @FXML
     private Button cancelBtn;
-    
+
     @FXML
     public void initialize() {
         this.addBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -51,9 +51,9 @@ public class StudentCreationViewImpl extends AbstractView implements StudentCrea
                 createStudent();
             }
         });
-        
+
         this.cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 PageSwitcher.goToPage(getStage(), Pages.ADMIN_HOME, getController().getModel());
