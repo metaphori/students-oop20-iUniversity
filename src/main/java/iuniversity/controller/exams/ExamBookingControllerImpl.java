@@ -1,13 +1,16 @@
-package iuniversity.controller;
+package iuniversity.controller.exams;
 
 import java.util.stream.Collectors;
 
+import iuniversity.controller.AbstractController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.model.exams.ExamCall.CallStatus;
 import iuniversity.model.user.Student;
 import iuniversity.view.exams.ExamBookingView;
 
 public class ExamBookingControllerImpl extends AbstractController implements ExamBookingController {
+
+    private static final String BOOKING_ERROR_MESSAGE = "Impossibile iscriversi all'appello d'esame";
 
     private void checkUser() {
         if (!isUserLogged()) {
@@ -40,7 +43,9 @@ public class ExamBookingControllerImpl extends AbstractController implements Exa
     @Override
     public void bookExamCall(final ExamCall examCall) {
         checkUser();
-        this.getModel().getExamManager().registerStudent(examCall, getLoggedStudent());
+        if (!this.getModel().getExamManager().registerStudent(examCall, getLoggedStudent())) {
+            this.getView().showErrorMessage(BOOKING_ERROR_MESSAGE);
+        }
     }
 
 }

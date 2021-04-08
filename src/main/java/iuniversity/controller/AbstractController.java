@@ -5,6 +5,8 @@ import java.io.File;
 import iuniversity.model.Model;
 import iuniversity.model.user.Student;
 import iuniversity.model.user.Teacher;
+import iuniversity.storage.DataStore;
+import iuniversity.storage.io.FileDataStoreImpl;
 import iuniversity.view.View;
 
 public abstract class AbstractController implements Controller {
@@ -15,6 +17,7 @@ public abstract class AbstractController implements Controller {
 
     private View view;
     private Model model;
+    private final DataStore storage = new FileDataStoreImpl();
 
     protected final String getFileStoragePath() {
         return STORAGE_PATH;
@@ -80,5 +83,13 @@ public abstract class AbstractController implements Controller {
     @Override
     public boolean isUserAStudent() {
         return this.isUserLogged() && this.getModel().getLoggedUser().get() instanceof Student;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DataStore getStorage() {
+        return this.storage;
     }
 }

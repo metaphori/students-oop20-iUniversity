@@ -1,5 +1,6 @@
 package iuniversity.model.user;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
@@ -38,12 +39,12 @@ public class ArchiveImpl implements Archive {
     }
     
     @Override
-    public void setStudents(Set<Student> students) {
+    public void setStudents(Collection<Student> students) {
         this.students = new HashSet<>(students);
     }
     
     @Override
-    public void setTeachers(Set<Teacher> teachers) {
+    public void setTeachers(Collection<Teacher> teachers) {
         this.teachers = new HashSet<>(teachers);
     }
 

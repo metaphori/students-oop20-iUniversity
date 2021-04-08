@@ -3,7 +3,7 @@ package iuniversity.view.exams;
 import java.util.Objects;
 import java.util.Set;
 
-import iuniversity.controller.ExamBookingController;
+import iuniversity.controller.exams.ExamBookingController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.view.AbstractView;
 import iuniversity.view.PageSwitcher;

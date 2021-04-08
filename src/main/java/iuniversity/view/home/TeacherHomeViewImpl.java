@@ -3,7 +3,7 @@ package iuniversity.view.home;
 import java.util.Objects;
 import java.util.Set;
 
-import iuniversity.controller.TeacherHomeController;
+import iuniversity.controller.home.TeacherHomeController;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.view.AbstractView;
 import iuniversity.view.PageSwitcher;
@@ -147,6 +147,9 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
                 ((TeacherHomeController) this.getController()).removeExamCall(examCall);
                 ((TeacherHomeController) this.getController()).displayOpenExamCalls();
             }
+        });
+        addExamResultBtn.setOnAction(e -> {
+            PageSwitcher.goToPage(getStage(), Pages.CREATE_EXAM_REPORT, getController().getModel());
         });
     }
 

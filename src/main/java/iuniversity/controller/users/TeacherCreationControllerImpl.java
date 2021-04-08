@@ -1,10 +1,13 @@
-package iuniversity.controller;
+package iuniversity.controller.users;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import iuniversity.controller.AbstractController;
+import iuniversity.controller.AccountsManager;
+import iuniversity.controller.AccountsManagerImpl;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Teacher;
 import iuniversity.model.user.TeacherImpl;
@@ -32,6 +35,7 @@ public class TeacherCreationControllerImpl extends AbstractController implements
                 this.getModel().getArchive().getNewTeacherRegistrationNumber(), courses);
         this.getModel().getArchive().addTeacher(teacher);
         this.accountManager.registerTeacherAccount(teacher, newPassword, occurencies);
+        this.getStorage().saveTeachers(this.getModel().getArchive().getTeachers());
         ((TeacherCreationView) this.getView()).showTeacherCredentials(newUsername, newPassword);
     }
     @Override

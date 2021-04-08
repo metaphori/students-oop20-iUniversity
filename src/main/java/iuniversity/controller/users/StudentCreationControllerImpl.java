@@ -1,4 +1,4 @@
-package iuniversity.controller;
+package iuniversity.controller.users;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import iuniversity.controller.AbstractController;
+import iuniversity.controller.AccountsManager;
+import iuniversity.controller.AccountsManagerImpl;
 import iuniversity.model.didactics.DegreeProgramme;
 import iuniversity.model.user.Student;
 import iuniversity.model.user.StudentImpl;
@@ -35,6 +38,7 @@ public class StudentCreationControllerImpl extends AbstractController implements
                 degreeProgramme);
         this.getModel().getArchive().addStudent(student);
         this.accountManager.registerStudentAccount(student, newPassword, occurencies);
+        this.getStorage().saveStudents(this.getModel().getArchive().getStudents());
         ((StudentCreationView) this.getView()).showStudentCredentials(newUsername, newPassword);
     }
 

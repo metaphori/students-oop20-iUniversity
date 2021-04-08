@@ -1,4 +1,4 @@
-package iuniversity.controller;
+package iuniversity.controller.didactics;
 
 import iuniversity.model.didactics.DegreeProgrammeImpl;
 import iuniversity.view.didactics.DegreeProgrammeCreationView;
@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import iuniversity.controller.AbstractController;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.didactics.DegreeProgramme.DegreeType;
 
@@ -16,6 +17,7 @@ public class DegreeProgrammeCreationControllerImpl extends AbstractController im
     @Override
     public void createDegreeProgramme(String name, DegreeType type, Set<Course> courses) {
         this.getModel().getDidacticsManager().addDegreeProgramme(new DegreeProgrammeImpl(name, type, courses));
+        this.getStorage().saveDegreeProgrammes(this.getModel().getDidacticsManager().getDegreeProgrammes());
     }
 
     @Override

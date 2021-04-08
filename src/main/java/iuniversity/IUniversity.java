@@ -1,6 +1,14 @@
 package iuniversity;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+
+import iuniversity.model.Model;
 import iuniversity.model.ModelImpl;
+import iuniversity.storage.DataStore;
+import iuniversity.storage.io.FileDataStoreImpl;
 import iuniversity.view.PageSwitcher;
 import iuniversity.view.Pages;
 import javafx.application.Application;
@@ -8,15 +16,30 @@ import javafx.stage.Stage;
 
 public class IUniversity extends Application {
 
-    public static void main(final String[] args) {
+    private static final String PATH_SEPARATOR = System.getProperty("file.separator");
+    private static final String FOLDER_PATH = System.getProperty("user.home") + PATH_SEPARATOR + ".iuniversity"
+            + PATH_SEPARATOR;
+
+    public static void main(final String[] args) throws IOException {
+        final File folder = new File(FOLDER_PATH);
+        if (!folder.exists()) {
+            FileUtils.forceMkdir(folder);
+        }
         launch(args);
+    }
+
+    private void loadModelData(final Model model) {
+        final DataStore storage = new FileDataStoreImpl();
+        model.getArchive().setStudents(storage.loadStudents());
+        model.getArchive().setTeachers(storage.loadTeachers());
+        model.getDidacticsManager().setCourses(storage.loadCourses());
+        model.getDidacticsManager().setDegreeProgrammes(storage.loadDegreeProgrammes());
     }
 
     @Override
     public final void start(final Stage primaryStage) throws Exception {
-        PageSwitcher.goToPage(primaryStage, Pages.LOGIN, new ModelImpl());
-        //PageSwitcher.goToPage(primaryStage, Pages.LOGIN, new ModelImpl());
-        //PageSwitcher.goToPage(primaryStage, Pages.ADD_STUDENT, new ModelImpl());
-        //PageSwitcher.goToPage(primaryStage, Pages.ADD_DEGREE_PROGRAMME, new ModelImpl());
+        final Model model = new ModelImpl();
+        loadModelData(model);
+        PageSwitcher.goToPage(primaryStage, Pages.LOGIN, model);
     }
 }

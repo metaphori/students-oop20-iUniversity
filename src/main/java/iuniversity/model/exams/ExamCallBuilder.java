@@ -1,6 +1,6 @@
 package iuniversity.model.exams;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
@@ -12,7 +12,7 @@ public interface ExamCallBuilder {
      * @param callStart the start datetime of the exam call
      * @return instance of builder
      */
-    ExamCallBuilder callStart(LocalDateTime callStart);
+    ExamCallBuilder callStart(LocalDate callStart);
 
     /**
      * Sets the Exam call type.
