@@ -14,20 +14,20 @@ public class CourseCreationViewImpl extends AbstractView implements CourseCreati
 
     @FXML
     private TextField courseNameTF;
-    
+
     @FXML
     private TextField cfuTF;
-    
+
     @FXML
     private Button addBtn;
-    
+
     @FXML
     private Button cancelBtn;
-    
+
     @FXML
     public void initialize() {
         this.addBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 createCourse();
@@ -35,14 +35,14 @@ public class CourseCreationViewImpl extends AbstractView implements CourseCreati
         });
         
         cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 PageSwitcher.goToPage(getStage(), Pages.ADMIN_HOME, getController().getModel());
             }
         });
     }
-    
+
     @Override
     public void start() {
     }

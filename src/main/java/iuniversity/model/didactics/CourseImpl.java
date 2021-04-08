@@ -10,7 +10,7 @@ public class CourseImpl implements Course, Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
     private int CFU;
-    
+
     public CourseImpl(String name, int CFU) {
         super();
         this.name = name;
