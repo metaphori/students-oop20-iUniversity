@@ -31,8 +31,13 @@ public class TeacherCreationControllerImpl extends AbstractController implements
         }
         final String newUsername = accountManager.makeUsername(UserType.TEACHER, firstName, lastName, occurencies);
         final String newPassword = accountManager.createPassword();
-        final Teacher teacher = new TeacherImpl(firstName, lastName, newUsername, dateOfBirth, gender, address, this.getModel().getArchive().getNewUserId(), 
-                this.getModel().getArchive().getNewTeacherRegistrationNumber(), courses);
+        final Teacher teacher = new TeacherImpl.Builder(firstName, lastName, this.getModel().getArchive().getNewUserId(), this.getModel().getArchive().getNewTeacherRegistrationNumber())
+                                               .username(newUsername)
+                                               .dateOfBirth(dateOfBirth)
+                                               .address(address)
+                                               .gender(gender)
+                                               .courses(courses)
+                                               .build();
         this.getModel().getArchive().addTeacher(teacher);
         this.accountManager.registerTeacherAccount(teacher, newPassword, occurencies);
         this.getStorage().saveTeachers(this.getModel().getArchive().getTeachers());
