@@ -105,11 +105,19 @@ public class ExamCallImpl implements ExamCall {
         return this.maxStudents;
     }
 
-    private boolean isFull() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isFull() {
         return this.maxStudents.isPresent() && registeredStudents.size() == this.maxStudents.get();
     }
 
-    private boolean isCallOpen() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isOpen() {
         return this.getStatus() == CallStatus.OPEN;
     }
 
@@ -118,7 +126,7 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public boolean registerStudent(final Student student) {
-        if (isFull() || !isCallOpen()) {
+        if (isFull() || !isOpen()) {
             return false;
         }
         registrationStrategy.register(this.registeredStudents, student);
@@ -130,7 +138,7 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public boolean withdrawStudent(final Student student) {
-        if (!isCallOpen()) {
+        if (!isOpen()) {
             return false;
         }
         this.registeredStudents.remove(student);

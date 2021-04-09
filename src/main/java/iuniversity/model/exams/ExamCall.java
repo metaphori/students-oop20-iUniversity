@@ -105,4 +105,8 @@ public interface ExamCall {
 
     boolean withdrawStudent(Student student);
 
+    boolean isOpen();
+
+    boolean isFull();
+
 }
