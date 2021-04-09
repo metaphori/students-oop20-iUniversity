@@ -264,7 +264,7 @@ public class ExamCallImpl implements ExamCall {
         @Override
         public final ExamCall build() {
             if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(type)) {
-                throw new IllegalStateException();
+                throw new IllegalStateException("Can't build an exam call, arguments missing");
             } else if (start.isBefore(LocalDate.now().plusDays(DAYS_BEFORE_CALL))) {
                 throw new IllegalStateException("ExamCall must be at least " + DAYS_BEFORE_CALL + " days after today");
             }
