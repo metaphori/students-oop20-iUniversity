@@ -257,7 +257,7 @@ public class ExamCallImpl implements ExamCall {
 
         @Override
         public final ExamCallBuilder maximumStudents(final int maximumStudents) {
-            this.maximumStudents = Optional.of(maximumStudents);
+            this.maximumStudents = Optional.ofNullable(maximumStudents);
             return this;
         }
 
