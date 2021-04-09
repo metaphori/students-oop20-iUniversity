@@ -44,7 +44,11 @@ public enum Pages {
     /**
      * Exam call booking page.
      */
-    BOOK_EXAM_CALL("book_exam_call");
+    BOOK_EXAM_CALL("book_exam_call"),
+    /**
+     * 
+     */
+    BOOKLET("booklet");
 
     private final String fxmlName;
 

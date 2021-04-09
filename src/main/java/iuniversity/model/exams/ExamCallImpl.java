@@ -14,7 +14,7 @@ import iuniversity.model.user.Student;
 
 public class ExamCallImpl implements ExamCall {
 
-    private static final int DAYS_BEFORE_CALL = 2;
+    private static final int DAYS_BEFORE_CALL = 1;
 
     private Optional<Integer> maxStudents = Optional.empty();
     private List<Student> registeredStudents = new ArrayList<>();
@@ -105,11 +105,19 @@ public class ExamCallImpl implements ExamCall {
         return this.maxStudents;
     }
 
-    private boolean isFull() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isFull() {
         return this.maxStudents.isPresent() && registeredStudents.size() == this.maxStudents.get();
     }
 
-    private boolean isCallOpen() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isOpen() {
         return this.getStatus() == CallStatus.OPEN;
     }
 
@@ -118,7 +126,7 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public boolean registerStudent(final Student student) {
-        if (isFull() || !isCallOpen()) {
+        if (isFull() || !isOpen()) {
             return false;
         }
         registrationStrategy.register(this.registeredStudents, student);
@@ -130,7 +138,7 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public boolean withdrawStudent(final Student student) {
-        if (!isCallOpen()) {
+        if (!isOpen()) {
             return false;
         }
         this.registeredStudents.remove(student);
@@ -257,14 +265,14 @@ public class ExamCallImpl implements ExamCall {
 
         @Override
         public final ExamCallBuilder maximumStudents(final int maximumStudents) {
-            this.maximumStudents = Optional.of(maximumStudents);
+            this.maximumStudents = Optional.ofNullable(maximumStudents);
             return this;
         }
 
         @Override
         public final ExamCall build() {
             if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(type)) {
-                throw new IllegalStateException();
+                throw new IllegalStateException("Can't build an exam call, arguments missing");
             } else if (start.isBefore(LocalDate.now().plusDays(DAYS_BEFORE_CALL))) {
                 throw new IllegalStateException("ExamCall must be at least " + DAYS_BEFORE_CALL + " days after today");
             }

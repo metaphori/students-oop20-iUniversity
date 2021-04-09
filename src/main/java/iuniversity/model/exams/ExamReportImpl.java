@@ -1,6 +1,7 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import iuniversity.model.didactics.Course;
@@ -111,6 +112,14 @@ public class ExamReportImpl implements ExamReport {
             return false;
         }
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return course + " " + result + " " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public static class Builder implements ExamReportBuilder {

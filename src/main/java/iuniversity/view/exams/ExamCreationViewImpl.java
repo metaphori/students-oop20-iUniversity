@@ -35,11 +35,13 @@ public final class ExamCreationViewImpl extends AbstractView implements ExamCrea
     @FXML
     private Button cancelBtn;
 
+    private ExamCreationController controller;
+
     @FXML
     public void initialize() {
         this.maxStudentSpin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
         this.publishBtn.setOnAction(e -> {
-            ((ExamCreationController) this.getController()).publishExamCall(callDatePicker.getValue(),
+            this.controller.publishExamCall(callDatePicker.getValue(),
                     courseChoice.getValue(), examTypeChoice.getValue(), maxStudentSpin.getValue());
             this.goToHome();
         });
@@ -54,7 +56,8 @@ public final class ExamCreationViewImpl extends AbstractView implements ExamCrea
 
     @Override
     public void start() {
-        ((ExamCreationController) this.getController()).initializeChoices();
+        this.controller = (ExamCreationController) this.getController();
+        this.controller.initializeChoices();
     }
 
     @Override

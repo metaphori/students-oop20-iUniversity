@@ -25,6 +25,7 @@ public class CreateExamReportControllerImpl extends AbstractController implement
             ((CreateExamReportView) this.getView()).setExamCallChoices(this.getModel().getExamManager().getExamCalls()
                     .stream()
                     .filter(e -> ((Teacher) this.getModel().getLoggedUser().get()).getCourses().contains(e.getCourse()))
+                    .filter(e -> this.getModel().getExamManager().alreadyHeld(e))
                     .collect(Collectors.toSet()));
         }
 

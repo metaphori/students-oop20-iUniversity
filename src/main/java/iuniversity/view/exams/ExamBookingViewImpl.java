@@ -23,6 +23,8 @@ public class ExamBookingViewImpl extends AbstractView implements ExamBookingView
     @FXML
     private Button cancelBtn;
 
+    private ExamBookingController controller;
+
     /**
      * {@inheritDoc}
      */
@@ -34,20 +36,23 @@ public class ExamBookingViewImpl extends AbstractView implements ExamBookingView
         bookBtn.setOnAction(e -> {
             final ExamCall examCall = examCallList.getSelectionModel().getSelectedItem();
             if (!Objects.isNull(examCall)) {
-                ((ExamBookingController) this.getController()).bookExamCall(examCall);
+                this.controller.bookExamCall(examCall);
                 goToHome();
             }
         });
     }
+
     private void goToHome() {
         PageSwitcher.goToPage(getStage(), Pages.STUDENT_HOME, getController().getModel());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void start() {
-        ((ExamBookingController) this.getController()).displayAvailableExamCalls();
+        this.controller = (ExamBookingController) this.getController();
+        this.controller.displayAvailableExamCalls();
     }
 
     /**

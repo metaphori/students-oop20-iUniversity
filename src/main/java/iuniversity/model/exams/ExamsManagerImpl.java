@@ -79,7 +79,7 @@ public final class ExamsManagerImpl implements ExamsManager {
      */
     @Override
     public boolean alreadyHeld(final ExamCall examCall) {
-        return LocalDate.now().isAfter(examCall.getStart());
+        return LocalDate.now().isAfter(examCall.getStart()) || LocalDate.now().isEqual(examCall.getStart());
     }
 
     /**
