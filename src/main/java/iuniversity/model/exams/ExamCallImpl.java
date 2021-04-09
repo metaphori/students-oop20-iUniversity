@@ -14,7 +14,7 @@ import iuniversity.model.user.Student;
 
 public class ExamCallImpl implements ExamCall {
 
-    private static final int DAYS_BEFORE_CALL = 2;
+    private static final int DAYS_BEFORE_CALL = 1;
 
     private Optional<Integer> maxStudents = Optional.empty();
     private List<Student> registeredStudents = new ArrayList<>();
