@@ -9,7 +9,6 @@ public interface StudentCreationController {
 
     /**
      * Create the new student, his username and I have him create the password
-     * 
      * @param firstName          
      * @param lastName
      * @param dateOfBirth

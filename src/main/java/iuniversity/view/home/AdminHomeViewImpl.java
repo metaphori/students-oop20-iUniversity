@@ -9,46 +9,46 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class AdminHomeViewImpl extends AbstractView {
-    
+
     @FXML
     private Button addCourseBtn;
-    
+
     @FXML
     private Button addDegreeProgramme;
-    
+
     @FXML
     private Button addStudentBtn;
-    
+
     @FXML
     private Button addTeacherBtn;
-    
+
     @FXML
     private Button logoutBtn;
 
-    
+
     /**
      * Choose whether to add the course, the degree course, the student, the teacher or log out.
      */
     @Override
     public void start() {
         addCourseBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 PageSwitcher.goToPage(getStage(), Pages.ADD_COURSE, getController().getModel());
             }
         });
-        
+
         addDegreeProgramme.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 PageSwitcher.goToPage(getStage(), Pages.ADD_DEGREE_PROGRAMME, getController().getModel());
             }
         });
-        
+
         addStudentBtn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 PageSwitcher.goToPage(getStage(), Pages.ADD_STUDENT, getController().getModel());
@@ -56,7 +56,7 @@ public class AdminHomeViewImpl extends AbstractView {
         });
 
         addTeacherBtn.setOnAction(new EventHandler<ActionEvent>() {
-    
+
             @Override
             public void handle(ActionEvent event) {
                 PageSwitcher.goToPage(getStage(), Pages.ADD_TEACHER, getController().getModel());
@@ -64,7 +64,7 @@ public class AdminHomeViewImpl extends AbstractView {
         });
 
         logoutBtn.setOnAction(new EventHandler<ActionEvent>() {
-    
+
             @Override
             public void handle(ActionEvent event) {
                 getController().logout();
@@ -72,10 +72,9 @@ public class AdminHomeViewImpl extends AbstractView {
             }
         });
     }
-    
+
     @FXML
     public void initialize() {
-        
+   
     }
-
 }
