@@ -10,6 +10,8 @@ import iuniversity.view.exams.ExamCreationView;
 
 public class ExamCreationControllerImpl extends AbstractController implements ExamCreationController {
 
+    private static final String EXAM_CALL_CREATION_ERROR = "Errore nella creazione dell'appello d'esame. Riprovare";
+
     /**
      * {@inheritDoc}
      */
@@ -42,6 +44,10 @@ public class ExamCreationControllerImpl extends AbstractController implements Ex
     @Override
     public void publishExamCall(final LocalDate callStart, final Course course, final ExamType examType,
             final int maximumStudents) {
-        this.getModel().getExamManager().addExamCall(callStart, course, examType, maximumStudents);
+        try {
+            this.getModel().getExamManager().addExamCall(callStart, course, examType, maximumStudents);
+        } catch (IllegalStateException e) {
+            this.getView().showErrorMessage(EXAM_CALL_CREATION_ERROR);
+        }
     }
 }
