@@ -11,5 +11,5 @@ public interface StudentHomeController {
 
     void withdrawStudent(ExamCall examCall);
 
-    void displayBookedExamCalls();
+    void displayOpenBookedExamCalls();
 }

@@ -69,7 +69,7 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
             final ExamCall examCall = this.bookedExamCallList.getSelectionModel().getSelectedItem();
             if (!Objects.isNull(examCall)) {
                 this.controller.withdrawStudent(examCall);
-                this.controller.displayBookedExamCalls();
+                this.controller.displayOpenBookedExamCalls();
             }
         });
         bookExamBtn.setOnAction(e -> {
@@ -88,7 +88,7 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
         this.controller = (StudentHomeController) this.getController();
         this.controller.displayStudentInfo();
         this.controller.displayStudentStatistics();
-        this.controller.displayBookedExamCalls();
+        this.controller.displayOpenBookedExamCalls();
     }
 
     /**

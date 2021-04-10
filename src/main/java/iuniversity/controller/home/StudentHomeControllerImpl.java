@@ -73,7 +73,7 @@ public class StudentHomeControllerImpl extends AbstractController implements Stu
      * {@inheritDoc}
      */
     @Override
-    public void displayBookedExamCalls() {
+    public void displayOpenBookedExamCalls() {
         checkStudent();
         ((StudentHomeView) this.getView()).setOpenBookedExamCalls(this.getModel().getExamManager().getExamCalls()
                 .stream().filter(e -> e.getRegisteredStudents().contains(getLoggedStudent()))
