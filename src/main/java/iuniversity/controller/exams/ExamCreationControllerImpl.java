@@ -6,7 +6,6 @@ import java.util.Set;
 import iuniversity.controller.AbstractController;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
-import iuniversity.model.user.Teacher;
 import iuniversity.view.exams.ExamCreationView;
 
 public class ExamCreationControllerImpl extends AbstractController implements ExamCreationController {
@@ -33,10 +32,8 @@ public class ExamCreationControllerImpl extends AbstractController implements Ex
      */
     @Override
     public void initilizeCourseChoices() {
-        if (this.isUserATeacher()) {
-            ((ExamCreationView) this.getView())
-                    .setCourseChoices(((Teacher) this.getModel().getLoggedUser().get()).getCourses());
-        }
+        checkTeacher();
+        ((ExamCreationView) this.getView()).setCourseChoices(getLoggedTeacher().getCourses());
     }
 
     /**
@@ -46,6 +43,5 @@ public class ExamCreationControllerImpl extends AbstractController implements Ex
     public void publishExamCall(final LocalDate callStart, final Course course, final ExamType examType,
             final int maximumStudents) {
         this.getModel().getExamManager().addExamCall(callStart, course, examType, maximumStudents);
-        this.getModel().getExamManager().getExamCalls().stream().forEach(e -> System.out.println(e.getStatus()));
     }
 }

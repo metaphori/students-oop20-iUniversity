@@ -3,23 +3,24 @@ package iuniversity.controller.exams;
 import java.util.stream.Collectors;
 
 import iuniversity.controller.AbstractController;
+import iuniversity.model.exams.ExamReport;
 import iuniversity.model.user.Student;
 import iuniversity.view.exams.BookletView;
 
 public class BookletControllerImpl extends AbstractController implements BookletController {
+
+    private boolean reportBelongsToStudent(final ExamReport examReport, final Student student) {
+        return examReport.getStudent().equals(student);
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void displayReports() {
-        if (!isUserLogged() && !isUserAStudent()) {
-            throw new IllegalStateException("User must be a student");
-        }
-
+        checkStudent();
         ((BookletView) this.getView()).setReports(this.getModel().getExamManager().getExamReports().stream()
-                .filter(r -> r.getStudent().equals((Student) this.getModel().getLoggedUser().get()))
-                .collect(Collectors.toSet()));
+                .filter(r -> reportBelongsToStudent(r, getLoggedStudent())).collect(Collectors.toSet()));
     }
 
 }
