@@ -46,4 +46,6 @@ public interface ExamsManager {
 
     boolean alreadyReportedSuccess(ExamReport examReport);
 
+    boolean alreadyReportedSuccess(Student student, Course course);
+
 }

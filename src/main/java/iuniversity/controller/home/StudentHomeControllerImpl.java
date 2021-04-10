@@ -77,6 +77,7 @@ public class StudentHomeControllerImpl extends AbstractController implements Stu
         checkStudent();
         ((StudentHomeView) this.getView()).setOpenBookedExamCalls(this.getModel().getExamManager().getExamCalls()
                 .stream().filter(e -> e.getRegisteredStudents().contains(getLoggedStudent()))
+                .filter(e -> e.isOpen())
                 .collect(Collectors.toSet()));
     }
 

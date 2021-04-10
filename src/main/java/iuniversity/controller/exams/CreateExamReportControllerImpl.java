@@ -42,18 +42,13 @@ public class CreateExamReportControllerImpl extends AbstractController implement
                 .setExamResultTypeChoices(new HashSet<>(Arrays.asList(ExamResultType.values())));
     }
 
-    private boolean alreadyReported(final Student student, final Course course) {
-        return this.getModel().getExamManager().getExamReports().stream().filter(r -> r.getCourse().equals(course))
-                .anyMatch(r -> r.getStudent().equals(student));
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public void displayStudentChoices(final ExamCall examCall) {
         ((CreateExamReportView) this.getView()).setStudentChoices(examCall.getRegisteredStudents().stream()
-                .filter(s -> !alreadyReported(s, examCall.getCourse())).collect(Collectors.toSet()));
+                .filter(s -> this.getModel().getExamManager().alreadyReportedSuccess(s, examCall.getCourse())).collect(Collectors.toSet()));
     }
 
     /**
