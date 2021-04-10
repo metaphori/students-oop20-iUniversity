@@ -1,4 +1,4 @@
-package iuniversity.test.model.exams;
+package iuniversity.test;
 
 import java.time.LocalDate;
 import java.util.Set;

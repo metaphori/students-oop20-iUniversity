@@ -12,6 +12,7 @@ import iuniversity.model.exams.StudentRegistrationStrategy;
 import iuniversity.model.exams.StudentRegistrationStrategyFactory;
 import iuniversity.model.exams.StudentRegistrationStrategyFactoryImpl;
 import iuniversity.model.user.Student;
+import iuniversity.test.SampleTestData;
 
 public final class StudentRegistrationStrategyFactoryTest {
 
