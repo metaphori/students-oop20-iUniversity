@@ -26,10 +26,9 @@ public class CreateExamReportControllerImpl extends AbstractController implement
     @Override
     public void displayExamCallChoices() {
         checkTeacher();
-        ((CreateExamReportView) this.getView())
-                .setExamCallChoices(this.getModel().getExamManager().getExamCalls().stream()
-                        .filter(e -> isTeachedByTeacher(e.getCourse(), getLoggedTeacher()))
-                        .filter(e -> this.getModel().getExamManager().alreadyHeld(e)).collect(Collectors.toSet()));
+        ((CreateExamReportView) this.getView()).setExamCallChoices(this.getModel().getExamManager().getExamCalls()
+                .stream().filter(e -> isTeachedByTeacher(e.getCourse(), getLoggedTeacher()))
+                .filter(e -> this.getModel().getExamManager().alreadyHeld(e)).collect(Collectors.toSet()));
 
     }
 
@@ -48,7 +47,8 @@ public class CreateExamReportControllerImpl extends AbstractController implement
     @Override
     public void displayStudentChoices(final ExamCall examCall) {
         ((CreateExamReportView) this.getView()).setStudentChoices(examCall.getRegisteredStudents().stream()
-                .filter(s -> this.getModel().getExamManager().alreadyReportedSuccess(s, examCall.getCourse())).collect(Collectors.toSet()));
+                .filter(s -> this.getModel().getExamManager().alreadyReportedSuccess(s, examCall.getCourse()))
+                .collect(Collectors.toSet()));
     }
 
     /**
