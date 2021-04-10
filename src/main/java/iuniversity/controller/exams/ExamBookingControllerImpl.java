@@ -13,18 +13,6 @@ public class ExamBookingControllerImpl extends AbstractController implements Exa
 
     private static final String BOOKING_ERROR_MESSAGE = "Impossibile iscriversi all'appello d'esame";
 
-    private void checkUser() {
-        if (!isUserLogged()) {
-            throw new IllegalStateException("No user logged");
-        } else if (!isUserAStudent()) {
-            throw new IllegalStateException("User must be a student");
-        }
-    }
-
-    private Student getLoggedStudent() {
-        return (Student) this.getModel().getLoggedUser().get();
-    }
-
     private boolean alreadySucceded(final Student student, final Course course) {
         return this.getModel().getExamManager().getExamReports().stream()
                 .filter(r -> r.getResult().getResultType() == ExamResultType.SUCCEDED)
@@ -44,7 +32,7 @@ public class ExamBookingControllerImpl extends AbstractController implements Exa
      */
     @Override
     public void displayAvailableExamCalls() {
-        checkUser();
+        checkStudent();
         ((ExamBookingView) this.getView()).setAvailableExamCalls(this.getModel().getExamManager().getExamCalls()
                 .stream().filter(e -> !alreadyRegistered(e, getLoggedStudent()))
                 .filter(e -> e.isOpen())
@@ -57,7 +45,7 @@ public class ExamBookingControllerImpl extends AbstractController implements Exa
      */
     @Override
     public void bookExamCall(final ExamCall examCall) {
-        checkUser();
+        checkStudent();
         if (!this.getModel().getExamManager().registerStudent(examCall, getLoggedStudent())) {
             this.getView().showErrorMessage(BOOKING_ERROR_MESSAGE);
         }

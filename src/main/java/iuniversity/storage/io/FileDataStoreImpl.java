@@ -46,7 +46,7 @@ public class FileDataStoreImpl implements DataStore {
         }
     }
 
-    private void createFileIfAbsent(final String file) {
+    private void createStoreFileIfAbsent(final String file) {
         final File storeFile = new File(STORE_PATH + file);
         if (!storeFile.exists()) {
             try {
@@ -59,7 +59,7 @@ public class FileDataStoreImpl implements DataStore {
 
     @SuppressWarnings("unchecked")
     private <X> Collection<X> load(final String file) {
-        createFileIfAbsent(file);
+        createStoreFileIfAbsent(file);
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(STORE_PATH + file))) {
             return (Collection<X>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {

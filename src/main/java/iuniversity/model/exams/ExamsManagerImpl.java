@@ -7,6 +7,7 @@ import java.util.Set;
 
 import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
+import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Student;
 
 public final class ExamsManagerImpl implements ExamsManager {
@@ -58,9 +59,18 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
-    public boolean alreadyReported(final ExamReport examReport) {
-        return this.getExamReports().stream().filter(e -> e.getStudent().equals(examReport.getStudent()))
-                .anyMatch(e -> e.getCourse().equals(examReport.getCourse()));
+    public boolean alreadyReportedSuccess(final Student student, final Course course) {
+        return this.getExamReports().stream().filter(e -> e.getResult().getResultType() == ExamResultType.SUCCEDED)
+                .filter(e -> e.getStudent().equals(student))
+                .anyMatch(e -> e.getCourse().equals(course));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean alreadyReportedSuccess(final ExamReport examReport) {
+        return alreadyReportedSuccess(examReport.getStudent(), examReport.getCourse());
     }
 
     /**
@@ -68,8 +78,8 @@ public final class ExamsManagerImpl implements ExamsManager {
      */
     @Override
     public void addExamReport(final ExamReport examReport) {
-        if (alreadyReported(examReport)) {
-            throw new IllegalStateException("Student already have a report");
+        if (alreadyReportedSuccess(examReport)) {
+            throw new IllegalStateException("Student already have a successful report");
         }
         this.examReports.add(examReport);
     }

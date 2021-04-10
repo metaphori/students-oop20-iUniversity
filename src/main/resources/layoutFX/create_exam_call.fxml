@@ -47,7 +47,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="840.0">
                      <children>
-                        <Label text="N. max studenti (opzionale)" />
+                        <Label text="N. max studenti" />
                         <Spinner fx:id="maxStudentSpin" editable="true" />
                      </children>
                      <padding>
