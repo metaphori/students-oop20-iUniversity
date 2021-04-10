@@ -42,7 +42,7 @@ public class ExamCreationViewImpl extends AbstractView implements ExamCreationVi
      */
     @FXML
     public void initialize() {
-        this.maxStudentSpin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
+        this.maxStudentSpin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
         this.publishBtn.setOnAction(e -> {
             this.controller.publishExamCall(callDatePicker.getValue(),
                     courseChoice.getValue(), examTypeChoice.getValue(), maxStudentSpin.getValue());
