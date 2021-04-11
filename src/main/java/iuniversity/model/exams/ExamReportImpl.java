@@ -130,6 +130,12 @@ public class ExamReportImpl implements ExamReport {
         private Optional<Integer> result;
         private boolean cumLaude;
 
+        public Builder() {
+            course = Optional.empty();
+            student = Optional.empty();
+            resultType = Optional.empty();
+            result = Optional.empty();
+        }
         /**
          * {@inheritDoc}
          */
