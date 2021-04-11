@@ -74,6 +74,20 @@ public abstract class AbstractController implements Controller {
     }
 
     /**
+     * 
+     */
+    protected void saveExamCalls() {
+        this.getStorage().saveExamCalls(this.getModel().getExamManager().getExamCalls());
+    }
+
+    /**
+     * 
+     */
+    protected void saveExamReports() {
+        this.getStorage().saveExamReports(this.getModel().getExamManager().getExamReports());
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

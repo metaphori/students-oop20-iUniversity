@@ -48,6 +48,8 @@ public class ExamBookingControllerImpl extends AbstractController implements Exa
         checkStudent();
         if (!this.getModel().getExamManager().registerStudent(examCall, getLoggedStudent())) {
             this.getView().showErrorMessage(BOOKING_ERROR_MESSAGE);
+        } else {
+            this.saveExamCalls();
         }
     }
 

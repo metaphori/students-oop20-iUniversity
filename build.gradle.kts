@@ -32,5 +32,7 @@ dependencies {
 	
 	implementation("com.password4j:password4j:1.5.2")
 	
+	implementation("com.google.guava:guava:30.1.1-jre")
+	
     
 }

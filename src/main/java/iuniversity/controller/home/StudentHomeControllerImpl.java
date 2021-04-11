@@ -67,6 +67,7 @@ public class StudentHomeControllerImpl extends AbstractController implements Stu
     public void withdrawStudent(final ExamCall examCall) {
         checkStudent();
         this.getModel().getExamManager().withdrawStudent(examCall, getLoggedStudent());
+        this.saveExamCalls();
     }
 
     /**

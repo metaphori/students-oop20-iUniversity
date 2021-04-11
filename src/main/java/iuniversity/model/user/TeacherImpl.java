@@ -34,6 +34,40 @@ public class TeacherImpl extends AbstractUser implements Teacher, Serializable {
         return  "[" + registrationNumber + "] " + super.toString();
     }
     
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((courses == null) ? 0 : courses.hashCode());
+        result = prime * result + registrationNumber;
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TeacherImpl other = (TeacherImpl) obj;
+        if (courses == null) {
+            if (other.courses != null) {
+                return false;
+            }
+        } else if (!courses.equals(other.courses)) {
+            return false;
+        }
+        if (registrationNumber != other.registrationNumber) {
+            return false;
+        }
+        return true;
+    }
+
     public static class Builder{
         
         private String name;

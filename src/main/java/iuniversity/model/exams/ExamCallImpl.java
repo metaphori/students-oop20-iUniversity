@@ -1,5 +1,6 @@
 package iuniversity.model.exams;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,7 +12,12 @@ import java.util.Set;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Student;
 
-public class ExamCallImpl implements ExamCall {
+public class ExamCallImpl implements ExamCall, Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     private static final int DAYS_BEFORE_CALL = 1;
 
