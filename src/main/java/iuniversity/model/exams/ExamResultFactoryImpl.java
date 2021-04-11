@@ -1,6 +1,7 @@
 package iuniversity.model.exams;
 
-import java.util.Optional;
+
+import com.google.common.base.Optional;
 
 import iuniversity.model.exams.ExamResult.ExamResultType;
 
@@ -11,7 +12,7 @@ public class ExamResultFactoryImpl implements ExamResultFactory {
 
     private ExamResult makeEvaluation(final ExamResultType resultType, final Optional<Integer> result,
             final boolean cumLaude) {
-        if (result.isEmpty() && resultType != ExamResultType.WITHDRAWN) {
+        if (!result.isPresent() && resultType != ExamResultType.WITHDRAWN) {
             throw new IllegalArgumentException("Only withdrawn results may not have a numeric result");
         } else if (resultType == ExamResultType.WITHDRAWN && result.isPresent()) {
             throw new IllegalArgumentException("Only withdrawn can't have a numeric result");
@@ -79,7 +80,7 @@ public class ExamResultFactoryImpl implements ExamResultFactory {
      */
     @Override
     public ExamResult withdrawn() {
-        return makeEvaluation(ExamResultType.WITHDRAWN, Optional.empty(), false);
+        return makeEvaluation(ExamResultType.WITHDRAWN, Optional.absent(), false);
     }
 
     /**

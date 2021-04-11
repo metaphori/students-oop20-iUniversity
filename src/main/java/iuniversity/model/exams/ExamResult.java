@@ -1,6 +1,6 @@
 package iuniversity.model.exams;
 
-import java.util.Optional;
+import com.google.common.base.Optional;
 
 public interface ExamResult {
 
