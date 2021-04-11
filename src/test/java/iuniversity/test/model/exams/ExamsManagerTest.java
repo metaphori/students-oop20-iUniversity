@@ -63,6 +63,16 @@ public final class ExamsManagerTest {
          * The student already withdraw.
          */
         assertFalse(examManager.withdrawStudent(examCall, sampleData.getMarioRossi()));
+        /*
+         * A particular exam call  can be added once.
+         */
+        assertThrows(IllegalStateException.class, () -> {
+           examManager.addExamCall(date, analisiMatematica, examType, maximumStudents); 
+        });
+        /*
+         * Same date, same course but different type is ok.
+         */
+        examManager.addExamCall(date, analisiMatematica, ExamType.ORAL, maximumStudents);
     }
 
     @Test
