@@ -1,6 +1,7 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +13,8 @@ import iuniversity.model.user.Student;
 
 public final class ExamsManagerImpl implements ExamsManager {
 
-    private final Set<ExamCall> examCalls;
-    private final Set<ExamReport> examReports;
+    private Set<ExamCall> examCalls;
+    private Set<ExamReport> examReports;
 
     public ExamsManagerImpl() {
         this.examCalls = new HashSet<>();
@@ -135,6 +136,16 @@ public final class ExamsManagerImpl implements ExamsManager {
     @Override
     public boolean alreadyReportedSuccess(final ExamReport examReport) {
         return alreadyReportedSuccess(examReport.getStudent(), examReport.getCourse());
+    }
+
+    @Override
+    public void setExamCalls(final Collection<ExamCall> examCalls) {
+        this.examCalls = new HashSet<>(examCalls);
+    }
+
+    @Override
+    public void setExamReports(final Collection<ExamReport> examReports) {
+        this.examReports = new HashSet<>(examReports);
     }
 
 }
