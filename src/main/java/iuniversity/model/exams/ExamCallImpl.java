@@ -126,7 +126,7 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public boolean registerStudent(final Student student) {
-        if (isFull() || !isOpen()) {
+        if (isFull() || !isOpen() || this.registeredStudents.contains(student)) {
             return false;
         }
         registrationStrategy.register(this.registeredStudents, student);
@@ -141,8 +141,7 @@ public class ExamCallImpl implements ExamCall {
         if (!isOpen()) {
             return false;
         }
-        this.registeredStudents.remove(student);
-        return true;
+        return this.registeredStudents.remove(student);
     }
 
     /**
