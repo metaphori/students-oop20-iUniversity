@@ -83,7 +83,7 @@ public abstract class AbstractController implements Controller {
     /**
      * 
      */
-    protected void saveExamReport() {
+    protected void saveExamReports() {
         this.getStorage().saveExamReports(this.getModel().getExamManager().getExamReports());
     }
 
