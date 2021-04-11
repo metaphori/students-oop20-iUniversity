@@ -71,8 +71,10 @@ public final class ExamsManagerTest {
                 .student(sampleData.getMarioRossi()).laude(true).build();
         final ExamReport reportLucaBianchi = new ExamReportImpl.Builder().course(sampleData.getAnalisiMatematica())
                 .student(sampleData.getLucaBianchi()).laude(true).build();
-        final ExamReport failReport = new ExamReportImpl.Builder().course(sampleData.getAnalisiMatematica())
+        final ExamReport failReportMarioRossi = new ExamReportImpl.Builder().course(sampleData.getAnalisiMatematica())
                 .student(sampleData.getMarioRossi()).resultType(ExamResultType.WITHDRAWN).build();
+        final ExamReport failReportLucaBianchi = new ExamReportImpl.Builder().course(sampleData.getAnalisiMatematica())
+                .student(sampleData.getLucaBianchi()).resultType(ExamResultType.WITHDRAWN).build();
         examManager.addExamReport(reportMarioRossi);
         assertEquals(Set.of(reportMarioRossi), examManager.getExamReports());
         /*
@@ -89,8 +91,14 @@ public final class ExamsManagerTest {
          * The student already have a report.
          */
         assertThrows(IllegalStateException.class, () -> {
-            examManager.addExamReport(failReport);
+            examManager.addExamReport(failReportMarioRossi);
         });
+        /*
+         * A student can have more than one exam report for the same course only if he never succeeded.
+         */
+        examManager.addExamReport(failReportLucaBianchi);
+        examManager.addExamReport(reportLucaBianchi);
+        assertEquals(Set.of(reportMarioRossi, reportLucaBianchi, failReportLucaBianchi), examManager.getExamReports());
     }
 
 }
