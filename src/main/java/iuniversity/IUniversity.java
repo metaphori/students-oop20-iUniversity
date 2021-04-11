@@ -35,6 +35,7 @@ public class IUniversity extends Application {
         model.getDidacticsManager().setCourses(storage.loadCourses());
         model.getDidacticsManager().setDegreeProgrammes(storage.loadDegreeProgrammes());
         model.getExamManager().setExamCalls(storage.loadExamCalls());
+        model.getExamManager().setExamReports(storage.loadExamReports());
     }
 
     @Override
