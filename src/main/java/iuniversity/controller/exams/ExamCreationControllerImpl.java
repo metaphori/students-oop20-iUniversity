@@ -46,6 +46,7 @@ public class ExamCreationControllerImpl extends AbstractController implements Ex
             final int maximumStudents) {
         try {
             this.getModel().getExamManager().addExamCall(callStart, course, examType, maximumStudents);
+            this.saveExamCalls();
         } catch (IllegalStateException e) {
             this.getView().showErrorMessage(EXAM_CALL_CREATION_ERROR);
         }

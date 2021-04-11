@@ -60,6 +60,7 @@ public class CreateExamReportControllerImpl extends AbstractController implement
         final ExamReport examReport = new ExamReportImpl.Builder().course(course).student(student)
                 .resultType(resultType).result(result).laude(cumLaude).build();
         this.getModel().getExamManager().addExamReport(examReport);
+        this.saveExamReports();
     }
 
 }
