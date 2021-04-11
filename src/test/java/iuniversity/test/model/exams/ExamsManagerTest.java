@@ -97,6 +97,7 @@ public final class ExamsManagerTest {
          * A student can have more than one exam report for the same course only if he never succeeded.
          */
         examManager.addExamReport(failReportLucaBianchi);
+        assertFalse(examManager.alreadyReportedSuccess(sampleData.getLucaBianchi(), sampleData.getAnalisiMatematica()));
         examManager.addExamReport(reportLucaBianchi);
         assertEquals(Set.of(reportMarioRossi, reportLucaBianchi, failReportLucaBianchi), examManager.getExamReports());
     }
