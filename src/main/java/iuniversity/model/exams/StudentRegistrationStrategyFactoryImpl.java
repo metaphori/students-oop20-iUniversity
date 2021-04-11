@@ -1,8 +1,7 @@
 package iuniversity.model.exams;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import java.text.Collator;
+import java.util.Collections;
 
 public class StudentRegistrationStrategyFactoryImpl implements StudentRegistrationStrategyFactory {
 
@@ -13,6 +12,7 @@ public class StudentRegistrationStrategyFactoryImpl implements StudentRegistrati
     public StudentRegistrationStrategy atTheEndOfList() {
         return (list, student) -> list.add(student);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -20,14 +20,16 @@ public class StudentRegistrationStrategyFactoryImpl implements StudentRegistrati
     public StudentRegistrationStrategy atTheTopOfList() {
         return (list, student) -> list.add(0, student);
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public StudentRegistrationStrategy alfabeticalOrder() {
-        return (list, student) -> Stream.concat(Stream.of(student), list.stream())
-                .sorted((a, b) -> a.getLastName().compareToIgnoreCase(b.getLastName()))
-                .collect(Collectors.toList());
+        return (list, student) -> {
+            list.add(student);
+            Collections.sort(list, (a, b) -> Collator.getInstance().compare(a.getLastName(), b.getLastName()));
+        };
     }
 
 }

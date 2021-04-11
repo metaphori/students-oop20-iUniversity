@@ -33,21 +33,33 @@ public abstract class AbstractController implements Controller {
         return new File(this.getFileStoragePath() + fileName);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final View getView() {
         return this.view;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void setView(final View view) {
         this.view = view;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Model getModel() {
         return this.model;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void setModel(final Model model) {
         this.model = model;
@@ -57,8 +69,8 @@ public abstract class AbstractController implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public void logout() {
-        this.getModel().unsetCurrentUser();
+    public DataStore getStorage() {
+        return this.storage;
     }
 
     /**
@@ -86,10 +98,44 @@ public abstract class AbstractController implements Controller {
     }
 
     /**
+     * @throws IllegalStateException is no user is logged or is not a teacher
+     */
+    protected void checkStudent() {
+        if (!isUserAStudent()) {
+            throw new IllegalStateException("A user must be logged and should be a student");
+        }
+    }
+
+    /**
+     * @throws IllegalStateException is no user is logged or is not a teacher
+     */
+    protected void checkTeacher() {
+        if (!isUserATeacher()) {
+            throw new IllegalStateException("A user must be logged and should be a teacher");
+        }
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
-    public DataStore getStorage() {
-        return this.storage;
+    public Teacher getLoggedTeacher() {
+        return (Teacher) this.model.getLoggedUser().get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Student getLoggedStudent() {
+        return (Student) this.model.getLoggedUser().get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void logout() {
+        this.getModel().unsetCurrentUser();
     }
 }

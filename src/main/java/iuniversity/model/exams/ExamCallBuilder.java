@@ -31,6 +31,15 @@ public interface ExamCallBuilder {
     ExamCallBuilder maximumStudents(int maximumStudents);
 
     /**
+     * Set the student registration strategy.
+     * Default is set to at the end of list.
+     * 
+     * @param strategy the registration strategy
+     * @return instance of Builder
+     */
+    ExamCallBuilder registrationStrategy(StudentRegistrationStrategy strategy);
+
+    /**
      * Set the course of Exam call.
      * 
      * @param course the course of the exam call

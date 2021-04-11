@@ -15,11 +15,14 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.layout.VBox;
 import iuniversity.model.exams.ExamResult.ExamResultType;
 
 public class CreateExamReportViewImpl extends AbstractView implements CreateExamReportView {
 
     private static final int MAX_RESULT = 30;
+    private static final String REQUIRED_INPUT_MESSAGE = "Controllare che tutti i campi siano consistenti";
+    private static final String INVALID_EXAM_REPORT_ARGUMENT = "Controllare che la valutazione sia costruita correttamente";
 
     @FXML
     private ChoiceBox<ExamCall> examCallChoice;
@@ -42,6 +45,14 @@ public class CreateExamReportViewImpl extends AbstractView implements CreateExam
     @FXML
     private Button publishBtn;
 
+    @FXML
+    private VBox resultTypeVB;
+
+    @FXML
+    private VBox resultVB;
+
+    private CreateExamReportController controller;
+
     /**
      * {@inheritDoc}
      */
@@ -54,15 +65,32 @@ public class CreateExamReportViewImpl extends AbstractView implements CreateExam
         examCallChoice.setOnAction(e -> {
             final ExamCall examCall = this.examCallChoice.getValue();
             if (!Objects.isNull(examCall)) {
-                ((CreateExamReportController) this.getController()).displayStudentChoices(examCall);
+                this.controller.displayStudentChoices(examCall);
                 System.out.println(examCall);
             }
         });
         publishBtn.setOnAction(e -> {
-            ((CreateExamReportController) this.getController()).createExamReport(examCallChoice.getValue().getCourse(),
-                    studentChoice.getValue(), resultTypeChoice.getValue(), resultSpin.getValue(), laudeCB.isSelected());
-            PageSwitcher.goToPage(getStage(), Pages.TEACHER_HOME, getController().getModel());
+            if (!checkInput()) {
+                this.showErrorMessage(REQUIRED_INPUT_MESSAGE);
+                return;
+            }
+            try {
+                this.controller.createExamReport(examCallChoice.getValue().getCourse(), studentChoice.getValue(),
+                        resultTypeChoice.getValue(), resultSpin.getValue(), laudeCB.isSelected());
+                PageSwitcher.goToPage(getStage(), Pages.TEACHER_HOME, getController().getModel());
+            } catch (IllegalArgumentException ex) {
+                this.showErrorMessage(INVALID_EXAM_REPORT_ARGUMENT);
+                ex.printStackTrace();
+            }
         });
+        laudeCB.setOnAction(e -> {
+            resultTypeVB.setVisible(!laudeCB.isSelected());
+            resultVB.setVisible(!laudeCB.isSelected());
+        });
+    }
+
+    private boolean checkInput() {
+        return Objects.nonNull(this.examCallChoice.getValue()) && Objects.nonNull(studentChoice.getValue());
     }
 
     /**
@@ -70,7 +98,7 @@ public class CreateExamReportViewImpl extends AbstractView implements CreateExam
      */
     @Override
     public void start() {
-        final CreateExamReportController controller = (CreateExamReportController) this.getController();
+        this.controller = (CreateExamReportController) this.getController();
         controller.displayExamCallChoices();
         controller.displayResultTypeChoices();
     }

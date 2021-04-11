@@ -17,13 +17,13 @@ import javafx.stage.Stage;
 public class IUniversity extends Application {
 
     private static final String PATH_SEPARATOR = System.getProperty("file.separator");
-    private static final String FOLDER_PATH = System.getProperty("user.home") + PATH_SEPARATOR + ".iuniversity"
+    private static final String APP_FOLDER_PATH = System.getProperty("user.home") + PATH_SEPARATOR + ".iuniversity"
             + PATH_SEPARATOR;
 
     public static void main(final String[] args) throws IOException {
-        final File folder = new File(FOLDER_PATH);
-        if (!folder.exists()) {
-            FileUtils.forceMkdir(folder);
+        final File applicationFolder = new File(APP_FOLDER_PATH);
+        if (!applicationFolder.exists()) {
+            FileUtils.forceMkdir(applicationFolder);
         }
         launch(args);
     }

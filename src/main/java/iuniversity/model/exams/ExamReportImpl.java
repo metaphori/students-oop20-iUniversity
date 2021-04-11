@@ -1,6 +1,7 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import iuniversity.model.didactics.Course;
@@ -113,6 +114,14 @@ public class ExamReportImpl implements ExamReport {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return course + " " + result + " " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
     public static class Builder implements ExamReportBuilder {
 
         private Optional<Course> course;
@@ -121,6 +130,12 @@ public class ExamReportImpl implements ExamReport {
         private Optional<Integer> result;
         private boolean cumLaude;
 
+        public Builder() {
+            course = Optional.empty();
+            student = Optional.empty();
+            resultType = Optional.empty();
+            result = Optional.empty();
+        }
         /**
          * {@inheritDoc}
          */

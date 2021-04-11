@@ -54,6 +54,8 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
     @FXML
     private ListView<ExamCall> bookedExamCallList;
 
+    private StudentHomeController controller;
+
     /**
      * {@inheritDoc}
      */
@@ -66,12 +68,15 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
         withdrawBtn.setOnAction(e -> {
             final ExamCall examCall = this.bookedExamCallList.getSelectionModel().getSelectedItem();
             if (!Objects.isNull(examCall)) {
-                ((StudentHomeController) this.getController()).withdrawStudent(examCall);
-                ((StudentHomeController) this.getController()).displayBookedExamCalls();
+                this.controller.withdrawStudent(examCall);
+                this.controller.displayOpenBookedExamCalls();
             }
         });
         bookExamBtn.setOnAction(e -> {
             PageSwitcher.goToPage(getStage(), Pages.BOOK_EXAM_CALL, getController().getModel());
+        });
+        showBookletBtn.setOnAction(e -> {
+            PageSwitcher.openPage(Pages.BOOKLET, getController().getModel());
         });
     }
 
@@ -80,9 +85,10 @@ public class StudentHomeViewImpl extends AbstractView implements StudentHomeView
      */
     @Override
     public void start() {
-        ((StudentHomeController) this.getController()).displayStudentInfo();
-        ((StudentHomeController) this.getController()).displayStudentStatistics();
-        ((StudentHomeController) this.getController()).displayBookedExamCalls();
+        this.controller = (StudentHomeController) this.getController();
+        this.controller.displayStudentInfo();
+        this.controller.displayStudentStatistics();
+        this.controller.displayOpenBookedExamCalls();
     }
 
     /**
