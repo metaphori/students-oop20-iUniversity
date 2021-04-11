@@ -1,12 +1,18 @@
 package iuniversity.model.exams;
 
 
+import java.io.Serializable;
+
 import com.google.common.base.Optional;
 
 import iuniversity.model.exams.ExamResult.ExamResultType;
 
-public class ExamResultFactoryImpl implements ExamResultFactory {
+public class ExamResultFactoryImpl implements ExamResultFactory, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static final int MAX_RESULT = 30;
     private static final int SUFFICIENCY = 18;
 
@@ -27,6 +33,11 @@ public class ExamResultFactoryImpl implements ExamResultFactory {
             throw new IllegalArgumentException("An exam is failed only if result is below sufficiency");
         }
         return new ExamResult() {
+
+            /**
+             * 
+             */
+            private static final long serialVersionUID = 1L;
 
             @Override
             public ExamResultType getResultType() {
