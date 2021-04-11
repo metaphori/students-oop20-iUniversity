@@ -38,6 +38,40 @@ public class StudentImpl extends AbstractUser implements Student, Serializable {
         return  "[" + registrationNumber + "] " + super.toString();
     }
     
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((degreeProgramme == null) ? 0 : degreeProgramme.hashCode());
+        result = prime * result + registrationNumber;
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final StudentImpl other = (StudentImpl) obj;
+        if (degreeProgramme == null) {
+            if (other.degreeProgramme != null) {
+                return false;
+            }
+        } else if (!degreeProgramme.equals(other.degreeProgramme)) {
+            return false;
+        }
+        if (registrationNumber != other.registrationNumber) {
+            return false;
+        }
+        return true;
+    }
+
     public static class Builder{
             
             private String name;
