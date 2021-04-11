@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import iuniversity.model.didactics.Course;
@@ -16,7 +15,7 @@ public class ExamCallImpl implements ExamCall {
 
     private static final int DAYS_BEFORE_CALL = 1;
 
-    private Optional<Integer> maxStudents = Optional.empty();
+    private int maxStudents;
     private List<Student> registeredStudents = new ArrayList<>();
     private LocalDate callStart;
     private LocalDate registrationStart;
@@ -34,8 +33,8 @@ public class ExamCallImpl implements ExamCall {
          */
     }
 
-    private ExamCallImpl(final Course course, final LocalDate callStart, final ExamType examType,
-            final Optional<Integer> maxStudents, final StudentRegistrationStrategy registrationStrategy) {
+    private ExamCallImpl(final Course course, final LocalDate callStart, final ExamType examType, final int maxStudents,
+            final StudentRegistrationStrategy registrationStrategy) {
         this.course = course;
         this.callStart = callStart;
         this.examType = examType;
@@ -101,7 +100,7 @@ public class ExamCallImpl implements ExamCall {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Integer> maxStudents() {
+    public int maxStudents() {
         return this.maxStudents;
     }
 
@@ -110,7 +109,7 @@ public class ExamCallImpl implements ExamCall {
      */
     @Override
     public boolean isFull() {
-        return this.maxStudents.isPresent() && registeredStudents.size() == this.maxStudents.get();
+        return registeredStudents.size() == this.maxStudents;
     }
 
     /**
@@ -154,10 +153,8 @@ public class ExamCallImpl implements ExamCall {
         result = prime * result + ((callStart == null) ? 0 : callStart.hashCode());
         result = prime * result + ((course == null) ? 0 : course.hashCode());
         result = prime * result + ((examType == null) ? 0 : examType.hashCode());
-        result = prime * result + ((maxStudents == null) ? 0 : maxStudents.hashCode());
+        result = prime * result + maxStudents;
         result = prime * result + ((registeredStudents == null) ? 0 : registeredStudents.hashCode());
-        result = prime * result + ((registrationEnd == null) ? 0 : registrationEnd.hashCode());
-        result = prime * result + ((registrationStart == null) ? 0 : registrationStart.hashCode());
         return result;
     }
 
@@ -193,11 +190,7 @@ public class ExamCallImpl implements ExamCall {
         if (examType != other.examType) {
             return false;
         }
-        if (maxStudents == null) {
-            if (other.maxStudents != null) {
-                return false;
-            }
-        } else if (!maxStudents.equals(other.maxStudents)) {
+        if (maxStudents != other.maxStudents) {
             return false;
         }
         if (registeredStudents == null) {
@@ -205,20 +198,6 @@ public class ExamCallImpl implements ExamCall {
                 return false;
             }
         } else if (!registeredStudents.equals(other.registeredStudents)) {
-            return false;
-        }
-        if (registrationEnd == null) {
-            if (other.registrationEnd != null) {
-                return false;
-            }
-        } else if (!registrationEnd.equals(other.registrationEnd)) {
-            return false;
-        }
-        if (registrationStart == null) {
-            if (other.registrationStart != null) {
-                return false;
-            }
-        } else if (!registrationStart.equals(other.registrationStart)) {
             return false;
         }
         return true;
@@ -235,14 +214,13 @@ public class ExamCallImpl implements ExamCall {
 
     public static class Builder implements ExamCallBuilder {
 
-        private Optional<Integer> maximumStudents;
+        private int maximumStudents;
         private LocalDate start;
         private ExamType type;
         private Course course;
         private StudentRegistrationStrategy registrationStrategy;
 
         public Builder() {
-            this.maximumStudents = Optional.empty();
             registrationStrategy = new StudentRegistrationStrategyFactoryImpl().atTheEndOfList();
         }
 
@@ -278,7 +256,7 @@ public class ExamCallImpl implements ExamCall {
          */
         @Override
         public ExamCallBuilder maximumStudents(final int maximumStudents) {
-            this.maximumStudents = Optional.ofNullable(maximumStudents);
+            this.maximumStudents = maximumStudents;
             return this;
         }
 
