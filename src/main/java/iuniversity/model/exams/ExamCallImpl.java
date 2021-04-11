@@ -240,44 +240,69 @@ public class ExamCallImpl implements ExamCall {
         private LocalDate start;
         private ExamType type;
         private Course course;
+        private StudentRegistrationStrategy registrationStrategy;
 
         public Builder() {
             this.maximumStudents = Optional.empty();
+            registrationStrategy = new StudentRegistrationStrategyFactoryImpl().atTheEndOfList();
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public final ExamCallBuilder callStart(final LocalDate callStart) {
+        public ExamCallBuilder callStart(final LocalDate callStart) {
             this.start = callStart;
             return this;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public final ExamCallBuilder examType(final ExamType examType) {
+        public ExamCallBuilder examType(final ExamType examType) {
             this.type = examType;
             return this;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public final ExamCallBuilder course(final Course course) {
+        public ExamCallBuilder course(final Course course) {
             this.course = course;
             return this;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public final ExamCallBuilder maximumStudents(final int maximumStudents) {
+        public ExamCallBuilder maximumStudents(final int maximumStudents) {
             this.maximumStudents = Optional.ofNullable(maximumStudents);
             return this;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
-        public final ExamCall build() {
+        public ExamCallBuilder registrationStrategy(final StudentRegistrationStrategy strategy) {
+            this.registrationStrategy = strategy;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ExamCall build() {
             if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(type)) {
                 throw new IllegalStateException("Can't build an exam call, arguments missing");
             } else if (start.isBefore(LocalDate.now().plusDays(DAYS_BEFORE_CALL))) {
                 throw new IllegalStateException("ExamCall must be at least " + DAYS_BEFORE_CALL + " days after today");
             }
-            return new ExamCallImpl(course, start, type, maximumStudents,
-                    new StudentRegistrationStrategyFactoryImpl().atTheEndOfList());
+            return new ExamCallImpl(course, start, type, maximumStudents, registrationStrategy);
         }
 
     }
