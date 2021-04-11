@@ -3,6 +3,7 @@ package iuniversity.test.model.exams;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -14,6 +15,9 @@ import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.model.exams.ExamCallImpl;
+import iuniversity.model.exams.ExamReport;
+import iuniversity.model.exams.ExamReportImpl;
+import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.exams.ExamsManager;
 import iuniversity.model.exams.ExamsManagerImpl;
 import iuniversity.test.SampleTestData;
@@ -59,6 +63,34 @@ public final class ExamsManagerTest {
          * The student already withdraw.
          */
         assertFalse(examManager.withdrawStudent(examCall, sampleData.getMarioRossi()));
+    }
+
+    @Test
+    void testExamReport() {
+        final ExamReport reportMarioRossi = new ExamReportImpl.Builder().course(sampleData.getAnalisiMatematica())
+                .student(sampleData.getMarioRossi()).laude(true).build();
+        final ExamReport reportLucaBianchi = new ExamReportImpl.Builder().course(sampleData.getAnalisiMatematica())
+                .student(sampleData.getLucaBianchi()).laude(true).build();
+        final ExamReport failReport = new ExamReportImpl.Builder().course(sampleData.getAnalisiMatematica())
+                .student(sampleData.getMarioRossi()).resultType(ExamResultType.WITHDRAWN).build();
+        examManager.addExamReport(reportMarioRossi);
+        assertEquals(Set.of(reportMarioRossi), examManager.getExamReports());
+        /*
+         * The student have successfully passed the exam. 
+         */
+        assertTrue(examManager.alreadyReportedSuccess(reportMarioRossi));
+        assertTrue(examManager.alreadyReportedSuccess(sampleData.getMarioRossi(), sampleData.getAnalisiMatematica()));
+        /*
+         * The student does not have a report.
+         */
+        assertFalse(examManager.alreadyReportedSuccess(reportLucaBianchi));
+        assertFalse(examManager.alreadyReportedSuccess(sampleData.getMarioRossi(), sampleData.getProgrammazione()));
+        /*
+         * The student already have a report.
+         */
+        assertThrows(IllegalStateException.class, () -> {
+            examManager.addExamReport(failReport);
+        });
     }
 
 }
