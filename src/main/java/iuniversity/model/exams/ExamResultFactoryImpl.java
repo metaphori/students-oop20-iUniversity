@@ -1,17 +1,24 @@
 package iuniversity.model.exams;
 
-import java.util.Optional;
+
+import java.io.Serializable;
+
+import com.google.common.base.Optional;
 
 import iuniversity.model.exams.ExamResult.ExamResultType;
 
-public class ExamResultFactoryImpl implements ExamResultFactory {
+public class ExamResultFactoryImpl implements ExamResultFactory, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static final int MAX_RESULT = 30;
     private static final int SUFFICIENCY = 18;
 
     private ExamResult makeEvaluation(final ExamResultType resultType, final Optional<Integer> result,
             final boolean cumLaude) {
-        if (result.isEmpty() && resultType != ExamResultType.WITHDRAWN) {
+        if (!result.isPresent() && resultType != ExamResultType.WITHDRAWN) {
             throw new IllegalArgumentException("Only withdrawn results may not have a numeric result");
         } else if (resultType == ExamResultType.WITHDRAWN && result.isPresent()) {
             throw new IllegalArgumentException("Only withdrawn can't have a numeric result");
@@ -26,6 +33,11 @@ public class ExamResultFactoryImpl implements ExamResultFactory {
             throw new IllegalArgumentException("An exam is failed only if result is below sufficiency");
         }
         return new ExamResult() {
+
+            /**
+             * 
+             */
+            private static final long serialVersionUID = 1L;
 
             @Override
             public ExamResultType getResultType() {
@@ -79,7 +91,7 @@ public class ExamResultFactoryImpl implements ExamResultFactory {
      */
     @Override
     public ExamResult withdrawn() {
-        return makeEvaluation(ExamResultType.WITHDRAWN, Optional.empty(), false);
+        return makeEvaluation(ExamResultType.WITHDRAWN, Optional.absent(), false);
     }
 
     /**

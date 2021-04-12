@@ -1,8 +1,10 @@
 package iuniversity.model.exams;
 
-import java.util.Optional;
+import java.io.Serializable;
 
-public interface ExamResult {
+import com.google.common.base.Optional;
+
+public interface ExamResult extends Serializable {
 
     /**
      * The result type of an {@link ExamResult}.

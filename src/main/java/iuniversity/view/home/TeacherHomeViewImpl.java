@@ -54,6 +54,8 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
     @FXML
     private Button logoutBtn;
 
+    private TeacherHomeController controller;
+
     /**
      * {@inheritDoc}
      */
@@ -144,8 +146,8 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
         removeExamCallBtn.setOnAction(e -> {
             final ExamCall examCall = openExamCallList.getSelectionModel().getSelectedItem();
             if (!Objects.isNull(examCall)) {
-                ((TeacherHomeController) this.getController()).removeExamCall(examCall);
-                ((TeacherHomeController) this.getController()).displayOpenExamCalls();
+                this.controller.removeExamCall(examCall);
+                this.controller.displayOpenExamCalls();
             }
         });
         addExamResultBtn.setOnAction(e -> {
@@ -158,9 +160,10 @@ public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView
      */
     @Override
     public void start() {
-        ((TeacherHomeController) this.getController()).displayTeacherInfo();
-        ((TeacherHomeController) this.getController()).displayTeacherStatistics();
-        ((TeacherHomeController) this.getController()).displayOpenExamCalls();
+        this.controller = (TeacherHomeController) this.getController();
+        this.controller.displayTeacherInfo();
+        this.controller.displayTeacherStatistics();
+        this.controller.displayOpenExamCalls();
     }
 
 }

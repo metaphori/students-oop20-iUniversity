@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuniversity.view.exams.CreateExamReportViewImpl">
    <center>
       <VBox prefHeight="284.0" prefWidth="334.0" BorderPane.alignment="CENTER">
@@ -27,21 +26,21 @@
                   <ChoiceBox fx:id="studentChoice" prefWidth="150.0" />
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="56.0" prefWidth="334.0">
+            <VBox alignment="CENTER" prefHeight="31.0" prefWidth="334.0">
+               <children>
+                  <CheckBox fx:id="laudeCB" mnemonicParsing="false" text="Lode" />
+               </children>
+            </VBox>
+            <VBox fx:id="resultTypeVB" alignment="TOP_CENTER" prefHeight="56.0" prefWidth="334.0">
                <children>
                   <Label text="Esito" />
                   <ChoiceBox fx:id="resultTypeChoice" prefWidth="150.0" />
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="56.0" prefWidth="334.0">
+            <VBox fx:id="resultVB" alignment="TOP_CENTER" prefHeight="56.0" prefWidth="334.0">
                <children>
                   <Label text="Votazione" />
                   <Spinner fx:id="resultSpin" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="31.0" prefWidth="334.0">
-               <children>
-                  <CheckBox fx:id="laudeCB" mnemonicParsing="false" text="Lode" />
                </children>
             </VBox>
          </children>

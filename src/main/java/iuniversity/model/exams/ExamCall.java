@@ -2,7 +2,6 @@ package iuniversity.model.exams;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import iuniversity.model.didactics.Course;
@@ -93,7 +92,7 @@ public interface ExamCall {
      * @return an optional with is filled with the maximum number of student that
      *         register to the call
      */
-    Optional<Integer> maxStudents();
+    int maxStudents();
 
     /**
      * Add student to the Exam call list.
@@ -104,5 +103,9 @@ public interface ExamCall {
     boolean registerStudent(Student student);
 
     boolean withdrawStudent(Student student);
+
+    boolean isOpen();
+
+    boolean isFull();
 
 }
