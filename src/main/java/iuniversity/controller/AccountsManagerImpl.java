@@ -30,14 +30,6 @@ public class AccountsManagerImpl implements AccountsManager {
     private static final String STORAGE_PATH = System.getProperty("user.home") + PATH_SEPARATOR + ".iuniversity"
             + PATH_SEPARATOR;
     private static final String CHARSET = "UTF-8";
-    /*
-     * TODO Rettificare in un file di configurazione
-     */
-    private static final String ADMIN_USERNAME = "admin";
-    private static final String ADMIN_PASSWORD_HASH = "$2b$10$FeIspybS9D6rKGy5rAFyweYoVIS7g/sMuPAhQWcs7iUmccgU.Sw36"; // admin
-    private static final String TEACHER_USERNAME_PREFIX = "doc";
-    private static final String STUDENT_USERNAME_PREFIX = "stu";
-    private static final int PASSWORD_LENGHT = 8;
 
     private final Map<UserType, String> passwordFileMap = new EnumMap<>(UserType.class) {
         /**
@@ -50,8 +42,9 @@ public class AccountsManagerImpl implements AccountsManager {
             this.put(UserType.STUDENT, "pass_students.txt");
         }
     };
+    private final AccountsConfiguration configuration;
 
-    public AccountsManagerImpl() {
+    public AccountsManagerImpl(final AccountsConfiguration configuration) {
         for (final UserType userType : UserType.values()) {
             if (userType != UserType.ADMIN) {
                 final File file = new File(STORAGE_PATH + passwordFileMap.get(userType));
@@ -65,6 +58,7 @@ public class AccountsManagerImpl implements AccountsManager {
                 }
             }
         }
+        this.configuration = configuration;
     }
 
     private List<String> readUsersCredentials(final UserType userType) {
@@ -91,8 +85,9 @@ public class AccountsManagerImpl implements AccountsManager {
 
     private Optional<UserType> getUserTypeFromUsername(final String username) {
         final String prefix = username.split("\\.")[0];
-        return prefix.equals(TEACHER_USERNAME_PREFIX) ? Optional.of(UserType.TEACHER)
-                : prefix.equals(STUDENT_USERNAME_PREFIX) ? Optional.of(UserType.STUDENT) : Optional.empty();
+        return prefix.equals(configuration.getTeacherUsernamePrefix()) ? Optional.of(UserType.TEACHER)
+                : prefix.equals(configuration.getStudentUsernamePrefix()) ? Optional.of(UserType.STUDENT)
+                        : Optional.empty();
     }
 
     private boolean checkPassword(final String password, final String hashedPassword) {
@@ -108,7 +103,8 @@ public class AccountsManagerImpl implements AccountsManager {
      */
     @Override
     public Optional<Pair<UserType, Integer>> checkCredentials(final String username, final String password) {
-        if (username.equals(ADMIN_USERNAME) && checkPassword(password, ADMIN_PASSWORD_HASH)) {
+        if (username.equals(configuration.getAdminUsername())
+                && checkPassword(password, configuration.getAdminPasswordHash())) {
             return Optional.of(new ImmutablePair<>(User.UserType.ADMIN, 0));
         }
         final Optional<UserType> userType = getUserTypeFromUsername(username);
@@ -135,7 +131,8 @@ public class AccountsManagerImpl implements AccountsManager {
     }
 
     private String getUsernamePrefixByUserType(final UserType userType) {
-        return userType == UserType.TEACHER ? TEACHER_USERNAME_PREFIX : STUDENT_USERNAME_PREFIX;
+        return userType == UserType.TEACHER ? configuration.getTeacherUsernamePrefix()
+                : configuration.getStudentUsernamePrefix();
     }
 
     /**
@@ -173,7 +170,7 @@ public class AccountsManagerImpl implements AccountsManager {
     @Override
     public String createPassword() {
         return "1234";
-        //return RandomStringUtils.random(PASSWORD_LENGHT, true, true);
+        // return RandomStringUtils.random(PASSWORD_LENGHT, true, true);
     }
 
 }
