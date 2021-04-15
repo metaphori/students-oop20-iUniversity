@@ -18,7 +18,7 @@ import iuniversity.view.users.TeacherCreationView;
 
 public class TeacherCreationControllerImpl extends AbstractController implements TeacherCreationController {
 
-    private AccountsManager accountManager = new AccountsManagerImpl();
+    private AccountsManager accountManager = this.getAccountsManager();
     @Override
     public void createTeacher(String firstName, String lastName, LocalDate dateOfBirth, 
             Gender gender, String address, Set<Course> courses) {
