@@ -23,7 +23,7 @@
                         <Insets />
                      </VBox.margin>
                      <image>
-                        <Image url="@../../../../../../../../../../Desktop/iUniversity_logo.png" />
+                        <Image url="@../images/iUniversity_logo.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="errorLabel" textFill="RED" />

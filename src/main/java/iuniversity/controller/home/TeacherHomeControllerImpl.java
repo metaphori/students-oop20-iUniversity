@@ -61,6 +61,7 @@ public class TeacherHomeControllerImpl extends AbstractController implements Tea
     @Override
     public void removeExamCall(final ExamCall examCall) {
         this.getModel().getExamManager().removeExamCall(examCall);
+        this.saveExamCalls();
     }
 
     /**

@@ -16,8 +16,11 @@ public class LoginControllerImpl extends AbstractController implements LoginCont
 
     private final AccountsManager accountManager = new AccountsManagerImpl();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final void login(final String username, final String password) {
+    public void login(final String username, final String password) {
         final Optional<Pair<UserType, Integer>> userType = accountManager.checkCredentials(username, password);
         if (userType.isEmpty()) {
             ((LoginView) this.getView()).incorrectCredentials();
