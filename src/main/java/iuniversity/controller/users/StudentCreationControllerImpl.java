@@ -19,7 +19,7 @@ import iuniversity.view.users.StudentCreationView;
 
 public class StudentCreationControllerImpl extends AbstractController implements StudentCreationController {
 
-    private AccountsManager accountManager = new AccountsManagerImpl();
+    private AccountsManager accountManager = this.getAccountsManager();
     
     @Override
     public void createStudent(String firstName, String lastName, LocalDate dateOfBirth, Gender gender, String address,
