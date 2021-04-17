@@ -134,6 +134,7 @@ public class ExamReportImpl implements ExamReport, Serializable {
         private Optional<ExamResultType> resultType;
         private Optional<Integer> result;
         private boolean cumLaude;
+        private boolean built;
 
         public Builder() {
             course = Optional.empty();
@@ -195,7 +196,9 @@ public class ExamReportImpl implements ExamReport, Serializable {
          */
         @Override
         public ExamReport build() {
-            if (this.course.isEmpty() || this.student.isEmpty()) {
+            if (built) {
+                throw new IllegalStateException("The builder can be consumed only once");
+            } else if (this.course.isEmpty() || this.student.isEmpty()) {
                 throw new IllegalStateException("A student and a course must be provided");
             } else if (this.resultType.isEmpty() && !cumLaude) {
                 throw new IllegalStateException("A result type should be provided");
@@ -223,6 +226,7 @@ public class ExamReportImpl implements ExamReport, Serializable {
                     break;
                 }
             }
+            built = true;
             return new ExamReportImpl(this.course.get(), student.get(), examResult, LocalDate.now());
         }
     }
