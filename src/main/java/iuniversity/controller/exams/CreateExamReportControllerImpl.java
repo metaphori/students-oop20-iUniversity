@@ -20,6 +20,10 @@ public class CreateExamReportControllerImpl extends AbstractController implement
         return teacher.getCourses().contains(course);
     }
 
+    private boolean hasRegisteredStudents(final ExamCall examCall) {
+        return !examCall.getRegisteredStudents().isEmpty();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -28,6 +32,7 @@ public class CreateExamReportControllerImpl extends AbstractController implement
         checkTeacher();
         ((CreateExamReportView) this.getView()).setExamCallChoices(this.getModel().getExamManager().getExamCalls()
                 .stream().filter(e -> isTeachedByTeacher(e.getCourse(), getLoggedTeacher()))
+                .filter(e -> hasRegisteredStudents(e))
                 .filter(e -> this.getModel().getExamManager().alreadyHeld(e)).collect(Collectors.toSet()));
 
     }
@@ -60,6 +65,7 @@ public class CreateExamReportControllerImpl extends AbstractController implement
         final ExamReport examReport = new ExamReportImpl.Builder().course(course).student(student)
                 .resultType(resultType).result(result).laude(cumLaude).build();
         this.getModel().getExamManager().addExamReport(examReport);
+        this.saveExamReports();
     }
 
 }

@@ -1,6 +1,7 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +13,8 @@ import iuniversity.model.user.Student;
 
 public final class ExamsManagerImpl implements ExamsManager {
 
-    private final Set<ExamCall> examCalls;
-    private final Set<ExamReport> examReports;
+    private Set<ExamCall> examCalls;
+    private Set<ExamReport> examReports;
 
     public ExamsManagerImpl() {
         this.examCalls = new HashSet<>();
@@ -36,52 +37,17 @@ public final class ExamsManagerImpl implements ExamsManager {
         return Collections.unmodifiableSet(examReports);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addExamCall(final LocalDate callStart, final Course course, final ExamType examType,
-            final Integer maximumStudents) {
-        addExamCall(new ExamCallImpl.Builder().callStart(callStart).course(course).examType(examType)
-                .maximumStudents(maximumStudents).build());
+    private boolean alreadyPublished(final ExamCall examCall) {
+        return getExamCalls().stream().filter(e -> e.getStart().equals(examCall.getStart()))
+                .filter(e -> e.getCourse().equals(examCall.getCourse()))
+                .anyMatch(e -> e.getExamType() == examCall.getExamType());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addExamReport(final Course course, final Student student, final ExamResult result,
-            final LocalDate date) {
-        addExamReport(new ExamReportImpl(course, student, result, date));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean alreadyReportedSuccess(final Student student, final Course course) {
-        return this.getExamReports().stream().filter(e -> e.getResult().getResultType() == ExamResultType.SUCCEDED)
-                .filter(e -> e.getStudent().equals(student))
-                .anyMatch(e -> e.getCourse().equals(course));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean alreadyReportedSuccess(final ExamReport examReport) {
-        return alreadyReportedSuccess(examReport.getStudent(), examReport.getCourse());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addExamReport(final ExamReport examReport) {
-        if (alreadyReportedSuccess(examReport)) {
-            throw new IllegalStateException("Student already have a successful report");
+    private void addExamCall(final ExamCall examCall) {
+        if (alreadyPublished(examCall)) {
+            throw new IllegalStateException("An exam call with the same characteristics had alredy been added");
         }
-        this.examReports.add(examReport);
+        examCalls.add(examCall);
     }
 
     /**
@@ -96,15 +62,21 @@ public final class ExamsManagerImpl implements ExamsManager {
      * {@inheritDoc}
      */
     @Override
+    public void addExamCall(final LocalDate callStart, final Course course, final ExamType examType,
+            final Integer maximumStudents) {
+        addExamCall(new ExamCallImpl.Builder().callStart(callStart).course(course).examType(examType)
+                .maximumStudents(maximumStudents).build());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void removeExamCall(final ExamCall examCall) {
         if (alreadyHeld(examCall)) {
             throw new IllegalStateException("Can't remove an exam call which has been already held");
         }
         examCalls.remove(examCall);
-    }
-
-    private void addExamCall(final ExamCall examCall) {
-        examCalls.add(examCall);
     }
 
     /**
@@ -127,6 +99,53 @@ public final class ExamsManagerImpl implements ExamsManager {
         final boolean result = examCall.registerStudent(student);
         addExamCall(examCall);
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addExamReport(final ExamReport examReport) {
+        if (alreadyReportedSuccess(examReport)) {
+            throw new IllegalStateException("Student already have a successful report");
+        }
+        this.examReports.add(examReport);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addExamReport(final Course course, final Student student, final ExamResult result,
+            final LocalDate date) {
+        addExamReport(new ExamReportImpl(course, student, result, date));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean alreadyReportedSuccess(final Student student, final Course course) {
+        return this.getExamReports().stream().filter(e -> e.getResult().getResultType() == ExamResultType.SUCCEDED)
+                .filter(e -> e.getStudent().equals(student)).anyMatch(e -> e.getCourse().equals(course));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean alreadyReportedSuccess(final ExamReport examReport) {
+        return alreadyReportedSuccess(examReport.getStudent(), examReport.getCourse());
+    }
+
+    @Override
+    public void setExamCalls(final Collection<ExamCall> examCalls) {
+        this.examCalls = new HashSet<>(examCalls);
+    }
+
+    @Override
+    public void setExamReports(final Collection<ExamReport> examReports) {
+        this.examReports = new HashSet<>(examReports);
     }
 
 }

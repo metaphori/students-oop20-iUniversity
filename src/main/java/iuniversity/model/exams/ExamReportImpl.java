@@ -1,5 +1,6 @@
 package iuniversity.model.exams;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -8,8 +9,12 @@ import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Student;
 
-public class ExamReportImpl implements ExamReport {
+public class ExamReportImpl implements ExamReport, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private final Course course;
     private final Student student;
     private final ExamResult result;
@@ -130,6 +135,12 @@ public class ExamReportImpl implements ExamReport {
         private Optional<Integer> result;
         private boolean cumLaude;
 
+        public Builder() {
+            course = Optional.empty();
+            student = Optional.empty();
+            resultType = Optional.empty();
+            result = Optional.empty();
+        }
         /**
          * {@inheritDoc}
          */
@@ -153,7 +164,7 @@ public class ExamReportImpl implements ExamReport {
          */
         @Override
         public ExamReportBuilder resultType(final ExamResultType resultType) {
-            this.resultType = Optional.of(resultType);
+            this.resultType = Optional.ofNullable(resultType);
             return this;
         }
 
@@ -162,7 +173,7 @@ public class ExamReportImpl implements ExamReport {
          */
         @Override
         public ExamReportBuilder result(final int result) {
-            this.result = Optional.of(result);
+            this.result = Optional.ofNullable(result);
             return this;
         }
 

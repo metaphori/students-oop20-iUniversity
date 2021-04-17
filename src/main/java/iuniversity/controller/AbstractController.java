@@ -18,6 +18,7 @@ public abstract class AbstractController implements Controller {
     private View view;
     private Model model;
     private final DataStore storage = new FileDataStoreImpl();
+    private final AccountsManager accountManager = new AccountsManagerImpl(new AccountsConfiguration.Builder().build());
 
     protected final String getFileStoragePath() {
         return STORAGE_PATH;
@@ -66,34 +67,56 @@ public abstract class AbstractController implements Controller {
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return the dataStore strategy
      */
-    @Override
     public DataStore getStorage() {
         return this.storage;
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return the accountsManager
      */
-    @Override
-    public boolean isUserLogged() {
+    public AccountsManager getAccountsManager() {
+        return this.accountManager;
+    }
+
+    /**
+     * 
+     */
+    protected void saveExamCalls() {
+        this.getStorage().saveExamCalls(this.getModel().getExamManager().getExamCalls());
+    }
+
+    /**
+     * 
+     */
+    protected void saveExamReports() {
+        this.getStorage().saveExamReports(this.getModel().getExamManager().getExamReports());
+    }
+
+    /**
+     * 
+     * @return true if a user is logged
+     */
+    protected boolean isUserLogged() {
         return this.getModel().getLoggedUser().isPresent();
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return true if a teacher is logged
      */
-    @Override
-    public boolean isUserATeacher() {
+    protected boolean isUserATeacher() {
         return this.isUserLogged() && this.getModel().getLoggedUser().get() instanceof Teacher;
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return true if a student is logged
      */
-    @Override
-    public boolean isUserAStudent() {
+    protected boolean isUserAStudent() {
         return this.isUserLogged() && this.getModel().getLoggedUser().get() instanceof Student;
     }
 
@@ -116,18 +139,18 @@ public abstract class AbstractController implements Controller {
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return the current user as a teacher
      */
-    @Override
-    public Teacher getLoggedTeacher() {
+    protected Teacher getLoggedTeacher() {
         return (Teacher) this.model.getLoggedUser().get();
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return the current user as a student
      */
-    @Override
-    public Student getLoggedStudent() {
+    protected Student getLoggedStudent() {
         return (Student) this.model.getLoggedUser().get();
     }
 

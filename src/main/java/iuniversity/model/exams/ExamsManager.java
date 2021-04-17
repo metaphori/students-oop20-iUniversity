@@ -1,6 +1,7 @@
 package iuniversity.model.exams;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Set;
 
 import iuniversity.model.didactics.Course;
@@ -47,5 +48,9 @@ public interface ExamsManager {
     boolean alreadyReportedSuccess(ExamReport examReport);
 
     boolean alreadyReportedSuccess(Student student, Course course);
+
+    void setExamCalls(Collection<ExamCall> examCalls);
+
+    void setExamReports(Collection<ExamReport> examReports);
 
 }

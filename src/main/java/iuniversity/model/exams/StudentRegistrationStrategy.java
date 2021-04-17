@@ -1,11 +1,12 @@
 package iuniversity.model.exams;
 
+import java.io.Serializable;
 import java.util.List;
 
 import iuniversity.model.user.Student;
 
 @FunctionalInterface
-public interface StudentRegistrationStrategy {
+public interface StudentRegistrationStrategy extends Serializable {
 
     /**
      * The student registration Strategy.
