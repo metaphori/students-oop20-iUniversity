@@ -129,6 +129,9 @@ public class ExamReportImpl implements ExamReport, Serializable {
 
     public static class Builder implements ExamReportBuilder {
 
+        private static final int MAX_RESULT = 30;
+        private static final int MIN_RESULT = 0;
+
         private Optional<Course> course;
         private Optional<Student> student;
         private Optional<ExamResultType> resultType;
@@ -142,6 +145,7 @@ public class ExamReportImpl implements ExamReport, Serializable {
             resultType = Optional.empty();
             result = Optional.empty();
         }
+
         /**
          * {@inheritDoc}
          */
@@ -174,7 +178,7 @@ public class ExamReportImpl implements ExamReport, Serializable {
          */
         @Override
         public ExamReportBuilder result(final int result) {
-            this.result = Optional.ofNullable(result);
+            this.result = Optional.of(result).filter(r -> r >= MIN_RESULT && r <= MAX_RESULT);
             return this;
         }
 
