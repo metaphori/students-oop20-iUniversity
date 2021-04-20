@@ -10,6 +10,10 @@ import iuniversity.model.user.Archive;
 import iuniversity.model.user.ArchiveImpl;
 import iuniversity.model.user.User;
 
+/**
+ * This is the model class. It contains method to access the representation of model data.
+ *
+ */
 public class ModelImpl implements Model {
 
     private final ExamsManager examManager = new ExamsManagerImpl();

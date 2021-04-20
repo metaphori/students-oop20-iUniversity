@@ -11,6 +11,10 @@ import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Student;
 
+/**
+ * This class mantains all the information of exam calls and reports.
+ *
+ */
 public final class ExamsManagerImpl implements ExamsManager {
 
     private Set<ExamCall> examCalls;

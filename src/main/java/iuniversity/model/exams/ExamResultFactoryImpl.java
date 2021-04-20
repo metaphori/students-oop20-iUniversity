@@ -7,6 +7,10 @@ import com.google.common.base.Optional;
 
 import iuniversity.model.exams.ExamResult.ExamResultType;
 
+/**
+ * This class is a factory for examResults.
+ *
+ */
 public class ExamResultFactoryImpl implements ExamResultFactory, Serializable {
 
     /**

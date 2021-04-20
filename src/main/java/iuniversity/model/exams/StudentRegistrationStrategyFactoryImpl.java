@@ -3,6 +3,10 @@ package iuniversity.model.exams;
 import java.text.Collator;
 import java.util.Collections;
 
+/**
+ * A student registration strategy factory.
+ *
+ */
 public class StudentRegistrationStrategyFactoryImpl implements StudentRegistrationStrategyFactory {
 
     /**
