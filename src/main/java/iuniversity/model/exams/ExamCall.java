@@ -7,6 +7,11 @@ import java.util.Set;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Student;
 
+/**
+ * 
+ * ExamCall interface. Students can be registered or withdrawn
+ *
+ */
 public interface ExamCall {
 
     /**
@@ -97,15 +102,28 @@ public interface ExamCall {
     /**
      * Add student to the Exam call list.
      * 
-     * @param student
+     * @param student the student to add to the exam call list
      * @return true if the student was registered
      */
     boolean registerStudent(Student student);
 
+    /**
+     * 
+     * @param student the student to remove from the exam call list
+     * @return true if the student was already in list
+     */
     boolean withdrawStudent(Student student);
 
+    /**
+     * 
+     * @return true if the exam call is open which means that student can register or withdraw
+     */
     boolean isOpen();
 
+    /**
+     * 
+     * @return true if the maximum number of students is reached
+     */
     boolean isFull();
 
 }
