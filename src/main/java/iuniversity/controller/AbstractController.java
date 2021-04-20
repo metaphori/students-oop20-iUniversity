@@ -83,14 +83,14 @@ public abstract class AbstractController implements Controller {
     }
 
     /**
-     * 
+     * Saves the exam calls to storage.
      */
     protected void saveExamCalls() {
         this.getStorage().saveExamCalls(this.getModel().getExamManager().getExamCalls());
     }
 
     /**
-     * 
+     * Saves the exam reports to storage.
      */
     protected void saveExamReports() {
         this.getStorage().saveExamReports(this.getModel().getExamManager().getExamReports());

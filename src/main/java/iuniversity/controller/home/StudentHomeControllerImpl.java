@@ -11,6 +11,9 @@ import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Student;
 import iuniversity.view.home.StudentHomeView;
 
+/**
+ * The controller of the student home view. Displays informations and statistics.
+ */
 public class StudentHomeControllerImpl extends AbstractController implements StudentHomeController {
 
     /**

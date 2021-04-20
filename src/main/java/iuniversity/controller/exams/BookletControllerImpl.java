@@ -7,6 +7,9 @@ import iuniversity.model.exams.ExamReport;
 import iuniversity.model.user.Student;
 import iuniversity.view.exams.BookletView;
 
+/**
+ * Manages the visualization of the student booklet.
+ */
 public class BookletControllerImpl extends AbstractController implements BookletController {
 
     private boolean reportBelongsToStudent(final ExamReport examReport, final Student student) {

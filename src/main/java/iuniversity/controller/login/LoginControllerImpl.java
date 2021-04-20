@@ -11,6 +11,9 @@ import iuniversity.model.user.Teacher;
 import iuniversity.model.user.User.UserType;
 import iuniversity.view.login.LoginView;
 
+/**
+ * The is responsible of logging.
+ */
 public class LoginControllerImpl extends AbstractController implements LoginController {
 
     private final AccountsManager accountManager = this.getAccountsManager();
