@@ -9,6 +9,10 @@ import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Student;
 
+/**
+ * This class models an exam report.
+ *
+ */
 public class ExamReportImpl implements ExamReport, Serializable {
 
     /**
@@ -127,6 +131,10 @@ public class ExamReportImpl implements ExamReport, Serializable {
         return course + " " + result + " " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
+    /**
+     * This class is a builder for ExamReport.
+     *
+     */
     public static class Builder implements ExamReportBuilder {
 
         private static final int MAX_RESULT = 30;
