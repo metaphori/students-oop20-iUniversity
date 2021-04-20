@@ -1,5 +1,0 @@
-1 doc.caselli.fabrizio $2b$10$Yqaekdjkzpy2fFNbwsiOT.nTQwMvqdIZ7oBKqT4JsRg8Z06VyRItm
-2 doc.maio.dario $2b$10$N9ev.MJ94n.hLOv3eiFkp.JRmbJCckn/ybSjyxVpvBaYVXuTvBOtO
-3 doc.viroli.mirko $2b$10$oaq4.3xx6jweCfF5Hq1nu.lxB3MdMd2CIZAcx43Qs8/LkTe.1bEP6
-4 doc.pianini.danilo $2b$10$Fuk5diUl1XZwylZ8Hqt9BOKWv0GoEsClTOIP5omKjAY6ILJGVNNri
-5 doc.casadei.roberto $2b$10$y4urP8vmyC8duCffBvUgBeNtDs7R8skMdBvAcjZXqYVX6LqnVOOcq
