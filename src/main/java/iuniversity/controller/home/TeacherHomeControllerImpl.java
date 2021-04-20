@@ -10,6 +10,9 @@ import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Teacher;
 import iuniversity.view.home.TeacherHomeView;
 
+/**
+ * The controller of the teacher home view. Displays informations and statistics.
+ */
 public class TeacherHomeControllerImpl extends AbstractController implements TeacherHomeController {
 
     /**

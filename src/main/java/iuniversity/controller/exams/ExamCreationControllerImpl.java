@@ -8,6 +8,9 @@ import iuniversity.model.didactics.Course;
 import iuniversity.model.exams.ExamCall.ExamType;
 import iuniversity.view.exams.ExamCreationView;
 
+/**
+ * Manages the creation of an exam call.
+ */
 public class ExamCreationControllerImpl extends AbstractController implements ExamCreationController {
 
     private static final String EXAM_CALL_CREATION_ERROR = "Errore nella creazione dell'appello d'esame. Riprovare";
