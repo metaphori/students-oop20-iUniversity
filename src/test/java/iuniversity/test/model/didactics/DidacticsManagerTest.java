@@ -22,8 +22,8 @@ import iuniversity.model.didactics.DidacticsManagerImpl;
 
 public class DidacticsManagerTest {
 
-    private final DidacticsManager didacticsManager = new DidacticsManagerImpl();
-    private final SampleTestData sampleData = new SampleTestData();
+    private DidacticsManager didacticsManager = new DidacticsManagerImpl();
+    private SampleTestData sampleData = new SampleTestData();
 
     @Test
     public void testGetDegreeProgrammes() {

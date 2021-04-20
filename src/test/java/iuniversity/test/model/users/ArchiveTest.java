@@ -25,12 +25,12 @@ import iuniversity.test.SampleTestData;
 
 public class ArchiveTest {
 
-    private final Archive archive = new ArchiveImpl();
-    private final SampleTestData sampleData = new SampleTestData();
+    private Archive archive = new ArchiveImpl();
+    private SampleTestData sampleData = new SampleTestData();
     
     @Test
     public void testGetStudents() {
-        Student marioRossi = new StudentImpl.Builder("Mario","Rossi",0,0)
+        Student marioRossi = new StudentImpl.StudentBuilder("Mario","Rossi",0,0)
                                             .username("stu.mario.rossi")
                                             .dateOfBirth(LocalDate.of(1990, 8, 8))
                                             .address("Via Don Minzoni")
@@ -52,7 +52,7 @@ public class ArchiveTest {
         Course analisiMat = sampleData.getAnalisiMatematica();
         courses.add(algebra);
         courses.add(analisiMat);
-        Teacher claudioBravo = new TeacherImpl.Builder("Claudio","Bravo",0,0)
+        Teacher claudioBravo = new TeacherImpl.TeacherBuilder("Claudio","Bravo",0,0)
                                             .username("doc.claudio.bravo")
                                             .dateOfBirth(LocalDate.of(1990, 8, 8))
                                             .address("Via Madonna della Rosa")
@@ -69,7 +69,7 @@ public class ArchiveTest {
     
     @Test
     public void testGetNewStudentRegistrationNumber() {
-        Student marioRossi = new StudentImpl.Builder("Mario","Rossi",0,archive.getNewStudentRegistrationNumber())
+        Student marioRossi = new StudentImpl.StudentBuilder("Mario","Rossi",0,archive.getNewStudentRegistrationNumber())
                 .username("stu.mario.rossi")
                 .dateOfBirth(LocalDate.of(1990, 8, 8))
                 .address("Via Don Minzoni")
@@ -77,7 +77,7 @@ public class ArchiveTest {
                 .degreeProgramme(sampleData.getIngegneria())
                 .build();
         archive.addStudent(marioRossi);
-        Student marioGrossi = new StudentImpl.Builder("Mario","Grossi",1,archive.getNewStudentRegistrationNumber())
+        Student marioGrossi = new StudentImpl.StudentBuilder("Mario","Grossi",1,archive.getNewStudentRegistrationNumber())
                 .username("stu.mario.grossi")
                 .dateOfBirth(LocalDate.of(1990, 8, 8))
                 .address("Via Madonna della Rosa")
@@ -96,7 +96,7 @@ public class ArchiveTest {
         Course analisiMat = sampleData.getAnalisiMatematica();
         courses.add(algebra);
         courses.add(analisiMat);
-        Teacher claudioBravo = new TeacherImpl.Builder("Claudio","Bravo",0,archive.getNewTeacherRegistrationNumber())
+        Teacher claudioBravo = new TeacherImpl.TeacherBuilder("Claudio","Bravo",0,archive.getNewTeacherRegistrationNumber())
                 .username("doc.claudio.bravo")
                 .dateOfBirth(LocalDate.of(1990, 8, 8))
                 .address("Via Madonna della Rosa")
@@ -104,7 +104,7 @@ public class ArchiveTest {
                 .courses(courses)
                 .build();
         archive.addTeacher(claudioBravo);
-        Teacher francescoFrancoletti = new TeacherImpl.Builder("Francesco","Francoletti",0,archive.getNewTeacherRegistrationNumber())
+        Teacher francescoFrancoletti = new TeacherImpl.TeacherBuilder("Francesco","Francoletti",0,archive.getNewTeacherRegistrationNumber())
                 .username("doc.claudio.bravo")
                 .dateOfBirth(LocalDate.of(1990, 8, 8))
                 .address("Via Madonna della Rosa")
@@ -123,7 +123,7 @@ public class ArchiveTest {
         Course analisiMat = sampleData.getAnalisiMatematica();
         courses.add(algebra);
         courses.add(analisiMat);
-        Student marioRossi = new StudentImpl.Builder("Mario","Rossi",0,archive.getNewStudentRegistrationNumber())
+        Student marioRossi = new StudentImpl.StudentBuilder("Mario","Rossi",0,archive.getNewStudentRegistrationNumber())
                 .username("stu.mario.rossi")
                 .dateOfBirth(LocalDate.of(1990, 8, 8))
                 .address("Via Don Minzoni")
@@ -131,7 +131,7 @@ public class ArchiveTest {
                 .degreeProgramme(sampleData.getIngegneria())
                 .build();
         archive.addStudent(marioRossi);
-        Student marioGrossi = new StudentImpl.Builder("Mario","Grossi",1,archive.getNewStudentRegistrationNumber())
+        Student marioGrossi = new StudentImpl.StudentBuilder("Mario","Grossi",1,archive.getNewStudentRegistrationNumber())
                 .username("stu.mario.grossi")
                 .dateOfBirth(LocalDate.of(1990, 8, 8))
                 .address("Via Madonna della Rosa")
@@ -150,7 +150,7 @@ public class ArchiveTest {
         Course analisiMat = sampleData.getAnalisiMatematica();
         courses.add(algebra);
         courses.add(analisiMat);
-        Teacher claudioBravo = new TeacherImpl.Builder("Claudio","Bravo",0,archive.getNewTeacherRegistrationNumber())
+        Teacher claudioBravo = new TeacherImpl.TeacherBuilder("Claudio","Bravo",0,archive.getNewTeacherRegistrationNumber())
                 .username("doc.claudio.bravo")
                 .dateOfBirth(LocalDate.of(1990, 8, 8))
                 .address("Via Madonna della Rosa")
@@ -158,7 +158,7 @@ public class ArchiveTest {
                 .courses(courses)
                 .build();
         archive.addTeacher(claudioBravo);
-        Teacher francescoFrancoletti = new TeacherImpl.Builder("Francesco","Francoletti",0,archive.getNewTeacherRegistrationNumber())
+        Teacher francescoFrancoletti = new TeacherImpl.TeacherBuilder("Francesco","Francoletti",0,archive.getNewTeacherRegistrationNumber())
                 .username("doc.claudio.bravo")
                 .dateOfBirth(LocalDate.of(1990, 8, 8))
                 .address("Via Madonna della Rosa")

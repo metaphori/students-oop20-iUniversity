@@ -19,13 +19,13 @@ public final class SampleTestData {
     private final Course algebra = new CourseImpl("Algebra e Geometria", 6);
     private final DegreeProgramme ingegneria = new DegreeProgrammeImpl("Ingegneria e scienze informatica",
             DegreeType.BACHELOR, Set.of(analisiMatematica, programmazione, algebra));
-    private final Student marioRossi = new StudentImpl.Builder("Mario", "Rossi", 1, 1).address("via")
+    private final Student marioRossi = new StudentImpl.StudentBuilder("Mario", "Rossi", 1, 1).address("via")
             .dateOfBirth(LocalDate.now()).degreeProgramme(ingegneria).gender(Gender.MALE).username("stu.rossi.mario")
             .build();
-    private final Student lucianoVerdi = new StudentImpl.Builder("Luciano", "Verdi", 2, 2).address("via")
+    private final Student lucianoVerdi = new StudentImpl.StudentBuilder("Luciano", "Verdi", 2, 2).address("via")
             .dateOfBirth(LocalDate.now()).degreeProgramme(ingegneria).gender(Gender.MALE).username("stu.verdi.luciani")
             .build();
-    private final Student lucaBianchi = new StudentImpl.Builder("Luca", "Bianchi", 3, 3).address("via")
+    private final Student lucaBianchi = new StudentImpl.StudentBuilder("Luca", "Bianchi", 3, 3).address("via")
             .dateOfBirth(LocalDate.now()).degreeProgramme(ingegneria).gender(Gender.MALE).username("stu.bianchi.luca")
             .build();
 
