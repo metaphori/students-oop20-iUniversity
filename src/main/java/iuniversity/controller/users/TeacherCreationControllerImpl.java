@@ -18,7 +18,7 @@ import iuniversity.view.users.TeacherCreationView;
 
 public class TeacherCreationControllerImpl extends AbstractController implements TeacherCreationController {
 
-    private AccountsManager accountManager = new AccountsManagerImpl();
+    private AccountsManager accountManager = this.getAccountsManager();
     @Override
     public void createTeacher(String firstName, String lastName, LocalDate dateOfBirth, 
             Gender gender, String address, Set<Course> courses) {
@@ -31,7 +31,7 @@ public class TeacherCreationControllerImpl extends AbstractController implements
         }
         final String newUsername = accountManager.makeUsername(UserType.TEACHER, firstName, lastName, occurencies);
         final String newPassword = accountManager.createPassword();
-        final Teacher teacher = new TeacherImpl.Builder(firstName, lastName, this.getModel().getArchive().getNewUserId(), this.getModel().getArchive().getNewTeacherRegistrationNumber())
+        final Teacher teacher = new TeacherImpl.TeacherBuilder(firstName, lastName, this.getModel().getArchive().getNewUserId(), this.getModel().getArchive().getNewTeacherRegistrationNumber())
                                                .username(newUsername)
                                                .dateOfBirth(dateOfBirth)
                                                .address(address)

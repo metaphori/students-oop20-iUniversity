@@ -5,9 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
+
+import com.google.common.base.Optional;
 
 import iuniversity.model.exams.ExamResult;
 import iuniversity.model.exams.ExamResultFactory;
@@ -51,7 +51,7 @@ public class ExamResultFactoryTest {
     public void testWithdrawnExamResult() {
         final ExamResult examResult = resultFactory.withdrawn();
         assertFalse(examResult.cumLaude());
-        assertEquals(Optional.empty(), examResult.getResult());
+        assertEquals(Optional.absent(), examResult.getResult());
         assertEquals(ExamResultType.WITHDRAWN, examResult.getResultType());
     }
 

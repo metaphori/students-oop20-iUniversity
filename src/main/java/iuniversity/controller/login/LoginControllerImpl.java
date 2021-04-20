@@ -6,7 +6,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import iuniversity.controller.AbstractController;
 import iuniversity.controller.AccountsManager;
-import iuniversity.controller.AccountsManagerImpl;
 import iuniversity.model.user.Student;
 import iuniversity.model.user.Teacher;
 import iuniversity.model.user.User.UserType;
@@ -14,7 +13,7 @@ import iuniversity.view.login.LoginView;
 
 public class LoginControllerImpl extends AbstractController implements LoginController {
 
-    private final AccountsManager accountManager = new AccountsManagerImpl();
+    private final AccountsManager accountManager = this.getAccountsManager();
 
     /**
      * {@inheritDoc}

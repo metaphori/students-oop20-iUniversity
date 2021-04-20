@@ -19,7 +19,7 @@ import iuniversity.view.users.StudentCreationView;
 
 public class StudentCreationControllerImpl extends AbstractController implements StudentCreationController {
 
-    private AccountsManager accountManager = new AccountsManagerImpl();
+    private AccountsManager accountManager = this.getAccountsManager();
     
     @Override
     public void createStudent(String firstName, String lastName, LocalDate dateOfBirth, Gender gender, String address,
@@ -33,7 +33,7 @@ public class StudentCreationControllerImpl extends AbstractController implements
         }
         final String newUsername = accountManager.makeUsername(UserType.STUDENT, firstName, lastName, occurencies);
         final String newPassword = accountManager.createPassword();
-        final Student student = new StudentImpl.Builder(firstName, lastName, this.getModel().getArchive().getNewUserId(), this.getModel().getArchive().getNewStudentRegistrationNumber())
+        final Student student = new StudentImpl.StudentBuilder(firstName, lastName, this.getModel().getArchive().getNewUserId(), this.getModel().getArchive().getNewStudentRegistrationNumber())
                                            .username(newUsername)
                                            .dateOfBirth(dateOfBirth)
                                            .address(address)
