@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import iuniversity.model.didactics.*;
-import iuniversity.model.user.TeacherImpl.Builder;
 import iuniversity.model.user.User.Gender;
 
 public class StudentImpl extends AbstractUser implements Student, Serializable {
@@ -38,6 +37,7 @@ public class StudentImpl extends AbstractUser implements Student, Serializable {
         return  "[" + registrationNumber + "] " + super.toString();
     }
     
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -72,7 +72,8 @@ public class StudentImpl extends AbstractUser implements Student, Serializable {
         return true;
     }
 
-    public static class Builder{
+    public static class StudentBuilder{
+
             
             private String name;
             private String lastName;
@@ -84,34 +85,34 @@ public class StudentImpl extends AbstractUser implements Student, Serializable {
             private int registrationNumber;
             private DegreeProgramme degreeProgramme;
             
-            public Builder(String name, String lastName, int id, int registrationNumber) { 
+            public StudentBuilder(String name, String lastName, int id, int registrationNumber) { 
                 this.name = name;
                 this.lastName = lastName;
                 this.id = id;
                 this.registrationNumber = registrationNumber;
             }
             
-            public Builder username(String username) {
+            public StudentBuilder username(String username) {
                 this.username=username;
                 return this;
             }
             
-            public Builder dateOfBirth(LocalDate dateOfBirth) {
+            public StudentBuilder dateOfBirth(LocalDate dateOfBirth) {
                 this.dateOfBirth = dateOfBirth;
                 return this;
             }
             
-            public Builder gender(Gender gender) {
+            public StudentBuilder gender(Gender gender) {
                 this.gender=gender;
                 return this;
             }
             
-            public Builder address(String address) {
+            public StudentBuilder address(String address) {
                 this.address=address;
                 return this;
             }
      
-            public Builder degreeProgramme(DegreeProgramme degreeProgramme) {
+            public StudentBuilder degreeProgramme(DegreeProgramme degreeProgramme) {
                 this.degreeProgramme=degreeProgramme;
                 return this;
             }

@@ -68,7 +68,8 @@ public class TeacherImpl extends AbstractUser implements Teacher, Serializable {
         return true;
     }
 
-    public static class Builder{
+    public static class TeacherBuilder{
+
         
         private String name;
         private String lastName;
@@ -80,34 +81,34 @@ public class TeacherImpl extends AbstractUser implements Teacher, Serializable {
         private int registrationNumber;
         private Set<Course> courses;
         
-        public Builder(String name, String lastName, int id, int registrationNumber) { 
+        public TeacherBuilder(String name, String lastName, int id, int registrationNumber) { 
             this.name = name;
             this.lastName = lastName;
             this.id = id;
             this.registrationNumber = registrationNumber;
         }
         
-        public Builder username(String username) {
+        public TeacherBuilder username(String username) {
             this.username=username;
             return this;
         }
         
-        public Builder dateOfBirth(LocalDate dateOfBirth) {
+        public TeacherBuilder dateOfBirth(LocalDate dateOfBirth) {
             this.dateOfBirth = dateOfBirth;
             return this;
         }
         
-        public Builder gender(Gender gender) {
+        public TeacherBuilder gender(Gender gender) {
             this.gender=gender;
             return this;
         }
         
-        public Builder address(String address) {
+        public TeacherBuilder address(String address) {
             this.address=address;
             return this;
         }
  
-        public Builder courses(Set<Course> courses) {
+        public TeacherBuilder courses(Set<Course> courses) {
             this.courses=new HashSet<>(courses);
             return this;
         }
