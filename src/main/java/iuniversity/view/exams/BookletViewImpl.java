@@ -8,6 +8,10 @@ import iuniversity.view.AbstractView;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
+/**
+ * The student booklet view.
+ *
+ */
 public class BookletViewImpl extends AbstractView implements BookletView {
 
     @FXML

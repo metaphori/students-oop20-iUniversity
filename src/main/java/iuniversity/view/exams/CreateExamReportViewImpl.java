@@ -18,6 +18,9 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.VBox;
 import iuniversity.model.exams.ExamResult.ExamResultType;
 
+/**
+ * The view for the creation of an exam report.
+ */
 public class CreateExamReportViewImpl extends AbstractView implements CreateExamReportView {
 
     private static final int MAX_RESULT = 30;

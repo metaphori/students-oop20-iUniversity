@@ -23,6 +23,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * This class is responsible for page switching.
+ */
 public final class PageSwitcher {
 
     private PageSwitcher() {
@@ -50,6 +53,12 @@ public final class PageSwitcher {
         }
     };
 
+    /**
+     * 
+     * @param stage the stage in to which draw the scene
+     * @param page destination page
+     * @param model an instance of the model
+     */
     public static void goToPage(final Stage stage, final Pages page, final Model model) {
         final FXMLLoader loader = new FXMLLoader(
                 ClassLoader.getSystemResource("layoutFX/" + page.getFXMLName() + ".fxml"));
@@ -73,6 +82,11 @@ public final class PageSwitcher {
 
     }
 
+    /**
+     * 
+     * @param page the page to open
+     * @param model an instance of the model
+     */
     public static void openPage(final Pages page, final Model model) {
         goToPage(new Stage(), page, model);
     }

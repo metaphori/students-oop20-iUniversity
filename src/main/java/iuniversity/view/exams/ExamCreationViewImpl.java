@@ -15,6 +15,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 
+/**
+ * The view for the creation of an exam call.
+ *
+ */
 public class ExamCreationViewImpl extends AbstractView implements ExamCreationView {
 
     @FXML

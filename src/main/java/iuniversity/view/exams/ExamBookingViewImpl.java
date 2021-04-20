@@ -12,6 +12,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
+/**
+ * The view for the exam booking.
+ *
+ */
 public class ExamBookingViewImpl extends AbstractView implements ExamBookingView {
 
     @FXML
