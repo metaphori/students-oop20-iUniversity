@@ -28,6 +28,7 @@ import javafx.stage.Stage;
  */
 public final class PageSwitcher {
 
+    private static final String APPLICATION_NAME = "iUniversity";
     private PageSwitcher() {
     }
 
@@ -78,6 +79,7 @@ public final class PageSwitcher {
         view.start();
         stage.centerOnScreen();
         stage.sizeToScene();
+        stage.setTitle(APPLICATION_NAME);
         stage.show();
 
     }
