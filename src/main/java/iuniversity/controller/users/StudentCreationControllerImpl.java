@@ -33,7 +33,7 @@ public class StudentCreationControllerImpl extends AbstractController implements
         }
         final String newUsername = accountManager.makeUsername(UserType.STUDENT, firstName, lastName, occurencies);
         final String newPassword = accountManager.createPassword();
-        final Student student = new StudentImpl.Builder(firstName, lastName, this.getModel().getArchive().getNewUserId(), this.getModel().getArchive().getNewStudentRegistrationNumber())
+        final Student student = new StudentImpl.StudentBuilder(firstName, lastName, this.getModel().getArchive().getNewUserId(), this.getModel().getArchive().getNewStudentRegistrationNumber())
                                            .username(newUsername)
                                            .dateOfBirth(dateOfBirth)
                                            .address(address)
