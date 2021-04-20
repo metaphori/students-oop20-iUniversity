@@ -18,6 +18,10 @@ import iuniversity.model.user.Student;
 import iuniversity.model.user.Teacher;
 import iuniversity.storage.DataStore;
 
+/**
+ * This class is responsible for saving and retrieving data. If needed files are not present it creates them.
+ *
+ */
 public class FileDataStoreImpl implements DataStore {
     private static final String PATH_SEPARATOR = System.getProperty("file.separator");
     private static final String STORE_PATH = System.getProperty("user.home") + PATH_SEPARATOR + ".iuniversity"
@@ -29,6 +33,10 @@ public class FileDataStoreImpl implements DataStore {
     private static final String EXAM_CALLS_STORE_FILE = "exam_calls.txt";
     private static final String EXAM_REPORTS_STORE_FILE = "exam_reports.txt";
 
+    /**
+     * Initializes the file data store.
+     * Creates a directory in user home in which data files will be written
+     */
     public FileDataStoreImpl() {
         try {
             final File store = new File(STORE_PATH);

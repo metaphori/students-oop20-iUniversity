@@ -14,6 +14,9 @@ import iuniversity.model.user.Student;
 import iuniversity.model.user.Teacher;
 import iuniversity.view.exams.CreateExamReportView;
 
+/**
+ * Manages the creation of an exam report.
+ */
 public class CreateExamReportControllerImpl extends AbstractController implements CreateExamReportController {
 
     private boolean isTeachedByTeacher(final Course course, final Teacher teacher) {

@@ -13,6 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
+/**
+ * The teacher home view.
+ */
 public class TeacherHomeViewImpl extends AbstractView implements TeacherHomeView {
 
     @FXML

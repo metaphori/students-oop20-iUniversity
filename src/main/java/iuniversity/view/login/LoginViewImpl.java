@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+/**
+ * The login view.
+ */
 public class LoginViewImpl extends AbstractView implements LoginView {
 
     private static final String INCORRECT_CREDENTIALS_MESSAGE = "Username o password non corretti";

@@ -12,6 +12,11 @@ import java.util.Set;
 import iuniversity.model.didactics.Course;
 import iuniversity.model.user.Student;
 
+/**
+ * 
+ * Implementation of ExamCall interface.
+ *
+ */
 public class ExamCallImpl implements ExamCall, Serializable {
 
     /**
@@ -218,6 +223,10 @@ public class ExamCallImpl implements ExamCall, Serializable {
                 + ", aperto fino al " + registrationEnd.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
+    /**
+     * This class is a builder for ExamCalls.
+     *
+     */
     public static class Builder implements ExamCallBuilder {
 
         private int maximumStudents;

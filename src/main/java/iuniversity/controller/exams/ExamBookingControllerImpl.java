@@ -9,6 +9,9 @@ import iuniversity.model.exams.ExamResult.ExamResultType;
 import iuniversity.model.user.Student;
 import iuniversity.view.exams.ExamBookingView;
 
+/**
+ * Manages the booking of an exam call.
+ */
 public class ExamBookingControllerImpl extends AbstractController implements ExamBookingController {
 
     private static final String BOOKING_ERROR_MESSAGE = "Impossibile iscriversi all'appello d'esame";

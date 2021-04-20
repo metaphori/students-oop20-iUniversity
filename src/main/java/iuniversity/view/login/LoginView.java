@@ -15,10 +15,19 @@ public interface LoginView {
      */
     void incorrectCredentials();
 
+    /**
+     * Switch to the admin home page.
+     */
     void goToAdminHomePage();
 
+    /**
+     * Switch to the student home page.
+     */
     void goToStudentHomePage();
 
+    /**
+     * Switch to the teacher home page.
+     */
     void goToTeacherHomePage();
 
 }

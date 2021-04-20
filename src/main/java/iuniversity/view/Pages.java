@@ -1,5 +1,8 @@
 package iuniversity.view;
 
+/**
+ * Redirectionable pages.
+ */
 public enum Pages {
     /**
      * loginPage.
@@ -56,6 +59,10 @@ public enum Pages {
         this.fxmlName = name;
     }
 
+    /**
+     * 
+     * @return the name of the fxml file
+     */
     public String getFXMLName() {
         return this.fxmlName;
     }
