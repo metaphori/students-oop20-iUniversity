@@ -225,6 +225,7 @@ public class ExamCallImpl implements ExamCall, Serializable {
         private ExamType type;
         private Course course;
         private StudentRegistrationStrategy registrationStrategy;
+        private boolean built;
 
         public Builder() {
             registrationStrategy = new StudentRegistrationStrategyFactoryImpl().atTheEndOfList();
@@ -280,11 +281,14 @@ public class ExamCallImpl implements ExamCall, Serializable {
          */
         @Override
         public ExamCall build() {
-            if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(type)) {
+            if (built) {
+                throw new IllegalStateException("Builder can be consumed once");
+            } else if (Objects.isNull(course) || Objects.isNull(start) || Objects.isNull(type)) {
                 throw new IllegalStateException("Can't build an exam call, arguments missing");
             } else if (start.isBefore(LocalDate.now().plusDays(DAYS_BEFORE_CALL))) {
                 throw new IllegalStateException("ExamCall must be at least " + DAYS_BEFORE_CALL + " days after today");
             }
+            built = true;
             return new ExamCallImpl(course, start, type, maximumStudents, registrationStrategy);
         }
 
