@@ -27,4 +27,10 @@ public interface View {
      */
     void showErrorMessage(String message);
 
+    /**
+     * 
+     * @param message the information message to be displayed.
+     */
+    void showInfoMessage(String message);
+
 }

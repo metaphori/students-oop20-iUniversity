@@ -41,12 +41,24 @@ public abstract class AbstractView implements FXView {
         this.controller = controller;
     }
 
+    private void showAlert(final Alert.AlertType type, final String message) {
+        new Alert(type, message).showAndWait();
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void showErrorMessage(final String message) {
-        new Alert(Alert.AlertType.ERROR, message).showAndWait();
+        this.showAlert(Alert.AlertType.ERROR, message);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showInfoMessage(final String message) {
+        this.showAlert(Alert.AlertType.INFORMATION, message);
     }
 
 }

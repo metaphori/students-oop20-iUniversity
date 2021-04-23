@@ -26,6 +26,7 @@ public class CreateExamReportViewImpl extends AbstractView implements CreateExam
     private static final int MAX_RESULT = 30;
     private static final String REQUIRED_INPUT_MESSAGE = "Controllare che tutti i campi siano consistenti";
     private static final String INVALID_EXAM_REPORT_ARGUMENT = "Controllare che la valutazione sia costruita correttamente";
+    private static final String NO_HELD_EXAM_CALL_MESSAGE = "Non ci sono appelli d'esame conclusi";
 
     @FXML
     private ChoiceBox<ExamCall> examCallChoice;
@@ -111,6 +112,9 @@ public class CreateExamReportViewImpl extends AbstractView implements CreateExam
      */
     @Override
     public void setExamCallChoices(final Set<ExamCall> examCalls) {
+        if (examCalls.isEmpty()) {
+            this.showInfoMessage(NO_HELD_EXAM_CALL_MESSAGE);
+        }
         this.examCallChoice.getItems().clear();
         this.examCallChoice.getItems().addAll(examCalls);
     }
