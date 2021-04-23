@@ -2,8 +2,6 @@ package iuniversity;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-
 import org.apache.commons.io.FileUtils;
 
 import iuniversity.model.Model;
@@ -37,12 +35,6 @@ public class IUniversity extends Application {
         model.getDidacticsManager().setDegreeProgrammes(storage.loadDegreeProgrammes());
         model.getExamManager().setExamCalls(storage.loadExamCalls());
         model.getExamManager().setExamReports(storage.loadExamReports());
-        /*storage.saveCourses(Collections.emptySet());
-        storage.saveDegreeProgrammes(Collections.emptySet());
-        storage.saveExamCalls(Collections.emptySet());
-        storage.saveExamReports(Collections.emptySet());
-        storage.saveStudents(Collections.emptySet());
-        storage.saveTeachers(Collections.emptySet());*/
     }
 
     @Override
